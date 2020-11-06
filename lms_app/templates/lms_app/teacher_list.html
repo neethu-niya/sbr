@@ -1,0 +1,217 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">SBR Academy</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Tables</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Datatables</a>
+                </li>
+            </ul>
+        </div>
+
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Add Row</h4>
+                            {% comment %} <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal"> {% endcomment %}
+                            <a href="{% url 'teacher' %}" class="btn btn-primary btn-round ml-auto">ADD ROW<i class="fa fa-plus"></i></a>
+                              {% comment %} <i class="fa fa-plus"></i>  {% endcomment %}
+                                {% comment %} Add Row {% endcomment %}
+                            {% comment %} </button> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Modal -->
+                        <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header no-bd">
+                                        <h5 class="modal-title">
+                                            <span class="fw-mediumbold">
+                                            New</span> 
+                                            <span class="fw-light">
+                                                Row
+                                            </span>
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="small">Create a new Teacher Profile using this form, make sure you fill them all</p>
+                                        {% comment %} <form>
+                                            <div class="row"> 
+                                                <div class="col-sm-20">
+                                                    <div class="form-group form-group-default">
+                                                        <label>User Name</label>
+                                                        <input id="addName" type="text" class="form-control" placeholder="fill name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-20">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Email Address</label>
+                                                        <input type="email" class="form-control" id="email2" placeholder="Enter Email">
+                                                         <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           <div class="row">
+                                                <div class="col-sm-20">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Password</label>
+                                                        <input type="password" class="form-control" id="password" placeholder="Password">                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form> {% endcomment %} 
+                                    </div>
+                                    {% comment %} <div class="modal-footer no-bd">
+                                        <button type="button" id="addRowButton" class="btn btn-primary">Add</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Subjects</th>
+                                        <th>Phone Number</th>
+                                        <th style="width: 10%">Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                 {% comment %} {% for register in registers %}
+                                    <tr>
+                                        <td>{{register.name}}</td>
+                                        <td>{{register.email}}</td>
+                                        <td>{{register.password}}</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %} {% endcomment %}
+                                {% for teacher in teachers %}
+                                    <tr>
+                                        <td>{{teacher.name}}</td>
+                                        <td>{{teacher.email}}</td>
+                                        <td>{{teacher.whatsapp_number}}</td>
+                                        <td>
+                                            
+                                                <div class="form-button-action">
+                                                <label class="switch">
+                                                
+                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <span class="slider round"></span>
+                                                
+                                                </label>  
+                                                {% comment %} <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                                    <div class="handle"></div>
+                                                </button> {% endcomment %}
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %} 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

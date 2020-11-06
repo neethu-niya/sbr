@@ -1,0 +1,9 @@
+<form method="post">
+    {% csrf_token %}
+        <div class="form-group">
+            {{form.as_p}}  
+                <button class="btn btn-outline-info" type="submit">submit</button>
+                <button class="btn btn-danger">Cancel</button>
+                       
+        </div>
+</form>  

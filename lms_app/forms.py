@@ -1,0 +1,171 @@
+from django import forms
+from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Country, City,Documents
+from django.contrib.auth import get_user_model
+
+material_choices = [
+    ('0', 'Study Material'),
+    ('1', 'Questionnaire'),
+    ('2', 'Previous year Question'),
+]
+
+class SyllabusForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter syllabus name"}))
+    active = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Syllabus
+        fields = ['name', 'active']
+
+
+class StandardForm(forms.ModelForm):
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter standard name"}))
+    active = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Standard
+        fields = ['syllabus', 'name', 'active']
+
+
+
+class SubjectForm(forms.ModelForm):
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
+    active = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Subject
+        fields = ['standard', 'name', 'active']
+
+
+class ChapterForm(forms.ModelForm):
+    subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
+    active = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Chapter
+        fields = ['subject', 'name', 'active']
+
+class SchemeForm(forms.ModelForm):
+    subject_wise= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    scheme_name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
+    active = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Scheme
+        fields = ['subject_wise', 'scheme_name', 'active']
+
+class TeacherRegForm(forms.ModelForm):
+    name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    contact_no_1 = forms.CharField(max_length=30, required=False)
+    whatsapp_no = forms.CharField(max_length=30, required=False)
+    address = forms.CharField(max_length=50, required=False)
+    subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    image   = forms.ImageField()
+    # gender = forms.CharField(max_length=30, required=False, help_text='Optional.')  
+    
+    active = forms.BooleanField(required=False)
+    class Meta:
+        model = Teacher
+        fields = ('name', 'email',  'contact_no_1', 'whatsapp_no', 'address', 'subject', 'image',
+                  'active')
+
+
+
+class StudentRegister(forms.ModelForm):
+    name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
+    address = forms.CharField(max_length=50, required=False)
+    # nationality = forms.CharField(max_length=255)
+    country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    city = forms.ModelMultipleChoiceField(queryset=City.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+
+    
+    # state = forms.CharField(max_length=255)
+    district = forms.CharField(max_length=255)
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    image = forms.ImageField(required=False)
+    present_country = forms.CharField(max_length=255) 
+    guardian_name = forms.CharField(max_length=255)
+    guardian_relation = forms.CharField(max_length=50)
+    contact_no = forms.CharField(max_length=30, required=False)
+    whatsapp_no = forms.CharField(max_length=30, required=False)
+    # gender = forms.CharField(max_length=6, required=False)
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # Syllabus = forms.ModelMultipleChoiceField(queryset=Syllabus.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    # scheme = forms.ModelChoiceField(queryset=Scheme.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    course_type = forms.CharField(max_length=255)
+    active = forms.BooleanField(required=False)
+
+
+
+    class Meta:
+        model = Student
+        fields = ('name', 'address', 'country', 'city','district','present_country','email','subject',
+                  'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
+                  'syllabus','standard','subject','course_type','active')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city'].queryset = City.objects.none()
+
+        if 'country' in self.data:
+            try:
+                country_id = int(self.data.get('country'))
+                self.fields['city'].queryset = City.objects.filter(country_id=country_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
+
+
+class VideoUpload(forms.ModelForm):
+    name = forms.CharField(max_length=100, required=True)
+    subtitle = forms.CharField(max_length=255, required=False)
+    description =forms.Textarea()
+    subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    
+    # chapter =forms.ModelChoiceField(Chapter, on_delete=models.CASCADE)
+    # upload_to='staticfiles/media_root/videos/'
+    # upload_to='staticfiles/image/'
+    # upload_to='staticfiles/thumbnail/',
+    videofile =forms.FileField(required=False)
+    image =forms.ImageField(required=False)
+    thumbnail_image =forms.ImageField(required=False)
+    url_field =forms.URLField(max_length=200, required=False)
+    active =forms.BooleanField(required=False)
+    class Meta:
+       model = Video
+       fields = ('name', 'subtitle', 'description', 'subject', 'chapter',  'videofile', 'image', 
+                 'thumbnail_image','url_field', 'active')
+
+# class VideoUpload(forms.ModelForm):
+#     class Meta:
+#         model = 'videos'
+#         fields = '__all__'
+
+class DocumentUpload(forms.ModelForm):
+    name = forms.CharField(max_length=255, required=False)
+    subtitle = forms.CharField(max_length=255, required=False)
+    description = forms.Textarea()
+    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+
+    material_type = forms.ChoiceField(choices = material_choices, required=False)
+
+    image = forms.ImageField(required=False)
+    thumbnail_image = forms.ImageField(required=False)
+        
+    pdf = forms.FileField(required=False)
+    url_field =forms.URLField(max_length=200, required=False)
+
+    active = forms.BooleanField(required=False)
+    class Meta:
+        model = Documents
+        fields = ('name','subtitle', 'description', 'chapter', 'material_type', 'image', 
+                  'thumbnail_image', 'pdf','url_field', 'active')
