@@ -20,7 +20,7 @@ from django.contrib.auth import get_user_model
 from lms_app.models import Syllabus, Standard, Subject, Chapter
 
 
-class SyllabusView(ListAPIView):
+# class SyllabusView(ListAPIView):
 
 
 
