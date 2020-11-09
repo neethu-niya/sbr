@@ -11,6 +11,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include('api.urls'), name='api'),
+
     path("", include("authentication.urls")),  # add this
     path("", include("app.urls")),  # add this
     path("dashboard/", include("lms_app.urls")) 

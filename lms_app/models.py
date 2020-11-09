@@ -87,6 +87,10 @@ class Subject(models.Model):
     def __str__(self):
         # return self.name
         return f"{self.standard} - {self.name}"
+
+    @property
+    def get_standard(self):
+        return self.standard.name
     
 
     # @property

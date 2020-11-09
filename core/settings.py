@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'lms_app',
     'user',
     'phonenumber_field',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +74,9 @@ TEMPLATES = [
     },
 ]
 
+
+
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
@@ -102,6 +107,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'DEFAULT_AUTHENTICATION_CLASSES': (
+        #     'rest_framework.authentication.TokenAuthentication',
+        # ),
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
