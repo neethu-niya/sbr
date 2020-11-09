@@ -89,7 +89,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6708f5b55ed26fdbd3d68188cb25e03a70e93a60
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
