@@ -17,9 +17,7 @@ urlpatterns = [
     path('video_up/',views.file_upload, name='up'),
     path('document_list/',views.upload_document.as_view(), name='document'),
     path('document_up/',views.docs_upload, name='upload'),
-
-
-    
+    path('ajax/load-cities/', views.load_cities, name='ajax_load_cities'),
 
 # 'register_teacher/',register
 

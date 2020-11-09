@@ -28,7 +28,11 @@ material_choices = [
     ('2', 'Previous year Question'),
 ]
 
-
+file_choices = [
+    ('0', 'Video'),
+    ('1', 'Image'),
+    ('2', 'pdf'),
+]
 
 
 send_choices = [
@@ -40,7 +44,6 @@ scheme_choices = [
     ('0', 'Subject'),
     ('1', 'Chapter'),
 ]
-
 
 
 class Syllabus(models.Model):
@@ -82,6 +85,7 @@ class Subject(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        # return self.name
         return f"{self.standard} - {self.name}"
     
 
@@ -107,8 +111,10 @@ class Teacher(models.Model):
         default=None, null=True, blank=True, unique=True)
     address = models.CharField(max_length=255)
     subject = models.ManyToManyField(Subject, blank=True)
+    material_type = models.CharField(max_length=50, choices=file_choices,  null=True,  blank=True)
+
     image = models.ImageField(
-        upload_to='staticfiles/image/', null=True, blank=True)
+        upload_to='staticfiles/image/',null=True, blank=True)
    
     #hanin created gender
     # gender = models.CharField(max_length = 6,choices=boolChoice, null=True)
@@ -253,15 +259,13 @@ class Scheme(models.Model):
     # return str(sub)
 
 class Country(models.Model):
-
     name = models.CharField(max_length=30)
-
+    
     def __str__(self):
         return self.name
 
 class City(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE,  null=True, blank=False)
-
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
 
     def __str__(self):
@@ -274,8 +278,10 @@ class Student(models.Model):
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255)
-    country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    # country = models.CharField(null=True,blank=True,max_length=255)
+    # city = models.CharField(null=True,blank=True,max_length=255)
+    country = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
 
     # nationality = models.CharField(null=True,blank=True,max_length=255)
     # state = models.CharField(null=True,blank=True,max_length=255)
@@ -307,11 +313,25 @@ class Student(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        u = User.objects.create(username=self.name,password = "helloworld555")
+        s = User.objects.create(username=self.name,password = "worldheloo666")
         # self.user.username = self.name
         # self.user.password = "helloworld555"
-        self.user=u
+        self.user=s
         super(Student, self).save(self, *args, **kwargs)
+
+        # def __init__(self, *args, **kwargs):
+        #     super().__init__(*args, **kwargs)
+        #     self.fields['city'].queryset = City.objects.none()
+
+            # if 'country' in self.data:
+            #     try:
+            #         country_id = int(self.data.get('country'))
+            #         self.fields['city'].queryset = City.objects.filter(country_id=country_id).order_by('name')
+            #     except (ValueError, TypeError):
+            #         pass  # invalid input from the client; ignore and fallback to empty City queryset
+            # elif self.instance.pk:
+            #     self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
+
 
 # @receiver(post_save, sender=Student)
 # def create_or_update_studentuser(sender, instance, created, **kwargs):

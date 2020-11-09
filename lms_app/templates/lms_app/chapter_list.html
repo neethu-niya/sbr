@@ -61,18 +61,32 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="/dashboard/standard/" method="POST">
+                                        <form action="/dashboard/chapters/" method="POST">
                                             {% csrf_token %}
                                             <div class="row">
-                                                <div class="col-sm-12">
+                                                {% comment %} <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label for="addPosition">Select Syllabus</label>                                                       
-                                                        {{form.syllabus}}
+                                                    <label for="addPosition">Select Subject</label>                                                       
+                                                        {{form.subject}}
                                                 </div>
+                                                </div> {% endcomment %}
+
+                                                <div class="form-group">
+                                                    {% comment %} <label for="exampleFormControlSelect2">Example multiple select</label>
+                                                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                                                    {% for sub in form.subject %}
+                                                        <option>{{sub}}</option>
+                                                    {% endfor %}
+                                                    </select> {% endcomment %}
+                                                    {{form.subject}}
                                                 </div>
+
+
+                                                
+
                                                 <div class="col-md-6">
-                                                    <div id="addName" class="form-group form-group-default">
-                                                        <label>Std Name</label>
+                                                    <div class="form-group form-group-default">
+                                                        <label>Chapter Name</label>
                                                         {{form.name}}
                                                     </div>
                                                 </div>
@@ -96,30 +110,31 @@
                             </div>
                         </div>
 
+
                         <div class="table-responsive">
                             <table id="add-row" class="display table table-striped table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Classes</th>
-                                        <th>Syllabus</th>
+                                        <th>Subject</th>
+                                        <th>Chapter</th>
                                         <th>Active</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                {% for standard in standards %}
+                                {% for chapter in chapters %}
                                     <tr>
-                                        <td><a href="{% url 'subject_list' %}?standard={{ standard.pk }}">{{standard.name}}</a> </td>
-                                        <td>{{standard.syllabus}}</td>
-                                        
-                                        <td>{{standard.active}}</td>
+                                        <td><a href="{% url 'subject_list' %}?subject={{subject.pk}}">{{chapter.subject}}</a></td>
+
+                                        <td>{{chapter.name}}</td>
+                                        <td>{{chapter.active}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
                                                 <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
                                                 <span class="slider round"></span>
-                                                </label>
+                                                </label> 
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                                     <i class="fa fa-times"></i>
                                                 </button>
@@ -179,7 +194,8 @@
 			$('#addRowButton').click(function() {
 				$('#add-row').dataTable().fnAddData([
 					$("#addName").val(),
-                    
+					$("#addPosition").val(),
+					$("#addOffice").val(),
 					action
 					]);
 				$('#addRowModal').modal('hide');

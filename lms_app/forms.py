@@ -1,5 +1,5 @@
 from django import forms
-from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Country, City,Documents
+from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Documents, Country, City
 from django.contrib.auth import get_user_model
 
 material_choices = [
@@ -78,6 +78,8 @@ class StudentRegister(forms.ModelForm):
     name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
     address = forms.CharField(max_length=50, required=False)
     # nationality = forms.CharField(max_length=255)
+    # country = forms.CharField(max_length=255, required=False)
+    # city = forms.CharField(max_length=255, required=False)
     country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     city = forms.ModelMultipleChoiceField(queryset=City.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
 
@@ -86,7 +88,7 @@ class StudentRegister(forms.ModelForm):
     district = forms.CharField(max_length=255)
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    image = forms.ImageField(required=False)
+    image = forms.ImageField()
     present_country = forms.CharField(max_length=255) 
     guardian_name = forms.CharField(max_length=255)
     guardian_relation = forms.CharField(max_length=50)
@@ -108,20 +110,23 @@ class StudentRegister(forms.ModelForm):
         fields = ('name', 'address', 'country', 'city','district','present_country','email','subject',
                   'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
                   'syllabus','standard','subject','course_type','active')
+    # class Meta:
+    #     model = Student
+    #     fields = '__all__'
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['city'].queryset = City.objects.none()
 
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['city'].queryset = City.objects.none()
-
-        if 'country' in self.data:
-            try:
-                country_id = int(self.data.get('country'))
-                self.fields['city'].queryset = City.objects.filter(country_id=country_id).order_by('name')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk:
-            self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
+    #     if 'country' in self.data:
+    #         try:
+    #             country_id = int(self.data.get('country'))
+    #             self.fields['city'].queryset = City.objects.filter(country_id=country_id).order_by('name')
+    #         except (ValueError, TypeError):
+    #             pass  # invalid input from the client; ignore and fallback to empty City queryset
+    #     elif self.instance.pk:
+    #         self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
 
 
 class VideoUpload(forms.ModelForm):
@@ -135,9 +140,9 @@ class VideoUpload(forms.ModelForm):
     # upload_to='staticfiles/media_root/videos/'
     # upload_to='staticfiles/image/'
     # upload_to='staticfiles/thumbnail/',
-    videofile =forms.FileField(required=False)
-    image =forms.ImageField(required=False)
-    thumbnail_image =forms.ImageField(required=False)
+    videofile =forms.FileField()
+    image =forms.ImageField()
+    thumbnail_image =forms.ImageField()
     url_field =forms.URLField(max_length=200, required=False)
     active =forms.BooleanField(required=False)
     class Meta:
@@ -156,12 +161,12 @@ class DocumentUpload(forms.ModelForm):
     description = forms.Textarea()
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
-    material_type = forms.ChoiceField(choices = material_choices, required=False)
+    material_type = forms.ChoiceField(choices = material_choices)
 
-    image = forms.ImageField(required=False)
-    thumbnail_image = forms.ImageField(required=False)
+    image = forms.ImageField()
+    thumbnail_image = forms.ImageField()
         
-    pdf = forms.FileField(required=False)
+    pdf = forms.FileField()
     url_field =forms.URLField(max_length=200, required=False)
 
     active = forms.BooleanField(required=False)

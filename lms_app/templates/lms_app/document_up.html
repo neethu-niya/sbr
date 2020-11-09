@@ -28,7 +28,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">VIdeo</a>
+                    <a href="#">Document</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
@@ -44,7 +44,7 @@
                     <div class="card-header">
                         <div class="card-title">Form Elements</div>
                     </div>
-        <form method="post">
+        <form method="post"class="post-form" enctype="multipart/form-data">
             {% csrf_token %}                 
              <div class="container-fluid">
                 <div class="card-body">
@@ -52,7 +52,7 @@
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
                                 <label for="name">Name</label>
-                                <input type="textarea" class="form-control" id={{form.name}} placeholder="Enter Your Name">       
+                                <input type="textarea" class="form-control" name="name" id="" placeholder="Enter Your Name">       
                                
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
                                 <label for="name">Subtitle</label>
-                                <input type="textarea" class="form-control" id={{form.subtitle}} placeholder="Enter Your Name">       
+                                <input type="textarea" class="form-control"name="subtitle" id="" placeholder="Enter Your Name">       
                                
                             </div>
                         </div>  
@@ -70,7 +70,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Description</span>
                                         </div>
-                                        <textarea class="form-control" id={{form.description}} aria-label="With textarea"></textarea>
+                                        <textarea class="form-control" name="description" id="" aria-label="With textarea"></textarea>
                                     </div>
                         </div>
                         {% comment %} <div class="form-group">
@@ -104,16 +104,16 @@
                        
                         <div class="form-group">
                                 <label for="exampleFormControlFile1">Upload Image</label>
-                                <input type="file" class="form-control-file" id='{{form.image}}' >
+                                <input type="file" class="form-control-file" name="image" id='' >
                         </div>  
                         <div class="form-group">
                                 <label for="exampleFormControlFile1">Upload thumbnail</label>
-                                <input type="file" class="form-control-file" id='{{form.thumbnail_image}}' >
+                                <input type="file" class="form-control-file" name="thumbnail_image" id='' >
                         </div> 
                        
                         <div class="form-group">
                                 <label for="exampleFormControlFile1">Upload Pdf</label>
-                                <input type="file" class="form-control-file" id='{{form.pdf}}' >
+                                <input type="file" class="form-control-file" name="pdf" id='' >
                         </div>
 
 
@@ -124,12 +124,12 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
                                         </div>
-                                        <input type="text" class="form-control" id={{form.url_field}} aria-describedby="basic-addon3">
+                                        <input type="text" class="form-control" name="url_field" id="" aria-describedby="basic-addon3">
                                     </div>
                         </div>
                         <div class="form-check"> 
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value={{form.active}}>
+                                        <input class="form-check-input" type="checkbox" name="active" value="">
                                         <span class="form-check-sign">Active</span>
                                     </label>
                         </div>
