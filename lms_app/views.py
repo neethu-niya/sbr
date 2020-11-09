@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
 from .forms import *
+# from lms_app.functions.functions import handle_uploaded_file
 
 @staff_member_required
 def syllabus_list(request):
@@ -94,6 +95,8 @@ class StudentList(ListView):
 def registepage(request):
     form = TeacherRegForm(request.POST or None, request.FILES or None)
     if form.is_valid():
+
+        # handle_uploaded_file(request.FILES['file']) 
         form.cleaned_data
         print(form.cleaned_data)
         form.save()
@@ -103,7 +106,7 @@ def registepage(request):
 
 
 def studentpage(request):
-    form = StudentRegister(request.POST or None)
+    form = StudentRegister(request.POST or None, request.FILES or None)
     # register = Student.objects.all()
     if form.is_valid():
         form.cleaned_data
@@ -120,7 +123,7 @@ class upload_video(ListView):
     template_name = 'lms_app/videos_list.html'
 
 def file_upload(request):
-    form = VideoUpload(request.POST or None)
+    form = VideoUpload(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.cleaned_data
         print(form.cleaned_data)
@@ -143,3 +146,8 @@ def docs_upload(request):
         return redirect('document')
     context = {'form': form}
     return render(request, 'lms_app/document_up.html', context)
+
+def load_cities(request):
+    country_id = request.GET.get('country_id')  
+    cities = City.objects.filter(country_id=country_id)
+    return render(request, 'lms_app/city_dropdown_list_options.html', {'cities': cities})
