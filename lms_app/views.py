@@ -98,7 +98,6 @@ def registepage(request):
 
         # handle_uploaded_file(request.FILES['file']) 
         form.cleaned_data
-        print(form.cleaned_data)
         form.save()
         return redirect('teacher_list')
     context = { 'form': form}
