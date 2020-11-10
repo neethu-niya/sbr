@@ -93,7 +93,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sbr-django',
-        'USER': 'admin',
+        'USER': 'serveradmin',
         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
         'HOST': 'sbr-database.c87jt2nj0lma.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
