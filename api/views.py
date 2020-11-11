@@ -30,7 +30,6 @@ class SubjectView(APIView):
         try:
             subjects = Subject.objects.filter(active=True)
             subjects = SubjectSerializer(subjects, many=True).data
-            subjects = {subjects}
         except:
             subjects = []
         
