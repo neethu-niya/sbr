@@ -307,8 +307,8 @@ class Student(models.Model):
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255)
-    # country = models.CharField(null=True,blank=True,max_length=255)
-    # city = models.CharField(null=True,blank=True,max_length=255)
+    country = models.CharField(null=True,blank=True,max_length=255)
+    city = models.CharField(null=True,blank=True,max_length=255)
     # country = CountryField(blank_label='(select country)',null=True, blank=True)
     # state = models.ForeignKey(State, on_delete=models.CASCADE)
     

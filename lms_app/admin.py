@@ -36,6 +36,5 @@ admin.site.register(Documents)
 admin.site.register(Chat)
 admin.site.register(Notification)
 admin.site.register(Scheme)
-# admin.site.register(City)
-# admin.site.register(Country)
+
 
