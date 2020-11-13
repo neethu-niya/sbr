@@ -6,8 +6,7 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django_countries.fields import CountryField
-
+from rest_framework.authtoken.models import Token
 
 # from lms_app.forms import RegisterForm
 User = get_user_model()
@@ -148,6 +147,15 @@ class Teacher(models.Model):
         # self.user.password = "helloworld555"
         self.user=u
         super(Teacher, self).save(self, *args, **kwargs)
+
+
+
+
+
+    @receiver(post_save, sender=User)
+    def create_auth_token(sender, instance=None, created=False, **kwargs):
+        if created:
+            Token.objects.create(user=instance)
 # @receiver(post_save, sender=Teacher)
 # def teacherupdate(sender, instance, created, **kwargs):
 #     if created:
