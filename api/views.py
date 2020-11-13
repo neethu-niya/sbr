@@ -25,6 +25,7 @@ from lms_app.models import Syllabus, Standard, Subject, Chapter
 
 
 class SubjectView(APIView):
+    permission_classes = (IsAuthenticated, )
 
     def get(self, request):
         try:
