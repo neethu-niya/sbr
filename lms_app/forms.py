@@ -1,7 +1,7 @@
 from django import forms
 from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Documents, Notification
 from django.contrib.auth import get_user_model
-from django_countries.fields import CountryField
+# from django_countries.fields import CountryField
 
 material_choices = [
     ('0', 'Study Material'),
