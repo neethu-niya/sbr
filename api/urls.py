@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 
 
 urlpatterns = [
+    path('auth/', obtain_auth_token, name='api_token_auth'),
     path('subjects/', SubjectView.as_view(), name="subjects"),
     
 ]
