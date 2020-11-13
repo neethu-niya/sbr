@@ -24,6 +24,21 @@ from lms_app.models import Syllabus, Standard, Subject, Chapter
 
 
 
+# class SubjectView(APIView):
+#     permission_classes = (IsAuthenticated, )
+
+#     def get(self, request):
+#         try:
+#             subjects = Subject.objects.filter(active=True)
+#             subjects = SubjectSerializer(subjects, many=True).data
+#         except:
+#             subjects = []
+        
+#         return Response({'subjects': subjects})
+
+
+
+
 class SubjectView(APIView):
     permission_classes = (IsAuthenticated, )
 
@@ -35,4 +50,3 @@ class SubjectView(APIView):
             subjects = []
         
         return Response({'subjects': subjects})
-

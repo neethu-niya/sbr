@@ -97,9 +97,9 @@ class Subject(models.Model):
         return self.name
         # return f"{self.standard} - {self.name}"
 
-    # @property
-    # def get_standard(self):
-    #     return self.standard.name
+    @property
+    def get_standard(self):
+        return self.standard.name
     
 
     # @property
