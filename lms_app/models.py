@@ -6,6 +6,9 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django_countries.fields import CountryField
+
+
 # from lms_app.forms import RegisterForm
 User = get_user_model()
 
@@ -36,8 +39,8 @@ file_choices = [
 
 
 send_choices = [
-    ('0', 'Teacher'),
-    ('1', 'Student'),
+    ('Teacher', 'Teachers'),
+    ('Student', 'Students'),
 ]
 
 scheme_choices = [
@@ -45,6 +48,12 @@ scheme_choices = [
     ('1', 'Chapter'),
 ]
 
+state_choices = [
+    ('KL', 'KERALA'),
+    ('KA', 'KARNATAKA'),
+    ('TN', 'TAMIL NADU'),
+    ('GOA', 'GOA'),
+]
 
 class Syllabus(models.Model):
     name = models.CharField(max_length=255)
@@ -85,12 +94,12 @@ class Subject(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        # return self.name
-        return f"{self.standard} - {self.name}"
+        return self.name
+        # return f"{self.standard} - {self.name}"
 
-    @property
-    def get_standard(self):
-        return self.standard.name
+    # @property
+    # def get_standard(self):
+    #     return self.standard.name
     
 
     # @property
@@ -262,18 +271,26 @@ class Scheme(models.Model):
     #         sub
     # return str(sub)
 
-class Country(models.Model):
-    name = models.CharField(max_length=30)
+
+
+
+
+# class Country(models.Model):
+#     country = CountryField(blank_label='(select country)',null=True, blank=True)
+#     # active = models.BooleanField(default=False)
     
-    def __str__(self):
-        return self.name
+    
+#     def __str__(self):
+#         return f'{self.country}'    
 
-class City(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
 
-    def __str__(self):
-        return self.name
+# class State(models.Model):
+#     country = models.ForeignKey(Country, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=50, choices=state_choices,  null=True,  blank=True)
+    
+
+#     def __str__(self):
+#         return self.name
 
 
 
@@ -284,13 +301,14 @@ class Student(models.Model):
     address = models.CharField(max_length=255)
     # country = models.CharField(null=True,blank=True,max_length=255)
     # city = models.CharField(null=True,blank=True,max_length=255)
-    country = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
+    # country = CountryField(blank_label='(select country)',null=True, blank=True)
+    # state = models.ForeignKey(State, on_delete=models.CASCADE)
+    
 
     # nationality = models.CharField(null=True,blank=True,max_length=255)
     # state = models.CharField(null=True,blank=True,max_length=255)
     district = models.CharField(null=True,blank=True,max_length=255)
-    present_country = models.CharField(null=True,blank=True,max_length=255)
+    present_country = models.CharField(max_length=100, null=True,blank=True)
     email = models.EmailField(null=True, blank=True)
     image = models.ImageField(
         upload_to='staticfiles/image/', null=True, blank=True)
@@ -323,20 +341,9 @@ class Student(models.Model):
         self.user=s
         super(Student, self).save(self, *args, **kwargs)
 
-        # def __init__(self, *args, **kwargs):
-        #     super().__init__(*args, **kwargs)
-        #     self.fields['city'].queryset = City.objects.none()
 
-            # if 'country' in self.data:
-            #     try:
-            #         country_id = int(self.data.get('country'))
-            #         self.fields['city'].queryset = City.objects.filter(country_id=country_id).order_by('name')
-            #     except (ValueError, TypeError):
-            #         pass  # invalid input from the client; ignore and fallback to empty City queryset
-            # elif self.instance.pk:
-            #     self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
-
-
+    
+        
 # @receiver(post_save, sender=Student)
 # def create_or_update_studentuser(sender, instance, created, **kwargs):
 #     if created:
@@ -384,6 +391,23 @@ class Notification(models.Model):
     image = models.ImageField(
         upload_to='staticfiles/image/', null=True, blank=True)
     description = models.TextField()
-    send_to = models.CharField(max_length=25, choices=send_choices)
+    send_to = models.CharField(max_length=255, choices=send_choices)
+
+    def __str__(self):
+        return self.title       
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
+        
+    def __str__(self):
+        return f'{self.user.name} Profile'
+     
+    # def save(self, *args, **kwargs):
+    #     s = User.objects.get()
+    #     # self.user.username = self.name
+    #     # self.user.password = "helloworld555"
+    #     self.user=s
+    #     super(Student, self).save(self, *args, **kwargs)
