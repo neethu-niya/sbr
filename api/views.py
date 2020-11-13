@@ -41,10 +41,11 @@ from lms_app.models import Syllabus, Standard, Subject, Chapter
 
 class SubjectView(APIView):
     permission_classes = (IsAuthenticated, )
-
     def get(self, request):
+        user = request.user
+        user = get_user_model().objects.get(pk=user.id)
         try:
-            subjects = Subject.objects.filter(active=True)
+            subjects = user.subject.all()
             subjects = SubjectSerializer(subjects, many=True).data
         except:
             subjects = []
