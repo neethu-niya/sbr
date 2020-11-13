@@ -1,3 +1,4 @@
+
 {% extends "layouts/base.html" %}
 
 {% block title %} Forms {% endblock title %}
@@ -39,7 +40,7 @@
                         <div class="card-title">Form Elements</div>
                     </div>
                 
-        <form method="post" id="studentform" class="post-form" enctype="multipart/form-data" data-cities-url="{% url 'ajax_load_cities' %}">
+        <form method="post"  class="post-form" enctype="multipart/form-data">
             {% csrf_token %}                 
              <div class="container-fluid">
                 <div class="card-body">
@@ -90,17 +91,16 @@
                                     </div>
                             </div>
                         </select> 
-                        <select class="" name="city"> 
+                        <select class="" name="state"> 
                             <div class="col-sm-4">
                                     <div class="form-group form-group-default">
-                                    <option value={{form.city}}></option>                                                    
+                                    <option value={{form.state}}></option>                                                    
                                       
                                     </div>
                             </div>
-                        </select>    {% endcomment %}
+                        </select>     {% endcomment %}
                 
-                
-                    <div class="row"> 
+                    {% comment %} <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
                                 <label for="name">Country :</label>
@@ -117,7 +117,7 @@
                                
                             </div>
                         </div> 
-                    </div> 
+                    </div>  {% endcomment %}
 
                     <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
@@ -354,57 +354,14 @@
             </div>
         </div>
     </div>
-
-{% comment %} <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form> {% endcomment %}
-
-
-
-
-<!-- Specific JS goes HERE -->
-{% block javascripts %}
-{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-    $("#id_country").change(function () {
-        //const url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
-        const url = $("#personForm").attr("ajax_load_cities");  // get the url of the `load_cities` view
-        
-        const countryId = $(this).val();  // get the selected country ID from the HTML input
-
-        $.ajax({                       // initialize an AJAX request
-            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
-            data: {
-                'country_id': countryId       // add the country id to the GET parameters
-            },
-            success: function (data) {   // `data` is the return of the `load_cities` view function
-                console.log(data);
-                $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
-                
-               /* let html_data = '<option value="">---------</option>';
-                data.forEach(function (city) {
-                    html_data += `<option value="${city.id}">${city.name}</option>`
-                });
-                console.log(html_data);
-                $("#id_city").html(html_data);*/
-                
-            }
-        });
-
-    });
-</script> 
-{% endblock javascripts %} {% endcomment %}
-{% endblock javascripts %}
 {% endblock content %}
 
-{% comment %} <form method="post" class="post-form" enctype="multipart/form-data">
+
+{% comment %} <form>
     {% csrf_token %}
-        <div class="form-group">
-            {{form.as_p}}  
-                <button class="btn btn-outline-info" type="submit">submit</button>
-                <button class="btn btn-danger">Cancel</button>
+    {{ form.as_p }}
+    <button class="btn btn-outline-info" type="submit">submit</button>
+                          <button class="btn btn-danger">Cancel</button>
                        
-        </div>
-</form>    {% endcomment %}
+                    
+</form>  {% endcomment %}

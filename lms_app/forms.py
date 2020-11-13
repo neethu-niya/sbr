@@ -1,12 +1,23 @@
 from django import forms
-from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Documents, Country, City
+from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Documents, Notification
 from django.contrib.auth import get_user_model
+from django_countries.fields import CountryField
 
 material_choices = [
     ('0', 'Study Material'),
     ('1', 'Questionnaire'),
     ('2', 'Previous year Question'),
 ]
+
+send_choices = [
+    ('Teacher', 'Teachers'),
+    ('Student', 'Students'),
+]
+
+# state_choices = [
+#     ('KL', 'KERALA'),
+#     ('KA', 'KARNATAKA'),
+#     ('TN', 'TAMIL NADU'),
 
 class SyllabusForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter syllabus name"}))
@@ -78,11 +89,12 @@ class StudentRegister(forms.ModelForm):
     name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
     address = forms.CharField(max_length=50, required=False)
     # nationality = forms.CharField(max_length=255)
-    # country = forms.CharField(max_length=255, required=False)
-    # city = forms.CharField(max_length=255, required=False)
-    country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    city = forms.ModelMultipleChoiceField(queryset=City.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-
+    country = forms.CharField(max_length=255, required=False)
+    city = forms.CharField(max_length=255, required=False)
+    # country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    # state = forms.ModelMultipleChoiceField(queryset=State.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    # country = CountryField(blank_label='(select country)',null=True, blank=True)
+    # state = forms.ChoiceField(choices=state_choices, required=False)
     
     # state = forms.CharField(max_length=255)
     district = forms.CharField(max_length=255)
@@ -107,7 +119,7 @@ class StudentRegister(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ('name', 'address', 'country', 'city','district','present_country','email','subject',
+        fields = ('name', 'address','district','present_country','email','subject',
                   'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
                   'syllabus','standard','subject','course_type','active')
     # class Meta:
@@ -116,17 +128,17 @@ class StudentRegister(forms.ModelForm):
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
-    #     self.fields['city'].queryset = City.objects.none()
+    #     self.fields['state'].queryset = State.objects.none()
 
 
     #     if 'country' in self.data:
-    #         try:
+    #         try:    
     #             country_id = int(self.data.get('country'))
-    #             self.fields['city'].queryset = City.objects.filter(country_id=country_id).order_by('name')
+    #             self.fields['state'].queryset = State.objects.filter(cid=cid).order_by('name')
     #         except (ValueError, TypeError):
     #             pass  # invalid input from the client; ignore and fallback to empty City queryset
     #     elif self.instance.pk:
-    #         self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
+    #         self.fields['state'].queryset = self.instance.country.state_set.order_by('name')
 
 
 class VideoUpload(forms.ModelForm):
@@ -174,3 +186,13 @@ class DocumentUpload(forms.ModelForm):
         model = Documents
         fields = ('name','subtitle', 'description', 'chapter', 'material_type', 'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
+
+class NotificationAdd(forms.ModelForm):
+    title = forms.CharField(max_length=255, required=False)
+    image = forms.ImageField()
+    description = forms.Textarea()
+    send_to = forms.ChoiceField(choices=send_choices, required=False)
+    class Meta:
+        model = Notification
+        fields = ('title','image', 'description', 'send_to')
+
