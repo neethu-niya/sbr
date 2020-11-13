@@ -7,6 +7,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.hashers import make_password
 
 # from lms_app.forms import RegisterForm
 User = get_user_model()
@@ -343,7 +344,8 @@ class Student(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        s = User.objects.create(username=self.name,password = "worldheloo666")
+
+        s = User.objects.create(username=self.name,password = make_password("worldheloo666"))
         # self.user.username = self.name
         # self.user.password = "helloworld555"
         self.user=s
