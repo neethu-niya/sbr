@@ -49,11 +49,6 @@ class SubjectView(APIView):
         user = user.student_set.all().first()
         # user = Student.objects.get(user_id=user.id)
         print(user)
-        
-
-        
-
-
         # try:
         subjects = user.subject.all()
         subjects = SubjectSerializer(subjects, many=True).data
