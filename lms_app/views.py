@@ -171,10 +171,10 @@ def notifi_up(request):
     return render(request, 'lms_app/add_notification.html', context)
 
 
-class Profilep(ListView):
-    queryset = Profile.objects.all()
-    context_object_name = 'prof'
-    template_name = 'lms_app/profile_t.html'
+#class Profilep(ListView):
+ #   queryset = Profile.objects.all()
+  #  context_object_name = 'prof'
+   # template_name = 'lms_app/profile_t.html'
 
 
 class Upload_material(ListView):
