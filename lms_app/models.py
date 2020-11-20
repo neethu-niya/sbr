@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from autoslug import AutoSlugField
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
@@ -90,6 +91,7 @@ class Standard(models.Model):
 class Subject(models.Model):
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -98,9 +100,9 @@ class Subject(models.Model):
         return self.name
         # return f"{self.standard} - {self.name}"
 
-    # @property
-    # def get_standard(self):
-    #     return self.standard.name
+    @property
+    def get_standard(self):
+        return self.standard.name
     
 
     # @property
@@ -268,7 +270,7 @@ class Scheme(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=255, unique=False)
+    name = models.CharField(max_length=255, unique=True)
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255,null=True,blank=True)
@@ -300,23 +302,31 @@ class Student(models.Model):
     subject = models.ManyToManyField(Subject, blank=True)
     # scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
     course_type = models.CharField(null=True,blank=True,max_length=255)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,  null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
     
     # user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+ 
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        s = User.objects.create(username=self.name,password = "worldheloo666")
-        # self.user.username = self.name
-        # self.user.password = "helloworld555"
-        self.user=s
+        user = User.objects.get(username=self.name)
+        if not user:
+
+            s = User.objects.create(username=self.name,password = make_password("worldheloo666"))
+            # self.user.username = self.name
+            # self.user.password = "helloworld555"
+            self.user=s
+        
+        else:
+            pass
         super(Student, self).save(self, *args, **kwargs)
 
+    
 
     
         
@@ -422,13 +432,13 @@ class Notification(models.Model):
         return self.title       
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(
-        upload_to='staticfiles/image/', null=True, blank=True)
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     image = models.ImageField(
+#         upload_to='staticfiles/image/', null=True, blank=True)
         
-    def __str__(self):
-        return f'{self.user.name} Profile'
+#     def __str__(self):
+#         return f'{self.user.name} Profile'
      
     # def save(self, *args, **kwargs):
     #     s = User.objects.get()
