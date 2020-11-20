@@ -8,7 +8,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.hashers import make_password
+from cities_light.models import City, Country, Region
+
 
 # from lms_app.forms import RegisterForm
 User = get_user_model()
@@ -159,49 +160,7 @@ class Teacher(models.Model):
     def create_auth_token(sender, instance=None, created=False, **kwargs):
         if created:
             Token.objects.create(user=instance)
-# @receiver(post_save, sender=Teacher)
-# def teacherupdate(sender, instance, created, **kwargs):
-#     if created:
-#         User.objects.create(username=instance.name,password=str(instance.contact_no_1),
-#                             email=instance.email,user_type="1")
-#         users = User.objects.get(username=instance.name)
-#         instance.user = users
-
-
-        
-    
-     
-  
-# @receiver(post_save, sender=Teacher)
-# def create_or_update_user_profile   (sender, instance, created, **kwargs):
-    
-#     if created:
-#         User.objects.create(username=instance.name,password=str(instance.contact_no_1),
-#                                  email=instance.email,user_type="1")
-
-
-
-
-# @receiver(post_save, sender=Teacher)
-# def create_or_update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         User.objects.create(username=instance.name,password=str(instance.contact_no_1),
-#                             email=instance.email,user_type="1")
-
-     
-       
-     
-        # instance.user.save()
-    # @receiver(post_save, sender=User)
-    # def save(self, *args, **kwargs):
-    #     self.username = whatsapp_no
-    #     self.password = "helloworld555"
-    #     super(Teacher, self).save(self, *args, **kwargs)
-            
-   
-    # def __str__(self):
-    #     return self.name
-
+# 
 
 class Chapter(models.Model):
     subject = models.ManyToManyField(Subject)
@@ -285,23 +244,28 @@ class Scheme(models.Model):
 
 
 
+# class UserProfile(models.Model):
+#     country = models.ForeignKey(Country ,on_delete=models.CASCADE)
+#     state = models.ForeignKey(Region ,on_delete=models.CASCADE)
+#   
+# class Countrys(models.Model):
+#     country = models.ForeignKey(Country,on_delete=models.CASCADE)
+#     active = models.BooleanField(default=False)
+    
 
-# class Country(models.Model):
-#     country = CountryField(blank_label='(select country)',null=True, blank=True)
-#     # active = models.BooleanField(default=False)
-    
-    
 #     def __str__(self):
-#         return f'{self.country}'    
+#         return f'{self.country}' 
+    
+#         # return f'{self.country}'    
 
 
 # class State(models.Model):
 #     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=50, choices=state_choices,  null=True,  blank=True)
+#     name = models.ForeignKey(Region, on_delete=models.CASCADE, null=True,  blank=True)
     
 
 #     def __str__(self):
-#         return self.name
+#         return f'{self.name}' 
 
 
 
@@ -309,9 +273,12 @@ class Student(models.Model):
     name = models.CharField(max_length=255, unique=True)
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
-    address = models.CharField(max_length=255)
-    country = models.CharField(null=True,blank=True,max_length=255)
+    address = models.CharField(max_length=255,null=True,blank=True)
+    country = models.ForeignKey(Country ,on_delete=models.CASCADE,null=True)
+
+    state = models.ForeignKey(Region ,on_delete=models.CASCADE,null=True)
     city = models.CharField(null=True,blank=True,max_length=255)
+
     # country = CountryField(blank_label='(select country)',null=True, blank=True)
     # state = models.ForeignKey(State, on_delete=models.CASCADE)
     
@@ -319,7 +286,7 @@ class Student(models.Model):
     # nationality = models.CharField(null=True,blank=True,max_length=255)
     # state = models.CharField(null=True,blank=True,max_length=255)
     district = models.CharField(null=True,blank=True,max_length=255)
-    present_country = models.CharField(max_length=100, null=True,blank=True)
+    present_country = models.ForeignKey(Country ,on_delete=models.CASCADE,null=True,related_name = 'pre_country')
     email = models.EmailField(null=True, blank=True)
     image = models.ImageField(
         upload_to='staticfiles/image/', null=True, blank=True)
@@ -374,7 +341,7 @@ class Documents(models.Model):
     subtitle = models.CharField(max_length=255 )
     description = models.TextField(null=True, blank=True)
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
-    material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
+    # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
     url_field = models.URLField(max_length=200, null=True, blank=True)
     image = models.ImageField(
         upload_to='staticfiles/image/', null=True, blank=True)
@@ -392,6 +359,55 @@ class Documents(models.Model):
 
     def __str__(self):
         return self.name
+
+class Study_Material(models.Model):
+    name = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255 )
+    description = models.TextField(null=True, blank=True)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
+    url_field = models.URLField(max_length=200, null=True, blank=True)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
+    thumbnail_image = models.ImageField(
+        upload_to='staticfiles/thumbnail/', null=True, blank=True)
+    pdf = models.FileField(upload_to='staticfiles/pdf')
+    active = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Study_Material'
+        verbose_name_plural = 'Study_Materials'
+
+
+    def __str__(self):
+        return self.name
+
+class Question_paper(models.Model):
+    name = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255 )
+    description = models.TextField(null=True, blank=True)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
+    url_field = models.URLField(max_length=200, null=True, blank=True)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
+    thumbnail_image = models.ImageField(
+        upload_to='staticfiles/thumbnail/', null=True, blank=True)
+    pdf = models.FileField(upload_to='staticfiles/pdf')
+    active = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Question_paper'
+        verbose_name_plural = 'Question_papers'
+
+
+    def __str__(self):
+        return self.name
+
 
 class File(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)

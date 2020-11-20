@@ -11,7 +11,7 @@
 {% comment %} {{form}} {% endcomment %}
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Forms</h4>
+            <h4 class="page-title">SBR Academy</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="#">
@@ -22,13 +22,13 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Teachers List</a>
+                    <a href="#">Students List</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Teacher Register</a>
+                    <a href="#">Student Register</a>
                 </li>
             </ul>
         </div>
@@ -37,10 +37,28 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Form Elements</div>
+                        <div class="card-title">STUDENT REGISTER </div>
                     </div>
                 
-        <form method="post"  class="post-form" enctype="multipart/form-data">
+    
+
+    {% if messages %}
+     <ul class="messages">
+     {% for message in messages %}
+        <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+         {{ message }}
+        </div>
+        </div>
+     {% endfor %}
+    </ul>
+    {% else %}
+    {% endif %}
+
+    <form method="post"  class="post-form" enctype="multipart/form-data">
             {% csrf_token %}                 
              <div class="container-fluid">
                 <div class="card-body">
@@ -81,26 +99,30 @@
                         </div>
                         
                     </div>
-                    {% comment %} <div class="row">
-                        <select class="" name="country">
                     
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <option value={{form.country}}></option>                                                    
+                    <div class="row">
+                        <div class="form-group">
+                                    <label for="smallSelect">COUNTRY</label>
+                                    <select class="form-control form-control-sm" id="smallSelect" name="country">
+                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
+                                    <option value={{form.country}} > </option>                                                    
                                       
-                                    </div>
-                            </div>
-                        </select> 
-                        <select class="" name="state"> 
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <option value={{form.state}}></option>                                                    
+                                    {% comment %} </div> {% endcomment %}
+                            
+                                    </select>    
+                            </div>    
+                            <div class="form-group">
+                                    <label for="smallSelect">STATE  </label>
+                                    <select id="State" class="form-control form-control-sm" id="smallSelect" name="state"   >
+                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
+                                    <option value={{form.state}} ></option>                                                    
                                       
-                                    </div>
-                            </div>
-                        </select>     {% endcomment %}
-                
-                     <div class="row"> 
+                                    {% comment %} </div> {% endcomment %}
+                            
+                                    </select>    
+                            </div>    
+                        </div>
+                      {% comment %} <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
                                 <label for="name">Country :</label>
@@ -108,7 +130,7 @@
                                
                             </div>
                         </div> 
-                    </div>
+                    </div> {% endcomment %}
                     <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
@@ -129,7 +151,18 @@
                         </div> 
                     </div>
 
-                    <div class="row"> 
+                     <div class="form-group">
+                                    <label for="smallSelect">PRESENT COUNTRY</label>
+                                    <select class="form-control form-control-sm" id="smallSelect" name="present_country">
+                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
+                                    <option >SELECT COUNTRY: </option>                                                    
+                                    <option value={{form.present_country}} > </option>                                                    
+                                     
+                                    {% comment %} </div> {% endcomment %}
+                            
+                                    </select>    
+                            </div>    
+                    {% comment %} <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
                                 <label for="name">Present country :</label>
@@ -137,7 +170,7 @@
                                
                             </div>
                         </div> 
-                    </div>
+                    </div> {% endcomment %}
                     
                     <div class="row"> 
                         <div class="col-md-2 col-lg-4">
@@ -292,12 +325,12 @@
                                 
                                 
                             
-                                <div class="form-check"> 
+                                 <div class="form-check"> 
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="active" value="">
-                                        <span class="form-check-sign">Active :</span>
+                                        <input class="form-check-input" type="checkbox" name="active" value="active">
+                                        <span class="form-check-sign">Active</span>
                                     </label>
-                                </div> 
+                                </div>
                             
                                 
                             
@@ -310,7 +343,7 @@
                           <button class="btn btn-danger">Cancel</button>
                        
                     </div>
-                </form> 
+    </form> 
                             {% comment %} <tbody>
                                 {% for teacher in teachers %}
                                     <tr>
@@ -365,3 +398,16 @@
                        
                     
 </form>  {% endcomment %}
+
+
+
+
+{% comment %} <form method="post"  class="post-form" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-outline-info" type="submit">submit</button>
+                          <button class="btn btn-danger">Cancel</button>
+                       
+                    
+</form> {% endcomment %}

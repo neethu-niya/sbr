@@ -1,0 +1,112 @@
+
+
+
+
+
+
+
+{% extends "layouts/base.html" %}
+
+{% block title %} Forms {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% comment %} {{form}} {% endcomment %}
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">SBR ACADEMY</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">NOTIFICATION</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">ADD NOTIFICATION</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">ADD NOTIFICATION</div>
+                    </div>
+        <form method="post" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}                 
+             <div class="container-fluid">
+                <div class="card-body">
+                    <div class="row"> 
+                        <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                                <label for="name">Title</label>
+                                <input type="textarea" class="form-control" name="title" id="" placeholder="Enter The Title">       
+                               
+                            </div>
+                        </div>   
+                </div>
+                        <div class="form-group">
+                                <label for="exampleFormControlFile1">Upload Image</label>
+                                <input type="file" class="form-control-file" name="image" id='' >
+                        </div>  
+                        <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Description</span>
+                                        </div>
+                                        <textarea class="form-control" name="description" id="" aria-label="With textarea"></textarea>
+                                    </div>
+                        </div>
+                    
+                        <div class="form-group">
+                        <div class="col-sm-4">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select Material Type</label>                                                       
+                                        {{form.send_to}}
+                                    </div>
+                        </div>
+                        </div>
+                        
+                       
+
+        
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">submit</button>
+                            <button class="btn btn-danger">Cancel</button>
+                       
+                        </div>
+        </form> 
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% comment %} <form method="post">
+    {% csrf_token %}
+        <div class="form-group" enctype="multipart/form-data">
+            {{form.as_p}}  
+                <button class="btn btn-outline-info" type="submit">submit</button>
+                <button class="btn btn-danger">Cancel</button>
+                       
+        </div>
+</form>   {% endcomment %}

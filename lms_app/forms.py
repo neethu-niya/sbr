@@ -1,7 +1,8 @@
 from django import forms
-from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Documents, Notification
+from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Scheme,  Video, Documents, Notification, Question_paper
 from django.contrib.auth import get_user_model
-# from django_countries.fields import CountryField
+from django_countries.fields import CountryField
+from cities_light.models import City, Country, Region
 
 material_choices = [
     ('0', 'Study Material'),
@@ -86,22 +87,21 @@ class TeacherRegForm(forms.ModelForm):
 
 
 class StudentRegister(forms.ModelForm):
-    name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
+    name = forms.CharField(max_length=30, required=False, help_text='Optional')  
     address = forms.CharField(max_length=50, required=False)
-    # nationality = forms.CharField(max_length=255)
-    country = forms.CharField(max_length=255, required=False)
+   
+    country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    state = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     city = forms.CharField(max_length=255, required=False)
-    # country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # state = forms.ModelMultipleChoiceField(queryset=State.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # country = CountryField(blank_label='(select country)',null=True, blank=True)
-    # state = forms.ChoiceField(choices=state_choices, required=False)
+    
     
     # state = forms.CharField(max_length=255)
-    district = forms.CharField(max_length=255)
+    district = forms.CharField(max_length=255,required=False)
+    present_country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     image = forms.ImageField()
-    present_country = forms.CharField(max_length=255) 
     guardian_name = forms.CharField(max_length=255)
     guardian_relation = forms.CharField(max_length=50)
     contact_no = forms.CharField(max_length=30, required=False)
@@ -119,7 +119,7 @@ class StudentRegister(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ('name', 'address','district','present_country','email','subject',
+        fields = ('name', 'address','country','state','city','district','present_country','email','subject',
                   'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
                   'syllabus','standard','subject','course_type','active')
     # class Meta:
@@ -173,19 +173,61 @@ class DocumentUpload(forms.ModelForm):
     description = forms.Textarea()
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
-    material_type = forms.ChoiceField(choices = material_choices)
+    # material_type = forms.ChoiceField(choices = material_choices)
 
-    image = forms.ImageField()
-    thumbnail_image = forms.ImageField()
+    image = forms.ImageField(required=False)
+    thumbnail_image = forms.ImageField(required=False)
         
-    pdf = forms.FileField()
+    pdf = forms.FileField(required=False)
     url_field =forms.URLField(max_length=200, required=False)
 
     active = forms.BooleanField(required=False)
     class Meta:
         model = Documents
-        fields = ('name','subtitle', 'description', 'chapter', 'material_type', 'image', 
+        fields = ('name','subtitle', 'description', 'chapter',  'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
+
+class StudyUpload(forms.ModelForm):
+    name = forms.CharField(max_length=255, required=False)
+    subtitle = forms.CharField(max_length=255, required=False)
+    description = forms.Textarea()
+    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+
+    # material_type = forms.ChoiceField(choices = material_choices)
+
+    image = forms.ImageField(required=False)
+    thumbnail_image = forms.ImageField(required=False)
+        
+    pdf = forms.FileField(required=False)
+    url_field =forms.URLField(max_length=200, required=False)
+
+    active = forms.BooleanField(required=False)
+    class Meta:
+        model = Documents
+        fields = ('name','subtitle', 'description', 'chapter', 'image', 
+                  'thumbnail_image', 'pdf','url_field', 'active')
+
+
+class Question_form(forms.ModelForm):
+    name = forms.CharField(max_length=255, required=False)
+    subtitle = forms.CharField(max_length=255, required=False)
+    description = forms.Textarea()
+    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+
+    # material_type = forms.ChoiceField(choices = material_choices)
+
+    image = forms.ImageField(required=False)
+    thumbnail_image = forms.ImageField(required=False)
+        
+    pdf = forms.FileField(required=False)
+    url_field =forms.URLField(max_length=200, required=False)
+
+    active = forms.BooleanField(required=False)
+    class Meta:
+        model = Question_paper
+        fields = ('name','subtitle', 'description', 'chapter', 'image', 
+                  'thumbnail_image', 'pdf','url_field', 'active')
+
 
 class NotificationAdd(forms.ModelForm):
     title = forms.CharField(max_length=255, required=False)
@@ -195,4 +237,3 @@ class NotificationAdd(forms.ModelForm):
     class Meta:
         model = Notification
         fields = ('title','image', 'description', 'send_to')
-

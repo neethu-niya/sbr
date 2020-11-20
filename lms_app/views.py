@@ -111,7 +111,7 @@ def studentpage(request):
         form.cleaned_data
         print(form.cleaned_data)    
         form.save()
-        return redirect('student_list')
+        return redirect('student_list') 
     context = {'form': form}
     return render(request, 'lms_app/register_student.html', context)
 
@@ -146,7 +146,64 @@ def docs_upload(request):
     context = {'form': form}
     return render(request, 'lms_app/document_up.html', context)
 
-def load_cities(request):
-    country_id = request.GET.get('country_id')  
-    cities = City.objects.filter(country_id=country_id)
-    return render(request, 'lms_app/city_dropdown_list_options.html', {'cities': cities})
+
+
+# def load_cities(request):
+#     country_id = request.GET.get('country_id')  
+#     cities = City.objects.filter(country_id=country_id)
+#     return render(request, 'lms_app/city_dropdown_list_options.html', {'cities': cities})
+
+
+class Notification_list(ListView):
+    queryset = Notification.objects.all()
+    context_object_name = 'notification'
+    template_name = 'lms_app/notification_list.html'
+
+def notifi_up(request):
+    form = NotificationAdd(request.POST or None, request.FILES or None)
+    # register = Student.objects.all()
+    if form.is_valid():
+        form.cleaned_data
+        print(form.cleaned_data)    
+        form.save()
+        return redirect('notify') 
+    context = {'form': form}
+    return render(request, 'lms_app/add_notification.html', context)
+
+
+class Profilep(ListView):
+    queryset = Profile.objects.all()
+    context_object_name = 'prof'
+    template_name = 'lms_app/profile_t.html'
+
+
+class Upload_material(ListView):
+    queryset = Study_Material.objects.all()
+    context_object_name = 'study'
+    template_name = 'lms_app/study_list.html'
+
+def study_upload(request):
+    form = StudyUpload(request.POST or None , request.FILES or None)
+    if form.is_valid():
+        form.cleaned_data
+        print(form.cleaned_data)
+        form.save()
+        return redirect('studyfile')
+    context = {'form': form}
+    return render(request, 'lms_app/study_up.html', context)
+
+
+class Question_Paper(ListView):
+    queryset = Study_Material.objects.all()
+    context_object_name = 'question'
+    template_name = 'lms_app/Question.html'
+
+def question_upload(request):
+    form = Question_form(request.POST or None , request.FILES or None)
+    if form.is_valid():
+        form.cleaned_data
+        print(form.cleaned_data)
+        form.save()
+        return redirect('questions')
+    context = {'form': form}
+    return render(request, 'lms_app/question_up.html', context)
