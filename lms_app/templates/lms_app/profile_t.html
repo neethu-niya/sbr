@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">SBR Academy</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Profile</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">My profile</a>
+                </li>
+            </ul>
+        </div>
+        
+            <div class="col-lg-12">
+                <div class="card card-profile">
+                    <div class="card-header" style="background-image: url('/static/assets/img/blogpost.jpg')">
+                        <div class="profile-picture">
+                            <div class="avatar avatar-xl">
+                                <img src="/static/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                 <div class="row">
+                    <div class="card-body">
+                        <div class="user-profile text-center">
+                            {% comment %} <div class="name" name={user} ></div> {% endcomment %}
+                            <div class="name"><p> {{ user }}</p></div>
+                            <div class="email"><p> {{ user.email }}</p></div>
+                            <div class="desc">A man who hates loneliness</div>
+                           
+                            <div class="social-media">
+                                <a class="btn btn-info btn-twitter btn-sm btn-link" href="#"> 
+                                    <span class="btn-label just-icon"><i class="flaticon-twitter"></i> </span>
+                                </a>
+                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#"> 
+                                    <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span> 
+                                </a>
+                                <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#"> 
+                                    <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span> 
+                                </a>
+                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#"> 
+                                    <span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span> 
+                                </a>
+                            </div>
+                            <div class="view-profile">
+                                <a href="#" class="btn btn-secondary btn-block">View Full Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+{% endblock %}

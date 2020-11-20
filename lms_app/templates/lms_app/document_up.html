@@ -12,12 +12,13 @@
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
+
 {% block content %}
 
 {% comment %} {{form}} {% endcomment %}
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Forms</h4>
+            <h4 class="page-title">SBR ACADEMY</h4>
             <ul class="breadcrumbs">
                 <li class="nav-home">
                     <a href="#">
@@ -34,7 +35,7 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Document Upload</a>
+                    <a href="#">Questionnaire Upload</a>
                 </li>
             </ul>
         </div>
@@ -42,7 +43,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Form Elements</div>
+                        <div class="card-title">Add Questionnaire</div>
                     </div>
         <form method="post"class="post-form" enctype="multipart/form-data">
             {% csrf_token %}                 
@@ -91,16 +92,15 @@
                         </div>
 
 
-                        <div class="form-group">
+                        {% comment %} <div class="form-group">
                         <div class="col-sm-4">
                                     <div class="form-group form-group-default">
                                     <label for="addPosition">Select Material Type</label>                                                       
                                         {{form.material_type}}
                                     </div>
                         </div>
-                        </div>
+                        </div> {% endcomment %}
                        
-
                        
                         <div class="form-group">
                                 <label for="exampleFormControlFile1">Upload Image</label>
@@ -115,9 +115,15 @@
                                 <label for="exampleFormControlFile1">Upload Pdf</label>
                                 <input type="file" class="form-control-file" name="pdf" id='' >
                         </div>
+                        </div> 
+                        <div style="width:800px; margin:0 auto;">     
+                                <b><h1>OR</h1></b>
+                            
 
+                        </div> 
+                        
+                        
 
-                        </div>
                         <div class="form-group">
                                     <label for="basic-url">URL</label>
                                     <div class="input-group mb-3">
@@ -129,7 +135,7 @@
                         </div>
                         <div class="form-check"> 
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="active" value="">
+                                        <input class="form-check-input" type="checkbox" name="active" value="active">
                                         <span class="form-check-sign">Active</span>
                                     </label>
                         </div>

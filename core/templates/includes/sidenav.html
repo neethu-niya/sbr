@@ -15,7 +15,8 @@
 									<span>
 										{{ request.user.user }}
 										<span class="user-level">
-											{{ request.user.email }}  
+											{{ request.user.username }}  
+											 
 										</span>
 										<span class="caret"></span>
 									</span>
@@ -25,7 +26,8 @@
 								<div class="collapse in" id="collapseExample">
 									<ul class="nav">
 										<li>
-											<a href="#profile">
+											<a href="{% url 'pro' %}">
+											
 												<span class="link-collapse">My Profile</span>
 											</a>
 										</li>
@@ -133,7 +135,33 @@
 									<p>Notification</p>
 									<span class="caret"></span>
 								</a>
+								<div class="collapse" id="notification">
+									<ul class="nav nav-collapse">
+										<li>
+											<a href="{% url 'notify' %}">
+											
+												<span class="sub-item">Notification</span>
+											</a>
+										</li>
+									</ul>
+								</div>
 							</li>
+							{% comment %} <li class="nav-item">
+							<a data-toggle="collapse" href="#profile">
+									<i class="fas fa-layer-group"></i>
+									<p>PROFILE</p>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="profile">
+									<ul class="nav nav-collapse">
+										<li>
+											<a href="{% url 'pro' %}">
+												<span class="sub-item">Profile</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li> {% endcomment %}
 									{% comment %} </ul>
 								</div>
 							</li> {% endcomment %}
@@ -164,13 +192,26 @@
 								</a>
 								<div class="collapse" id="documents">
 									<ul class="nav nav-collapse">
+										
+										<li>
+											<a href="{% url 'studyfile' %}">
+												<span class="sub-item">Study Material</span>
+											</a>
+										</li>
+
 										<li>
 											<a href="{% url 'document' %}">
-												<span class="sub-item">Documents</span>
+												<span class="sub-item">Previous year Question</span>
+											</a>
+										</li>
+										<li>
+											<a href="{% url 'questions' %}">
+												<span class="sub-item">Questionnaire</span>
 											</a>
 										</li>
 									</ul>
 								</div>
+								
 							</li>
 
 							

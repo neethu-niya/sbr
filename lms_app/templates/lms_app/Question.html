@@ -20,13 +20,13 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">VIDEOS</a>
+                    <a href="#">Documents</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">VIDEO LIST</a>
+                    <a href="#"> Question_paper:</a>
                 </li>
             </ul>
         </div>
@@ -36,8 +36,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title"> Video List:</h4>
-                           <a href="{% url 'up' %}" class="btn btn-primary btn-round ml-auto">ADD VIDEO<i class="fa fa-plus"></i></a>
+                            <h4 class="card-title">Question Paper:</h4>
+                           <a href="{% url 'question_up' %}" class="btn btn-primary btn-round ml-auto">ADD Question <i class="fa fa-plus"></i></a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -91,22 +91,22 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="add-row" class="display table table-striped table-hover" class="table table-head-bg-danger"> 
+                            <table id="add-row" class="display table table-striped table-hover" >
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>chapter</th>
+                                        <th>Material Type</th>
                                         <th>description</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {% for v in videos %}
+                                    {% for d in documents %}
                                         <tr>
-                                            <td>{{v.name}}</td>
-                                            <td>{{v.chapter}}</td>
-                                            <td>{{v.description}}</td>
+                                            <td>{{d.name}}</td>
+                                            <td>{{d.material_type}}</td>
+                                            <td>{{d.description}}</td>
                                             <td>
                                                 <div class="form-button-action">
                                                 <label class="switch">
@@ -128,8 +128,8 @@
                                                     </button>
                                                     <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                                         <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div> {% endcomment %}
+                                                    </button> {% endcomment %}
+                                                </div>
                                             </td>
                                         </tr>
                                     {% endfor %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
+    'cities_light'
 ]
 
 MIDDLEWARE = [
@@ -82,12 +83,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'dblms.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'dblms.sqlite3'),
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -100,16 +101,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sbr',
-        'USER': 'admin',
-        'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
-        'HOST': 'database-1.cz7kaqdmaqwx.us-east-2.rds.amazonaws.com',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'sbr',
+#         'USER': 'admin',
+#         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
+#         'HOST': 'database-1.cz7kaqdmaqwx.us-east-2.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
 
 
 #nothing

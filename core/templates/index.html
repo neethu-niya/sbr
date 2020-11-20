@@ -3,11 +3,15 @@
 {% block title %} Dashboard {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+{% endblock stylesheets %}
 
 {% block content %}
 
-    <div class="panel-header bg-primary-gradient">
+    
+    
+    {% comment %} <div class="panel-header bg-primary-gradient">
       <div class="page-inner py-5">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
           <div>
@@ -20,32 +24,177 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
+   <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title"></h4>
+            
+        </div>
+  <form action="/action_page.php" class="form-container">
+                       
     <div class="page-inner mt--5">
       <div class="row mt--2">
         <div class="col-md-6">
           <div class="card full-height">
             <div class="card-body">
-              <div class="card-title">Overall statistics</div>
-              <div class="card-category">Daily information about statistics in system</div>
+              <div class="card-title">SBR ACADEMY</div>
+              <div class="card-category">User's count</div>
               <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
                 <div class="px-2 pb-2 pb-md-0 text-center">
-                  <div id="circles-1"></div>
-                  <h6 class="fw-bold mt-3 mb-0">New Users</h6>
+                  <div id="circles-1" ></div>
+                  <h6 class="fw-bold mt-3 mb-0">TOTAL USER</h6>
                 </div>
                 <div class="px-2 pb-2 pb-md-0 text-center">
-                  <div id="circles-2"></div>
-                  <h6 class="fw-bold mt-3 mb-0">Sales</h6>
+                  <div id="circles-2" ></div>
+                  <h6 class="fw-bold mt-3 mb-0">STUDENT'S</h6>
                 </div>
                 <div class="px-2 pb-2 pb-md-0 text-center">
-                  <div id="circles-3"></div>
-                  <h6 class="fw-bold mt-3 mb-0">Subscribers</h6>
+                  <div id="circles-3" name="teacher"></div>
+                  <h6 class="fw-bold mt-3 mb-0">TEACHER</h6>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+      </div>      
+   
+      {% comment %} <div class="row row-card-no-pd"> {% endcomment %}
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <h4 class="card-title">COUNT</h4>
+                            {% comment %} <div class="card-tools">
+                                <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
+                                <button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
+                                <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
+                            </div> {% endcomment %}
+                        </div>
+                        <p class="card-category">
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="table-responsive table-hover table-sales">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                              
+                                                 <h1><td>NAME</td></h1>
+                                                <td class="text-right">
+                                                   
+                                                </td>
+                                                {% comment %} <td class="text-right">
+                                                    FIELDS
+                                                </td> {% endcomment %}
+                                                <td class="text-right">
+                                                    COUNT
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <h1><td>SYLLABUS</td></h1>
+                                                <td class="text-right">   
+                                                </td>
+                                                <td class="text-right">
+                                                    {{syllabus_c}}
+                                                </td>
+                                                </td>
+                                                 <td class="text-right">
+                                                    
+                                                </td>
+                                                 <td class="text-right">
+                                                    
+                                                </td>
+                                               
+                                                
+                                            </tr>
+                                            <tr>
+                                            
+                                                <td>STANDARD</td>
+                                                <td class="text-right">
+                                                    
+                                                </td>
+                                                <td class="text-right">
+                                                    {{standard_c}}
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                          
+                       
+             {% comment %} <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Table Head States</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-head-bg-danger">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                            </thead>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-head-bg-primary mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table> {% endcomment %}
+                    </div>
+                </div>
+                 
+  </form>
+
+        {% comment %} <div class="col-md-6">
           <div class="card full-height">
             <div class="card-body">
               <div class="card-title">Total income & spend statistics</div>
@@ -515,7 +664,7 @@
                 <div class="float-right pt-1">
                   <small class="text-muted">2 Days Ago</small>
                 </div>
-              </div>
+              </div> {% endcomment %}
             </div>
           </div>
         </div>
@@ -528,14 +677,22 @@
 
 	<script src="/static/assets/js/demo.js"></script>
 
-	<script>
+	<script>    
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+
 		Circles.create({
 			id:'circles-1',
 			radius:45,
 			value:60,
 			maxValue:100,
 			width:7,
-			text: 5,
+			text: {{user_count}},
 			colors:['#f1f1f1', '#FF9E27'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -547,10 +704,10 @@
 		Circles.create({
 			id:'circles-2',
 			radius:45,
-			value:70,
+			value:40,
 			maxValue:100,
 			width:7,
-			text: 36,
+			text: {{students_count}},
 			colors:['#f1f1f1', '#2BB930'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -562,10 +719,10 @@
 		Circles.create({
 			id:'circles-3',
 			radius:45,
-			value:40,
+			value:60,
 			maxValue:100,
 			width:7,
-			text: 12,
+			text: {{teacher_count}},
 			colors:['#f1f1f1', '#F25961'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -573,8 +730,7 @@
 			styleWrapper:true,
 			styleText:true
 		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
+    	var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
 		var mytotalIncomeChart = new Chart(totalIncomeChart, {
 			type: 'bar',
@@ -621,6 +777,11 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
-	</script>
+		
+	
+</script>
+	
+		
+	
 
 {% endblock javascripts %}
