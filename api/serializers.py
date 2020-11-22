@@ -24,6 +24,12 @@ class SubjectSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ChapterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chapter
+        fields = '__all__'
+
+
 
 
 
