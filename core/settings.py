@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
-    'cities_light'
+    'cities_light',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -170,16 +171,32 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'core/static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'core/static'),
+# )
 
 
-MEDIA_URL= "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'media_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
 #############################################################
 #############################################################
 
 
 AUTH_USER_MODEL = 'user.User'
 
+
+AWS_ACCESS_KEY_ID = 'AKIAUGL6LDKVBY2AK6E2'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'sbr-bucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

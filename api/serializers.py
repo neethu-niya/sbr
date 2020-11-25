@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from lms_app.models import Syllabus, Standard, Subject, Chapter
+from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents
 from user.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
@@ -33,4 +33,7 @@ class ChapterSerializer(serializers.ModelSerializer):
 
 
 
-
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Documents
+        fields = '__all__'
