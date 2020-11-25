@@ -167,6 +167,7 @@ class Chapter(models.Model):
     subject = models.ManyToManyField(Subject)
     #foreignkey
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -17,7 +17,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.contrib.auth import get_user_model
-from lms_app.models import Syllabus, Standard, Subject, Chapter, Student
+from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents, Student
 
 
 # class SyllabusView(ListAPIView):
@@ -69,4 +69,22 @@ class ChapterView(APIView):
             chapters = []
         
         return Response({'chapters': chapters})
+
+
+class DocumentView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, request, slug):
+       
+        
+        try:
+            chapter = Chapter.objects.get(slug=slug)
+            documents = chapter.documents_set.all()
+        
+            documents = DocumentSerializer(documents, many=True).data
+        except:
+            documents = []
+        
+        return Response({'documents': documents})
+
 
