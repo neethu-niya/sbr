@@ -171,9 +171,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'core/static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'core/static'),
+)
 
 
 MEDIA_URL= "/media/"
@@ -193,9 +193,12 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = None
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'core/static'),
-]
+
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStorage' 
+
+
+
