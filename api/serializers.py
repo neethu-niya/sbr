@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents
+from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents, Video
 from user.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
@@ -37,3 +37,10 @@ class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Documents
         fields = '__all__'
+
+
+class VideoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Video
+        fields = '__all__'
+

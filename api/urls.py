@@ -12,11 +12,8 @@ urlpatterns = [
     path('subjects/', SubjectView.as_view(), name="subjects"),
     path('chapters/<slug:slug>', ChapterView.as_view(), name="chapters"),
     path('documents/<slug:slug>', DocumentView.as_view(), name="documents"),
+    path('videos/<slug:slug>', VideoView.as_view(), name="videos"),
 
 
-    
 
-
-    
-    
 ]
