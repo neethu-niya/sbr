@@ -88,3 +88,18 @@ class DocumentView(APIView):
         return Response({'documents': documents})
 
 
+class VideoView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, request, slug):
+       
+        
+        try:
+            chapter = Chapter.objects.get(slug=slug)
+            videos = chapter.video_set.all()
+        
+            videos = VideoSerializer(videos, many=True).data
+        except:
+            videos = []
+        
+        return Response({'videos': videos})
