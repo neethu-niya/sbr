@@ -116,7 +116,8 @@ class StudentRegister(forms.ModelForm):
     # course_type = forms.CharField(max_length=255)
     # active = forms.BooleanField(required=False)
 
-
+    #want to work on user unique
+    #user = User.objects.get(username=self.name)
 
     class Meta:
         model = Student

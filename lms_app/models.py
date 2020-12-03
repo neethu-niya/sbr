@@ -7,6 +7,7 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django.contrib.auth.hashers import make_password
 from rest_framework.authtoken.models import Token
 from cities_light.models import City, Country, Region
 
@@ -166,6 +167,7 @@ class Chapter(models.Model):
     subject = models.ManyToManyField(Subject)
     #foreignkey
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -314,14 +316,27 @@ class Student(models.Model):
     def __str__(self):
         return self.name    
 
-    def save(self, *args, **kwargs):
-        user = User.objects.filter(username=self.name).first()
-        if not user:
+    # def save(self, *args, **kwargs):
+    #     user = User.objects.filter(username=self.name).first()
+    #     if not user:
 
-            s = User.objects.create_user(username=self.name,password = ("worldheloo666"))
+    #         s = User.objects.create_user(username=self.name,password = ("worldheloo666"))
+    # def save(self, *args, **kwargs):
+    #     user = User.objects.create(username=self.name,password = make_password("potafo123"))
+    #     self.user=user
+    #     super(Student, self).save(self, *args, **kwargs)
+
+
+    def save(self, *args, **kwargs):
+        if not self.user:
+            self.user = User.objects.create_user(username=self.name,password = make_password("potafo123"))
+        if self.user:
+            self.user = User.objects.get(username=self.name)
+            
+        
             # self.user.username = self.name
             # self.user.password = "helloworld555"
-            self.user=s
+            self.user
         
         else:
             pass
