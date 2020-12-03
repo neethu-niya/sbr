@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
-    'cities_light',
-    'storages',
+    'cities_light'
 ]
 
 MIDDLEWARE = [
@@ -84,12 +83,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'dblms.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'dblms.sqlite3'),
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -102,16 +101,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sbr',
-        'USER': 'admin',
-        'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
-        'HOST': 'database-1.cz7kaqdmaqwx.us-east-2.rds.amazonaws.com',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'sbr',
+#         'USER': 'admin',
+#         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
+#         'HOST': 'database-1.cz7kaqdmaqwx.us-east-2.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
 
 
 #nothing
@@ -183,22 +182,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'media_root')
 
 
 AUTH_USER_MODEL = 'user.User'
-
-
-AWS_ACCESS_KEY_ID = 'AKIAUGL6LDKVBY2AK6E2'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'sbr-bucket'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-AWS_DEFAULT_ACL = None
-
-
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStorage' 
-
-
 

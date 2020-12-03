@@ -20,13 +20,13 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Tables</a>
+                    <a href="#">CHAPTER</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Datatables</a>
+                    <a href="#">CHAPTER LIST</a>
                 </li>
             </ul>
         </div>
@@ -36,10 +36,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Add Row</h4>
+                            <h4 class="card-title">CHAPTTER LIST:</h4>
                             <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                                 <i class="fa fa-plus"></i>
-                                Add Row
+                                Add Chapter
                             </button>
                         </div>
                     </div>
@@ -71,15 +71,15 @@
                                                 </div>
                                                 </div> {% endcomment %}
 
-                                                <div class="form-group">
+                                                {% comment %} <div class="form-group"> {% endcomment %}
                                                     {% comment %} <label for="exampleFormControlSelect2">Example multiple select</label>
                                                     <select multiple class="form-control" id="exampleFormControlSelect2">
                                                     {% for sub in form.subject %}
                                                         <option>{{sub}}</option>
                                                     {% endfor %}
                                                     </select> {% endcomment %}
-                                                    {{form.subject}}
-                                                </div>
+                                                    {% comment %} {{form.subject}}
+                                                </div> {% endcomment %}
 
 
                                                 
@@ -115,7 +115,7 @@
                             <table id="add-row" class="display table table-striped table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Subject</th>
+                                        {% comment %} <th>Subject</th> {% endcomment %}
                                         <th>Chapter</th>
                                         <th>Active</th>
                                         <th style="width: 10%">Action</th>
@@ -125,14 +125,14 @@
                                 <tbody>
                                 {% for chapter in chapters %}
                                     <tr>
-                                        <td><a href="{% url 'subject_list' %}?subject={{subject.pk}}">{{chapter.subject}}</a></td>
+                                        <td><a href="{% url 'subject_list' %}?chapter={{chapter.pk}}">{{chapter.name}}</a></td>
 
-                                        <td>{{chapter.name}}</td>
+                                        {% comment %} <td>{{chapter.name}}</td> {% endcomment %}
                                         <td>{{chapter.active}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" {% if chapter.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{chapter.id}}, 'Chapter')">
                                                 <span class="slider round"></span>
                                                 </label> 
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">

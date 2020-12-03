@@ -130,16 +130,18 @@
                                 {% endfor %} {% endcomment %}
                                 {% for teacher in teachers %}
                                     <tr>
-                                        <td>{{teacher.name}}</td>
+                                        <td><a href="{% url 'teacherview' teacher.pk %}">{{teacher.name}}</a></td>
+
+                                        {% comment %} <td>{{teacher.name}}</td> {% endcomment %}
                                         <td>{{teacher.email}}</td>
-                                        <td>{{teacher.whatsapp_number}}</td>
+                                        <td>{{teacher.whatsapp_no}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
                                                 <input type="checkbox" id="togBtn" name="name">
                                                 <div class="slider round">
-                                                <span class="on">ACTIVE</span>
-                                                <span class="off">INACTIVE</span>
+                                                {% comment %} <span class="on">ACTIVE</span>
+                                                <span class="off">INACTIVE</span> {% endcomment %}
                                                 </div>
                                                 </label>
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">

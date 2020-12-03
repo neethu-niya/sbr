@@ -7,7 +7,6 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django.contrib.auth.hashers import make_password
 from rest_framework.authtoken.models import Token
 from cities_light.models import City, Country, Region
 
@@ -147,7 +146,7 @@ class Teacher(models.Model):
 
 
     def save(self, *args, **kwargs):
-        u = User.objects.create(username=self.name,password = "helloworld555")
+        u = User.objects.create_user(username=self.name,password = "helloworld555")
         # self.user.username = self.name
         # self.user.password = "helloworld555"
         self.user=u
@@ -157,17 +156,16 @@ class Teacher(models.Model):
 
 
 
-    @receiver(post_save, sender=User)
-    def create_auth_token(sender, instance=None, created=False, **kwargs):
-        if created:
-            Token.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def create_auth_token(sender, instance=None, created=False, **kwargs):
+    #     if created:
+    #         Token.objects.create(user=instance)
 # 
 
 class Chapter(models.Model):
     subject = models.ManyToManyField(Subject)
     #foreignkey
     name = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -181,6 +179,7 @@ class Chapter(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class Video(models.Model):
@@ -206,7 +205,6 @@ class Video(models.Model):
     def __str__(self):
         return self.name  + ": " + str(self.videofile)
         # + ": " + str(self.videofile)
-
 
 
 
@@ -272,7 +270,7 @@ class Scheme(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255,null=True,blank=True)
@@ -301,10 +299,11 @@ class Student(models.Model):
     syllabus = models.ForeignKey(Syllabus,null=True,blank=True, on_delete=models.CASCADE)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     # HANIN ADDED SUBJECT FIELD
-    subject = models.ManyToManyField(Subject, blank=True)
+    subject = models.ForeignKey(Subject, null=True,blank=True, on_delete=models.CASCADE)
     # scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
     course_type = models.CharField(null=True,blank=True,max_length=255)
-    user = models.ForeignKey(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User,  null=True, blank=True,  on_delete=models.CASCADE)
+    # user = models.OneToOneField(get_user_model(),  null=True, blank=True, unique=True, on_delete=models.CASCADE)
     
     # user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
@@ -313,24 +312,16 @@ class Student(models.Model):
  
 
     def __str__(self):
-        return self.name
-
-    # def save(self, *args, **kwargs):
-    #     user = User.objects.create(username=self.name,password = make_password("potafo123"))
-    #     self.user=user
-    #     super(Student, self).save(self, *args, **kwargs)
-
+        return self.name    
 
     def save(self, *args, **kwargs):
-        if not self.user:
-            self.user = User.objects.create(username=self.name,password = make_password("potafo123"))
-        if self.user:
-            self.user = User.objects.get(username=self.name)
-            
-        
+        user = User.objects.filter(username=self.name).first()
+        if not user:
+
+            s = User.objects.create_user(username=self.name,password = ("worldheloo666"))
             # self.user.username = self.name
             # self.user.password = "helloworld555"
-            self.user
+            self.user=s
         
         else:
             pass
@@ -339,12 +330,29 @@ class Student(models.Model):
     
 
     
-        
+    
 # @receiver(post_save, sender=Student)
 # def create_or_update_studentuser(sender, instance, created, **kwargs):
 #     if created:
 #         User.objects.create(username=instance.name,password=str(instance.contact_no),
 #                             email=instance.email,user_type="2")
+
+class Comment(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    text = models.TextField(null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    approved_comment = models.BooleanField(default=False)
+
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return str(self.text)
+
 
 class Documents(models.Model):
     name = models.CharField(max_length=255)
@@ -437,18 +445,19 @@ class Notification(models.Model):
         upload_to='staticfiles/image/', null=True, blank=True)
     description = models.TextField()
     send_to = models.CharField(max_length=255, choices=send_choices)
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title       
 
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     image = models.ImageField(
-#         upload_to='staticfiles/image/', null=True, blank=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
         
-#     def __str__(self):
-#         return f'{self.user.name} Profile'
+    def __str__(self):
+        return f'{self.user.name} Profile'
      
     # def save(self, *args, **kwargs):
     #     s = User.objects.get()

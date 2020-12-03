@@ -17,7 +17,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.contrib.auth import get_user_model
-from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents, Student
+from lms_app.models import Syllabus, Standard, Subject, Chapter, Student
 
 
 # class SyllabusView(ListAPIView):
@@ -43,63 +43,16 @@ class SubjectView(APIView):
     permission_classes = (IsAuthenticated, )
     def get(self, request):
         user = request.user
+        print(user)
         user = get_user_model().objects.get(id=user.id)
+        print(user)
         user = user.student_set.all().first()
-        try:
-            subjects = user.subject.all()
-            subjects = SubjectSerializer(subjects, many=True).data
-        except:
-            subjects = []
+        # user = Student.objects.get(user_id=user.id)
+        print(user)
+        # try:
+        subjects = user.subject.all()
+        subjects = SubjectSerializer(subjects, many=True).data
+        # except:
+        #     subjects = []
         
         return Response({'subjects': subjects})
-
-
-class ChapterView(APIView):
-    permission_classes = (IsAuthenticated, )
-
-    def get(self, request, slug):
-       
-        
-        try:
-            subject = Subject.objects.get(slug=slug)
-            chapters = subject.chapter_set.all()
-        
-            chapters = ChapterSerializer(chapters, many=True).data
-        except:
-            chapters = []
-        
-        return Response({'chapters': chapters})
-
-
-class DocumentView(APIView):
-    permission_classes = (IsAuthenticated, )
-
-    def get(self, request, slug):
-       
-        
-        try:
-            chapter = Chapter.objects.get(slug=slug)
-            documents = chapter.documents_set.all()
-        
-            documents = DocumentSerializer(documents, many=True).data
-        except:
-            documents = []
-        
-        return Response({'documents': documents})
-
-
-class VideoView(APIView):
-    permission_classes = (IsAuthenticated, )
-
-    def get(self, request, slug):
-       
-        
-        try:
-            chapter = Chapter.objects.get(slug=slug)
-            videos = chapter.video_set.all()
-        
-            videos = VideoSerializer(videos, many=True).data
-        except:
-            videos = []
-        
-        return Response({'videos': videos})

@@ -104,17 +104,23 @@
                                 <tbody>
                                 {% for student in students %}
                                     <tr>
-                                        <td>{{student.name}}</td>
+                                        <td><a href="{% url 'studentview' student.pk %}">{{student.name}}</a></td>
+
+                                        {% comment %} <td>{{student.name}}</td> {% endcomment %}
                                         <td>{{student.standard}}</td>
                                         <td>{{student.course_type}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
-                                                
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" id="togBtn">
+                                                <div class="slider round">
+                                                <label class="switch">
+                                                <input type="checkbox" id="checkbox" {% if student.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75"  onclick="makeActive({{student.id}},'Student')">
                                                 <span class="slider round"></span>
-                                                
-                                                </label>  
+                                                </label>
+                                                {% comment %} <span class="on">ACTIVE</span>
+                                                <span class="off">INACTIVE</span> {% endcomment %}
+                                                </div>
                                                 {% comment %} <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
                                                     <div class="handle"></div>
                                                 </button> {% endcomment %}

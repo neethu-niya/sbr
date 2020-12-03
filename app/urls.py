@@ -13,4 +13,6 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('index/', views.index2, name='toggle'),
+
 ]
