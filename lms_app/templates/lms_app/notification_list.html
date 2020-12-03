@@ -110,7 +110,7 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Description</th>
-                                        <th>Image</th>
+                                        <th>Active</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -123,14 +123,18 @@
                                         
                                         <td>{{noti.description}}</td>
                                         
-                                        <td>{{noti.image}}</td>
+                                        <td>{{noti.active}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
                                                 <input type="checkbox" id="togBtn">
                                                 <div class="slider round">
-                                                <span class="on">ACTIVE</span>
-                                                <span class="off">INACTIVE</span>
+                                                <label class="switch">
+                                                <input type="checkbox" id="checkbox" {% if noti.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75"  onclick="makeActive({{noti.id}},'Notification')">
+                                                <span class="slider round"></span>
+                                                </label>
+                                                {% comment %} <span class="on">ACTIVE</span>
+                                                <span class="off">INACTIVE</span> {% endcomment %}
                                                 </div>
                                                 </label>
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
@@ -154,6 +158,21 @@
 {% block javascripts %}
 
 	<script >
+
+        const  makeActive = (id) => {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'toggle' %}",
+                data: {
+                   id: id, 
+                    csrfmiddlewaretoken: '{{ csrf_token }}'  
+                },
+                success: (res) => {
+                   location.reload()
+                },
+            
+            });
+        }
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
 			});

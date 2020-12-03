@@ -58,7 +58,7 @@
     {% else %}
     {% endif %}
 
-    <form method="post"  class="post-form" enctype="multipart/form-data">
+    <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}" data-sub-url="{% url 'ajax_load_sub' %}" data-cit-url="{% url 'ajax_load_con' %}" class="post-form" enctype="multipart/form-data">
             {% csrf_token %}                 
              <div class="container-fluid">
                 <div class="card-body">
@@ -86,42 +86,61 @@
                         <div class="col-md-2 col-lg-4">
                             <div class="form-group col-md-12"> 
                                 <label for="Phone">Phone Number :</label>
-                                <input type="phone2numeric" class="form-control" name="contact_no" id=""   placeholder="Enter Phone Number">
-                                   
+                                <input type="phone2numeric" class="form-control" name="contact_no" id="phon"   placeholder="Enter Phone Number">
+                                
                             </div>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="Phone">Whatsapp Number :</label>
-                                    
-                            <input type="phone2numeric" class="form-control" name="whatsapp_no" id="" placeholder="Enter Whatsapp Number" >
-                                   
+                               
+                            <input type="phone2numeric" class="form-control" name="whatsapp_no" id="what" placeholder="Enter Whatsapp Number" >
+                            <input type="checkbox" name="check1" onchange="copyTextValue(this);">
+
+                                   <em>Same</em>
                         </div>
                         
                     </div>
                     
-                    <div class="row">
+                    {% comment %} <div class="row">
                         <div class="form-group">
                                     <label for="smallSelect">COUNTRY</label>
-                                    <select class="form-control form-control-sm" id="smallSelect" name="country">
+                                    <select class="form-control form-control-sm" id="smallSelect" name="country"> {% endcomment %}
                                     {% comment %} <div class="form-group form-group-default"> {% endcomment %}
-                                    <option value={{form.country}} > </option>                                                    
+                                    {% comment %} <option value={{form.country}} > </option>                                                     {% endcomment %}
                                       
                                     {% comment %} </div> {% endcomment %}
                             
-                                    </select>    
-                            </div>    
-                            <div class="form-group">
+                                    {% comment %} </select>    
+                            </div>     {% endcomment %}
+
+                        <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select country :</label>                                                       
+                                        {{form.country}}
+                                    </div>
+                                </div>
+
+
+                        <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select country :</label>                                                       
+                                        {{form.state}}
+                                    </div>
+                                </div>
+
+
+                            {% comment %} <div class="form-group">
                                     <label for="smallSelect">STATE  </label>
-                                    <select id="State" class="form-control form-control-sm" id="smallSelect" name="state"   >
+                                    <select id="State" class="form-control form-control-sm" id="smallSelect" name="state"   > {% endcomment %}
                                     {% comment %} <div class="form-group form-group-default"> {% endcomment %}
-                                    <option value={{form.state}} ></option>                                                    
+                                    {% comment %} <option value={{form.state}} ></option>                                                     {% endcomment %}
                                       
                                     {% comment %} </div> {% endcomment %}
                             
-                                    </select>    
+                                    {% comment %} </select>    
                             </div>    
-                        </div>
+                        </div> {% endcomment %}
                       {% comment %} <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
@@ -151,17 +170,25 @@
                         </div> 
                     </div>
 
-                     <div class="form-group">
+
+                    <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select country :</label>                                                       
+                                        {{form.present_country}}
+                                    </div>
+                                </div>
+
+                     {% comment %} <div class="form-group">
                                     <label for="smallSelect">PRESENT COUNTRY</label>
-                                    <select class="form-control form-control-sm" id="smallSelect" name="present_country">
+                                    <select class="form-control form-control-sm" id="smallSelect" name="present_country"> {% endcomment %}
                                     {% comment %} <div class="form-group form-group-default"> {% endcomment %}
-                                    <option >SELECT COUNTRY: </option>                                                    
-                                    <option value={{form.present_country}} > </option>                                                    
+                                    {% comment %} <option >SELECT COUNTRY: </option>                                                    
+                                    <option value={{form.present_country}} > </option>                                                     {% endcomment %}
                                      
                                     {% comment %} </div> {% endcomment %}
                             
-                                    </select>    
-                            </div>    
+                                    {% comment %} </select>    
+                            </div>     {% endcomment %}
                     {% comment %} <div class="row"> 
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
@@ -231,12 +258,7 @@
                         
                     </div>
 
-                                <div class="form-group">
-                                    <div class="form-group col-md-3">
-                                    <label for="Phone">SUBJECT :</label>
-                                                    {{form.subject}}
-                                                </div>
-                                </div> 
+                                
                                 
                                 {% comment %} <div class="form-group">
                                     <div class="form-group col-md-2">
@@ -245,18 +267,30 @@
                                                 </div>
                                 </div>  {% endcomment %}
 
+
+                                
+
+
                                 <div class="col-sm-4">
                                     <div class="form-group form-group-default">
                                     <label for="addPosition">Select syllabus :</label>                                                       
                                         {{form.syllabus}}
                                     </div>
                                 </div>
+                     
                                 <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
+                                    <div class="form-group form-group-default" >
                                     <label for="addPosition">Select STANDARD :</label>                                                       
                                         {{form.standard}}
                                     </div>
                                 </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-default" >
+                                    <label for="addPosition">SUBJECT :</label>
+                                                    {{form.subject}}
+                                                </div>
+                                </div> 
 
                                 <div class="row"> 
                                      <div class="col-md-2 col-lg-4">
@@ -364,7 +398,7 @@
                                 {% endfor %} 
                            </tbody>  {% endcomment %}
                            
-                            <tbody>
+                            {% comment %} <tbody>
                                 {% for student in students %}
                                     <tr>
                                         <td>{{student.name}}</td>
@@ -382,22 +416,120 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
+                            </tbody> {% endcomment %}
                 </div>
             </div>
         </div>
     </div>
 {% endblock content %}
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    {% comment %} $(document).ready(function(){ {% endcomment %}
+    $("#id_syllabus").change(function () {
+      var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+      var syllabusId = $(this).val();  // get the selected country ID from the HTML input
+        
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'syllabus_id': syllabusId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          console.log(data);
+          $("#id_standard").html(data);  // replace the contents of the city input with the data that came from the server
+
+            /*let html_data = '<option value="">---------</option>';
+                data.forEach(function (standard) {
+                    html_data += `<option value="${standard.id}">${standard.name}</option>`
+                });
+                console.log(html_data);
+                $("#id_standard").html(html_data);*/
+        
+
+        }
+
+      });
+
+    }); 
+    $("#id_standard").change(function () {
+      var url = $("#personForm").attr("data-sub-url");  // get the url of the `load_cities` view
+      var standardId = $(this).val();  // get the selected country ID from the HTML input
+        
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'standard_id': standardId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          console.log(data);
+          $("#id_subject").html(data);  // replace the contents of the city input with the data that came from the server
+
+            /*let html_data = '<option value="">---------</option>';
+                data.forEach(function (standard) {
+                    html_data += `<option value="${standard.id}">${standard.name}</option>`
+                });
+                console.log(html_data);
+                $("#id_standard").html(html_data);*/
+        
+
+        }
+
+      });
+
+    }); 
 
 
-{% comment %} <form>
+    $("#id_country").change(function () {
+      var url = $("#personForm").attr("data-cit-url");  // get the url of the `load_cities` view
+      var countryId = $(this).val();  // get the selected country ID from the HTML input
+        
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'country_id': countryId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          console.log(data);
+          $("#id_state").html(data);  // replace the contents of the city input with the data that came from the server
+
+            /*let html_data = '<option value="">---------</option>';
+                data.forEach(function (standard) {
+                    html_data += `<option value="${standard.id}">${standard.name}</option>`
+                });
+                console.log(html_data);
+                $("#id_standard").html(html_data);*/
+        
+
+        }
+
+      });
+
+    }); 
+    {% comment %} $(document).ready(function(){
+  $("button").click(function(){
+    $("input").clone().appendTo("body");
+  });
+}); {% endcomment %}
+
+function copyTextValue(bf) {
+  var text1 = bf.checked ? document.getElementById("phon").value : '';
+  document.getElementById("what").value = text1;
+  
+}
+  </script>
+
+{% endblock javascripts %}
+
+
+{% comment %} <form> 
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-outline-info" type="submit">submit</button>
                           <button class="btn btn-danger">Cancel</button>
                        
                     
-</form>  {% endcomment %}
+</form>    {% endcomment %}
 
 
 

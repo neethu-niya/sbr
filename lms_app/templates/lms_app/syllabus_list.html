@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load static %} 
 
 {% block title %} Dashboard {% endblock title %}
 
@@ -20,13 +21,13 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Tables</a>
+                    <a href="#">SYLLABUS</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Datatables</a>
+                    <a href="#">SYLLABUS LIST</a>
                 </li>
             </ul>
         </div>
@@ -36,10 +37,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Add Row</h4>
+                            <h4 class="card-title">SYLLABUS LIST :</h4>
                             <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                                 <i class="fa fa-plus"></i>
-                                Add Row
+                                Add Syllabus
                             </button>
                         </div>
                     </div>
@@ -70,11 +71,11 @@
                                                         {{form.name}}
                                                 </div>
                                                 </div>
-                                                <div class="form-group form-check">
+                                                <div class="form-group form-check" >
                                                     <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value={{form.active}}>
+                                                    <input class="form-check-input" type="checkbox" value={{form.active}} >
                                         
-                                                    <span class="form-check-sign">Active</span>
+                                                    {% comment %} <span class="form-check-sign">Active</span> {% endcomment %}
                                                     </label>
                                                 </div>
                                                 
@@ -103,12 +104,13 @@
                                 <tbody>
                                 {% for syllabus in syllabus %}
                                     <tr>
-                                        <td><a href="{% url 'standard_list' %}?syllabus={{ syllabus.pk }}">{{syllabus.name}}</a> </td>
+                                    {% comment %} ?syllabus={{syllabus.pk}} {% endcomment %}
+                                        <td><a href="{% url 'standard_list' %}">{{syllabus.name}}</a> </td>
                                         <td>{{syllabus.active}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" id="checkbox" {% if syllabus.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75"  onclick="makeActive({{syllabus.id}}, 'Syllabus')">
                                                 <span class="slider round"></span>
                                                 </label> 
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
@@ -130,8 +132,37 @@
 {% endblock content %}
 
 {% block javascripts %}
+{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here--> {% endcomment %}
+	  <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->
+            {% comment %} <script type="text/javascript"> {% endcomment %}
 
-	<script >
+            {% comment %} <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#checkbox').change(function() {
+                        $.post("/toggle/", {
+                        id: '{{syllabus.id}}', 
+                        active: this.checked, 
+                        csrfmiddlewaretoken: '{{ csrf_token }}' 
+                    });
+                });
+            });  {% endcomment %}
+        <script>
+        {% comment %} const  makeActive = (id, model) => {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'toggle' %}",
+                data: {
+                   id: id, 
+                   model: model,
+                   csrfmiddlewaretoken: '{{ csrf_token }}'  
+                },
+                success: (res) => {
+                   location.reload()
+                },
+            
+            });
+        } {% endcomment %}
+            
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
 			});
@@ -147,7 +178,7 @@
 							var val = $.fn.dataTable.util.escapeRegex(
 								$(this).val()
 								);
-
+                                //active
 							column
 							.search( val ? '^'+val+'$' : '', true, false )
 							.draw();
@@ -177,6 +208,8 @@
 
 			});
 		});
+
+                  
 	</script>
 
 {% endblock javascripts %}

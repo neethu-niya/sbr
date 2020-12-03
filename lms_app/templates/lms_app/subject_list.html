@@ -20,13 +20,13 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Tables</a>
+                    <a href="#">SUBJECTS</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Datatables</a>
+                    <a href="#">SUBJECt LIST</a>
                 </li>
             </ul>
         </div>
@@ -36,10 +36,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Add Row</h4>
+                            <h4 class="card-title">SUBJECT LIST :</h4>
                             <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
                                 <i class="fa fa-plus"></i>
-                                Add Row
+                                Add Subject
                             </button>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" {% if subject.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{subject.id}}, 'Subject')">
                                                 <span class="slider round"></span>
                                                 </label>
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">

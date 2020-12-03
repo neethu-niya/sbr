@@ -1,19 +1,21 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
-from lms_app.forms import SyllabusForm, StandardForm, SubjectForm, ChapterForm, TeacherRegForm, StudentRegister
+from lms_app.forms import SyllabusForm, StandardForm, SubjectForm, ChapterForm, TeacherRegForm, StudentRegister, Comments_Form
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
 from .forms import *
+from django.http import HttpResponse
 # from lms_app.functions.functions import handle_uploaded_file
 
 @staff_member_required
 def syllabus_list(request):
-    syllabus = Syllabus.objects.filter(active=True)
+    syllabus = Syllabus.objects.all()
     form = SyllabusForm(request.POST or None)
     if form.is_valid():
 
@@ -38,7 +40,7 @@ def syllabus_list(request):
 @staff_member_required
 def standard_list(request):
     syllabus = request.GET.get('syllabus', None)
-    standards = Standard.objects.filter(active=True)
+    standards = Standard.objects.all()
     if syllabus is not None:
         standards = standards.filter(syllabus__id__exact=syllabus)
     
@@ -53,7 +55,7 @@ def standard_list(request):
 @staff_member_required
 def subject_list(request):
     standard = request.GET.get('standard', None)
-    subjects = Subject.objects.filter(active=True)
+    subjects = Subject.objects.all()
     if standard is not None:
         subjects = subjects.filter(standard__id__exact=standard)
     form = SubjectForm(request.POST or None)
@@ -67,7 +69,7 @@ def subject_list(request):
 @staff_member_required
 def chapter_list(request):
     subject = request.GET.get('subject')
-    chapters = Chapter.objects.filter(active=True)
+    chapters = Chapter.objects.all()
     if subject is not None:
         chapters = chapters.filter(subject__id__exact=subject)
     form = ChapterForm(request.POST or None)
@@ -84,12 +86,28 @@ class TeacherList(ListView):
     context_object_name = 'teachers'
     template_name = 'lms_app/teacher_list.html'
 
+def TeacherView(request, pk):
+    teachers = get_object_or_404(Teacher, pk=pk)
+    return render(request, 'lms_app/teacher_view.html', {'teachers': teachers} )
+
+
 # @staff_member_required
 class StudentList(ListView):
     queryset = Student.objects.all()
     context_object_name = 'students'
     template_name = 'lms_app/student_list.html'
 
+# class StudentView(ListView):
+#     queryset = Student.objects.all()
+#     context_object_name = 'studentsV'
+#     template_name = 'lms_app/student_view.html'
+def StudentView(request, pk):
+    students = get_object_or_404(Student, pk=pk)
+    return render(request, 'lms_app/student_view.html', {'students': students} )
+
+# def comments(request, pk):
+#     msg = get_object_or_404(Video, pk=pk)
+#     return render(request, 'lms_app/comment.html', {'msg': msg} )
 
 
 def registepage(request):
@@ -105,7 +123,7 @@ def registepage(request):
 
 
 def studentpage(request):
-    form = StudentRegister(request.POST or None, request.FILES or None)
+    form = StudentRegister(request.POST , request.FILES )
     # register = Student.objects.all()
     if form.is_valid():
         form.cleaned_data
@@ -114,6 +132,24 @@ def studentpage(request):
         return redirect('student_list') 
     context = {'form': form}
     return render(request, 'lms_app/register_student.html', context)
+
+def load_syllabus(request):
+    syllabus_id = request.GET.get('syllabus_id')
+    stand = Standard.objects.filter(syllabus_id=syllabus_id).order_by('name')
+    
+    return render(request, 'lms_app/city_dropdown_list_options.html', {'stand': stand})
+
+def load_subject(request):
+    standard_id = request.GET.get('standard_id')
+    sub = Subject.objects.filter(standard_id=standard_id).order_by('name')
+    
+    return render(request, 'lms_app/subject_dropdown.html', {'sub': sub})
+
+def load_country(request):
+    country_id = request.GET.get('country_id')
+    city = Region.objects.filter(country_id=country_id).order_by('name')
+    
+    return render(request, 'lms_app/city_dropdown.html', {'city': city})
 
 
 class upload_video(ListView):
@@ -194,7 +230,7 @@ def study_upload(request):
 
 
 class Question_Paper(ListView):
-    queryset = Study_Material.objects.all()
+    queryset = Question_paper.objects.all()
     context_object_name = 'question'
     template_name = 'lms_app/Question.html'
 
@@ -207,3 +243,42 @@ def question_upload(request):
         return redirect('questions')
     context = {'form': form}
     return render(request, 'lms_app/question_up.html', context)
+
+
+def toggle(request):
+    from django.apps import apps
+    Model = apps.get_model("lms_app",request.POST['model'])
+    w = Model.objects.get(id=request.POST['id'])
+    w.active = not w.active
+    w.save()
+    
+
+    return HttpResponse('success')
+
+def commenting(request, pk):
+    comment = request.POST.get('text', None)
+    # if comment is None:
+    #     context = {
+    #         'error': "Comment is required"
+    #     }
+    #     return redirect(request, 'lms_app/videos_list.html',context)
+
+
+
+    # video = Video.objects.get(pk=pk)
+    video = get_object_or_404(Video, pk=pk)
+    # video.comment.create(comment)
+    Comment.objects.create(video=video, text=comment)
+    # video.save()
+
+    # form = Comments_Form(request.POST)
+    # if form.is_valid():
+    #     form.cleaned_data
+    #     form.save()
+    # return redirect('video')
+    # context = {
+    #     'form':form,
+    #     'msg': msg
+    # }
+
+    return render(request,'lms_app/comment.html')

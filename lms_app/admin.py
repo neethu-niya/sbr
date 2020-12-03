@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import Syllabus, Standard, Subject, Teacher, Chapter, Video, File, Chat, Student, Documents, Notification, Scheme
+from .models import Syllabus, Standard, Subject, Teacher, Chapter, Video, File, Chat, Student, Documents, Notification, Scheme, Study_Material, Question_paper, Comment
 
 class StandarAdmin(admin.ModelAdmin):
     list_filter = ('syllabus', )
@@ -38,5 +38,9 @@ admin.site.register(Notification)
 admin.site.register(Scheme)
 # admin.site.register(State)
 # admin.site.register(Countrys)
+admin.site.register(Study_Material)
+admin.site.register(Question_paper)
+admin.site.register(Comment)
+
 
 

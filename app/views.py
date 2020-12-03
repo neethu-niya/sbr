@@ -32,6 +32,9 @@ def index(request):
 
     return render(request, "index.html", context)
 
+def index2(request):
+    return render(request, "index2.html")
+
 @login_required(login_url="/login/")
 def pages(request):
     context = {}
