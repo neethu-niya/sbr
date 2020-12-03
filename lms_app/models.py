@@ -164,8 +164,8 @@ class Teacher(models.Model):
 # 
 
 class Chapter(models.Model):
-    subject = models.ManyToManyField(Subject)
-    #foreignkey
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
