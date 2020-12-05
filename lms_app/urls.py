@@ -37,7 +37,7 @@ urlpatterns = [
     
     path('ajax/load-syllabus/', views.load_syllabus, name='ajax_load_cities'),
     path('ajax/load-subject/', views.load_subject, name='ajax_load_sub'),
-    path('ajax/load-country/', views.load_country, name='+'),
+    path('ajax/load-country/', views.load_country, name='ajax_load_con'),
 
 
 # 'register_teacher/',register
