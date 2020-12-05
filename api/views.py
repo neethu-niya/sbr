@@ -44,9 +44,10 @@ class SubjectView(APIView):
     def get(self, request):
         user = request.user
         user = get_user_model().objects.get(id=user.id)
-        user = user.student_set.all().first()
+        user = user.student
+        subjects = user.standard.subject_set.all()
         try:
-            subjects = user.subject.all()
+            # subjects = user.subject.all()
             subjects = SubjectSerializer(subjects, many=True).data
         except:
             subjects = []
@@ -58,14 +59,26 @@ class ChapterView(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, request, slug):
-       
-        
-        try:
-            subject = Subject.objects.get(slug=slug)
-            chapters = subject.chapter_set.all()
-        
-            chapters = ChapterSerializer(chapters, many=True).data
-        except:
+        user = request.user
+        user = get_user_model().objects.get(id=user.id)
+        user = user.student
+        if user.is_paid == True:
+            try:
+                subject = Subject.objects.get(slug=slug)
+                chapters = subject.chapter_set.all()
+            
+                chapters = ChapterSerializer(chapters, many=True).data
+            except:
+                chapters = []
+        elif user.is_paid == False:
+            try:
+                subject = Subject.objects.get(slug=slug)
+                chapters = subject.chapter_set.filter(free_tier=True)
+            
+                chapters = ChapterSerializer(chapters, many=True).data
+            except:
+                chapters = []
+        else:
             chapters = []
         
         return Response({'chapters': chapters})
