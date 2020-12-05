@@ -240,9 +240,9 @@ class Chat(models.Model):
 
 
 class Scheme(models.Model):
-    scheme_name = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
      
-    subject_wise = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subjects = models.ManyToManyField(Subject)
 
     # subs =  self.subject.all()
     # _subs = []
@@ -312,8 +312,8 @@ class Student(models.Model):
     is_paid = models.BooleanField(default=False)
 
   
-    subject = models.ManyToManyField(Subject)
-    # scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
+    # subject = models.ManyToManyField(Subject)
+    scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
 
 
     active = models.BooleanField(default=False)
