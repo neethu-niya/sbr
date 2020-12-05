@@ -312,7 +312,7 @@ class Student(models.Model):
     is_paid = models.BooleanField(default=False)
 
   
-    #subject = models.ForeignKey(Subject, null=True,blank=True, on_delete=models.CASCADE)
+    subject = models.ManyToManyField(Subject)
     # scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
 
 
