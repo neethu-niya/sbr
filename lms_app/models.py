@@ -237,12 +237,13 @@ class Chat(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
 
-
-
 class Scheme(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
-     
-    subjects = models.ManyToManyField(Subject)
+    name = models.CharField(max_length=255)
+    subject = models.ManyToManyField(Subject)
+    slug = AutoSlugField(populate_from='name', null=True)
+    active = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     # subs =  self.subject.all()
     # _subs = []
