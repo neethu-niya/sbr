@@ -81,6 +81,10 @@ def chapter_list(request):
     return render(request, 'lms_app/chapter_list.html', context)
 
 
+
+
+
+
 class TeacherList(ListView):
     queryset = Teacher.objects.all()
     context_object_name = 'teachers'

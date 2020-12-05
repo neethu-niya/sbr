@@ -167,7 +167,7 @@ class Chapter(models.Model):
     subject = models.ManyToManyField(Subject)
     #foreignkey
     name = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name', null=True)
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -181,6 +181,8 @@ class Chapter(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 
 
@@ -309,6 +311,7 @@ class Student(models.Model):
     
     # user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
+    
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
  
