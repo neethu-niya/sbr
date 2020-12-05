@@ -10,6 +10,8 @@ from django.dispatch import receiver
 from django.contrib.auth.hashers import make_password
 from rest_framework.authtoken.models import Token
 from cities_light.models import City, Country, Region
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_save
 
 
 # from lms_app.forms import RegisterForm
@@ -58,6 +60,11 @@ state_choices = [
     ('GOA', 'GOA'),
 ]
 
+gender_choices = [
+    ('0', 'Male'),
+    ('1', 'Female'),
+]
+
 class Syllabus(models.Model):
     name = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
@@ -75,7 +82,7 @@ class Syllabus(models.Model):
 class Standard(models.Model):
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    active = models.BooleanField(default=False, null=True, blank=True) 
+    active = models.BooleanField(default=False) 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -117,9 +124,7 @@ class Subject(models.Model):
 
 
 class Teacher(models.Model):
-    # boolChoice = (
-    #     ("M","Male"),("F","Female")
-    #     )
+    
     name = models.CharField(max_length=255)
     email = models.EmailField(null=True, blank=True)
     contact_no_1 = PhoneNumberField(
@@ -128,14 +133,13 @@ class Teacher(models.Model):
         default=None, null=True, blank=True, unique=True)
     address = models.CharField(max_length=255)
     subject = models.ManyToManyField(Subject, blank=True)
-    material_type = models.CharField(max_length=50, choices=file_choices,  null=True,  blank=True)
 
     image = models.ImageField(
         upload_to='staticfiles/image/',null=True, blank=True)
    
     #hanin created gender
-    # gender = models.CharField(max_length = 6,choices=boolChoice, null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,  null=True, blank=True, on_delete=models.CASCADE)
+    gender = models.CharField(max_length = 6,choices=gender_choices, null=True)
+    user = models.OneToOneField(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
     
     # user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
@@ -146,21 +150,27 @@ class Teacher(models.Model):
         return self.name
 
 
-    def save(self, *args, **kwargs):
-        u = User.objects.create(username=self.name,password = "helloworld555")
-        # self.user.username = self.name
-        # self.user.password = "helloworld555"
-        self.user=u
-        super(Teacher, self).save(self, *args, **kwargs)
+@receiver(post_save, sender=Teacher)
+def create_teacher_user(sender, instance, created, **kwargs):
+    if created:
+        user = User.objects.create_user(username=instance.name, password="potafo123")
+        instance.user = user
+        instance.save()
+
+
+@receiver(post_save, sender=Teacher)
+def update_teacher_user(sender, instance, created, **kwargs):
+    if created == False:
+        instance.user.save()
 
 
 
 
 
-    @receiver(post_save, sender=User)
-    def create_auth_token(sender, instance=None, created=False, **kwargs):
-        if created:
-            Token.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def create_auth_token(sender, instance=None, created=False, **kwargs):
+    #     if created:
+    #         Token.objects.create(user=instance)
 # 
 
 class Chapter(models.Model):
@@ -169,6 +179,7 @@ class Chapter(models.Model):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
+    free_tier = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -188,7 +199,7 @@ class Video(models.Model):
     subtitle = models.CharField(max_length=255, null=True, blank=True)
     # description = models.TextField()
     description = models.TextField()
-    subject = models.ManyToManyField(Subject, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
 
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
@@ -228,7 +239,7 @@ class Chat(models.Model):
 class Scheme(models.Model):
     scheme_name = models.CharField(max_length=255, null=True, blank=True)
      
-    subject_wise = models.ManyToManyField(Subject)
+    subject_wise = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     # subs =  self.subject.all()
     # _subs = []
@@ -277,16 +288,8 @@ class Student(models.Model):
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255,null=True,blank=True)
     country = models.ForeignKey(Country ,on_delete=models.CASCADE,null=True)
-
     state = models.ForeignKey(Region ,on_delete=models.CASCADE,null=True)
     city = models.CharField(null=True,blank=True,max_length=255)
-
-    # country = CountryField(blank_label='(select country)',null=True, blank=True)
-    # state = models.ForeignKey(State, on_delete=models.CASCADE)
-    
-
-    # nationality = models.CharField(null=True,blank=True,max_length=255)
-    # state = models.CharField(null=True,blank=True,max_length=255)
     district = models.CharField(null=True,blank=True,max_length=255)
     present_country = models.ForeignKey(Country ,on_delete=models.CASCADE,null=True,related_name = 'pre_country')
     email = models.EmailField(null=True, blank=True)
@@ -300,51 +303,32 @@ class Student(models.Model):
         default=None, null=True, blank=True, unique=True)
     syllabus = models.ForeignKey(Syllabus,null=True,blank=True, on_delete=models.CASCADE)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
-    # HANIN ADDED SUBJECT FIELD
-    subject = models.ManyToManyField(Subject, blank=True)
-    # scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
     course_type = models.CharField(null=True,blank=True,max_length=255)
-    user = models.ForeignKey(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
-    
-    # user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
+    is_paid = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
- 
+    
 
     def __str__(self):
         return self.name
 
-    # def save(self, *args, **kwargs):
-    #     user = User.objects.create(username=self.name,password = make_password("potafo123"))
-    #     self.user=user
-    #     super(Student, self).save(self, *args, **kwargs)
+
+@receiver(post_save, sender=Student)
+def create_student_user(sender, instance, created, **kwargs):
+    if created:
+        user = User.objects.create_user(username=instance.name, password="potafo123")
+        instance.user = user
+        instance.save()
 
 
-    def save(self, *args, **kwargs):
-        if not self.user:
-            self.user = User.objects.create(username=self.name,password = make_password("potafo123"))
-        if self.user:
-            self.user = User.objects.get(username=self.name)
-            
-        
-            # self.user.username = self.name
-            # self.user.password = "helloworld555"
-            self.user
-        
-        else:
-            pass
-        super(Student, self).save(self, *args, **kwargs)
-
+@receiver(post_save, sender=Student)
+def update_student_user(sender, instance, created, **kwargs):
+    if created == False:
+        instance.user.save()
+      
     
-
-    
-        
-# @receiver(post_save, sender=Student)
-# def create_or_update_studentuser(sender, instance, created, **kwargs):
-#     if created:
-#         User.objects.create(username=instance.name,password=str(instance.contact_no),
-#                             email=instance.email,user_type="2")
 
 class Documents(models.Model):
     name = models.CharField(max_length=255)
