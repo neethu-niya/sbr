@@ -37,6 +37,24 @@
 	<script src="/static/assets/js/atlantis.min.js"></script>
 
 	<script src="/static/assets/js/setting-demo.js"></script>
+	
+	<script>
+		const  makeActive = (id, model) => {
+    $.ajax({
+        type: "POST",
+        url: "{% url 'toggle' %}",
+        data: {
+           id: id, 
+           model: model,
+           csrfmiddlewaretoken: '{{ csrf_token }}'  
+        },
+        success: (res) => {
+           location.reload()
+        },
+    
+    });
+}
+	</script>
 
 
 

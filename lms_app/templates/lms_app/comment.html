@@ -1,0 +1,132 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">SBR Academy</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Videos</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Comments</a>
+                </li>
+            </ul>
+        </div>
+
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">ADD Comment</h4>
+                           {% comment %} <a href="{% url 'student' %}" class="btn btn-primary btn-round ml-auto">ADD STUDENT<i class="fa fa-plus"></i></a> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Modal -->
+<form method="post" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}                 
+             <div class="container-fluid">
+                <div class="card-body">
+                    <div class="row"> 
+                    
+                
+                           
+                                
+                            
+                          <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                            <div class="form-group">
+                                    <label for="comment">Comment</label>
+                                    <textarea class="form-control" id="comment"  name="text"rows="5">
+
+                                    </textarea>
+                            </div> 
+
+                            {% comment %} <div class="form-group"> {% endcomment %}
+                                        {% comment %} {{ form.as_p }}    {% endcomment %}
+                            <button class="btn btn-outline-info" type="submit">submit</button>
+                            <button class="btn btn-danger">Cancel</button> 
+                       
+                        </div>
+
+                        {% comment %} </div>  {% endcomment %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

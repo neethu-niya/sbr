@@ -20,13 +20,13 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Documents</a>
+                    <a href="#">Student</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#"> Question_paper:</a>
+                    <a href="#">Student List</a>
                 </li>
             </ul>
         </div>
@@ -36,8 +36,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h4 class="card-title">Question Paper:</h4>
-                           <a href="{% url 'question_up' %}" class="btn btn-primary btn-round ml-auto">ADD Question <i class="fa fa-plus"></i></a>
+                            <h4 class="card-title">Student List</h4>
+                           {% comment %} <a href="{% url 'student' %}" class="btn btn-primary btn-round ml-auto">ADD STUDENT<i class="fa fa-plus"></i></a> {% endcomment %}
                         </div>
                     </div>
                     <div class="card-body">
@@ -89,53 +89,80 @@
                                 </div>
                             </div>
                         </div>
-
+                        <form>
                         <div class="table-responsive">
                             <table id="add-row" class="display table table-striped table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Material Type</th>
-                                        <th>description</th>
-                                        <th style="width: 10%">Action</th>
+                                        <th><h1>Name:</h1></th>
+                                        <td><h2>{{students.name }}</h2></td>
                                     </tr>
-                                </thead>
-
-                                <tbody>
-                                    {% for stud in question %}
-                                        <tr>
-                                            <td>{{stud.name}}</td>
-                                            <td>{{stud.subtitle}}</td>
-                                            <td>{{stud.description}}</td>
-                                            <td>
-                                                <div class="form-button-action">
+                                    <tr>
+                                        <th><h1>Standard:</h1></th>
+                                        <td><h2>{{students.standard }}</h2></td>
+                                    </tr>
+                                    <tr>    
+                                        <th><h1>course_type:</h1></th>
+                                        <td><h2>{{students.course_type }}</h2></td>
+                                    </tr> 
+                                    <tr>   
+                                        <th><h1>country:</h1></th>
+                                        <td><h2>{{students.country }}</h2></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h1>state:</h1></th>
+                                        <td><h2>{{students.state }}</h2></td>
+                                    </tr>
+                                        {% comment %} <td style="width: 10%">Action</td>
+                                        <td>                                       
+                                        <div class="form-button-action">
                                                 <label class="switch">
-                                                
-                                                <input type="checkbox" {% if stud.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{stud.id}}, 'Question_paper')">
+                                            
+                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
                                                 <span class="slider round"></span>
                                                 
                                                 </label>  
                                                 {% comment %} <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
                                                     <div class="handle"></div>
                                                 </button> {% endcomment %}
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                {% comment %} <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </div>
-                                                {% comment %} <div class="form-button-action">
-                                                    <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button> {% endcomment %}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
+                                        </td>  {% endcomment %}
+                                    {% comment %} </td> {% endcomment %}
+                                </thead>
+
+                                <tbody>
+                                
+                                    <tr>
+                                        
+
+                                        {% comment %} <td>{{student.name}}</td>
+                                        <td>{{students.standard}}</td>
+                                        <td>{{students.course_type}}</td>
+                                        <td>{{students.country}}</td>
+                                        <td>{{students.state}}</td>
+
+
+                                        <td> {% endcomment %}
+                                            
+                                            {% comment %} <div class="form-button-action">
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                         
+                                </tbody>           <i class="fa fa-times"></i>
+                                                </button>
+                                            </div> {% endcomment %}
+                                        </td>
+                                    </tr>
+                                
                             </table>
+                        
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -143,6 +170,7 @@
     </div>
 
 {% endblock content %}
+
 {% block javascripts %}
 
 	<script >

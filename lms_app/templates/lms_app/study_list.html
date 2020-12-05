@@ -95,23 +95,23 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Material Type</th>
+                                        <th>Subtitle</th>
                                         <th>description</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {% for d in documents %}
+                                    {% for s in study %}
                                         <tr>
-                                            <td>{{d.name}}</td>
-                                            <td>{{d.material_type}}</td>
-                                            <td>{{d.description}}</td>
+                                            <td>{{s.name}}</td>
+                                            <td>{{s.subtitle}}</td>
+                                            <td>{{s.description}}</td>
                                             <td>
                                                 <div class="form-button-action">
                                                 <label class="switch">
                                                 
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" {% if s.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{s.id}}, 'Study_Material')">
                                                 <span class="slider round"></span>
                                                 
                                                 </label>  
@@ -144,7 +144,7 @@
 
 {% endblock content %}
 {% block javascripts %}
-
+{% comment %} 
 	<script >
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
@@ -192,6 +192,6 @@
 
 			});
 		});
-	</script>
+	</script> {% endcomment %}
 
 {% endblock javascripts %}

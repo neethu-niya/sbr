@@ -150,6 +150,7 @@ class Teacher(models.Model):
         return self.name
 
 
+
 @receiver(post_save, sender=Teacher)
 def create_teacher_user(sender, instance, created, **kwargs):
     if created:
@@ -162,6 +163,8 @@ def create_teacher_user(sender, instance, created, **kwargs):
 def update_teacher_user(sender, instance, created, **kwargs):
     if created == False:
         instance.user.save()
+
+
 
 
 
@@ -194,6 +197,7 @@ class Chapter(models.Model):
         return self.name
 
 
+
 class Video(models.Model):
     name = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255, null=True, blank=True)
@@ -217,7 +221,6 @@ class Video(models.Model):
     def __str__(self):
         return self.name  + ": " + str(self.videofile)
         # + ": " + str(self.videofile)
-
 
 
 
@@ -283,7 +286,7 @@ class Scheme(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255,null=True,blank=True)
@@ -303,16 +306,23 @@ class Student(models.Model):
         default=None, null=True, blank=True, unique=True)
     syllabus = models.ForeignKey(Syllabus,null=True,blank=True, on_delete=models.CASCADE)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
+
     course_type = models.CharField(null=True,blank=True,max_length=255)
     user = models.OneToOneField(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
     is_paid = models.BooleanField(default=False)
+
+  
+    #subject = models.ForeignKey(Subject, null=True,blank=True, on_delete=models.CASCADE)
+    # scheme = models.ForeignKey(Scheme,null=True,blank=True, on_delete=models.CASCADE)
+
+
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
 
     def __str__(self):
-        return self.name
+        return self.name    
 
 
 @receiver(post_save, sender=Student)
@@ -329,6 +339,25 @@ def update_student_user(sender, instance, created, **kwargs):
         instance.user.save()
       
     
+
+
+class Comment(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    text = models.TextField(null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    approved_comment = models.BooleanField(default=False)
+
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return str(self.text)
+
+
 
 class Documents(models.Model):
     name = models.CharField(max_length=255)
@@ -421,18 +450,19 @@ class Notification(models.Model):
         upload_to='staticfiles/image/', null=True, blank=True)
     description = models.TextField()
     send_to = models.CharField(max_length=255, choices=send_choices)
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title       
 
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     image = models.ImageField(
-#         upload_to='staticfiles/image/', null=True, blank=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
         
-#     def __str__(self):
-#         return f'{self.user.name} Profile'
+    def __str__(self):
+        return f'{self.user.name} Profile'
      
     # def save(self, *args, **kwargs):
     #     s = User.objects.get()

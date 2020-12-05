@@ -104,14 +104,16 @@
                                 <tbody>
                                     {% for v in videos %}
                                         <tr>
-                                            <td>{{v.name}}</td>
+                                        <td><a href="{% url 'commentup' v.pk %}">{{v.name}}</a></td>
+
+                                            {% comment %} <td>{{v.name}}</td> {% endcomment %}
                                             <td>{{v.chapter}}</td>
                                             <td>{{v.description}}</td>
                                             <td>
                                                 <div class="form-button-action">
                                                 <label class="switch">
                                                 
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" {% if v.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{v.id}}, 'Video')">
                                                 <span class="slider round"></span>
                                                 
                                                 </label>  
