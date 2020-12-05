@@ -125,9 +125,9 @@ class StudentRegister(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ('name', 'address','country','state','city','district','present_country','email','subject',
+        fields = ('name', 'address','country','state','city','district','present_country','email',
                   'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
-                  'syllabus','standard','subject','course_type','active')
+                  'syllabus','standard','course_type','active')
     # class Meta:
     #     model = Student
     #     fields = '__all__'
