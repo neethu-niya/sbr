@@ -180,7 +180,7 @@ class Chapter(models.Model):
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name', null=True)
     active = models.BooleanField(default=False)
     free_tier = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -195,6 +195,8 @@ class Chapter(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 
 
@@ -318,6 +320,7 @@ class Student(models.Model):
 
 
     active = models.BooleanField(default=False)
+    
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     

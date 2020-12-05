@@ -59,6 +59,10 @@ class ChapterForm(forms.ModelForm):
         model = Chapter
         fields = ['subject', 'name', 'active']
 
+
+
+
+
 class SchemeForm(forms.ModelForm):
     subject_wise= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     scheme_name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
