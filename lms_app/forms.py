@@ -64,13 +64,13 @@ class ChapterForm(forms.ModelForm):
 
 
 class SchemeForm(forms.ModelForm):
-    subject_wise= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    scheme_name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
+    subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter Scheme name"}))
     active = forms.BooleanField(required=False)
 
     class Meta:
         model = Scheme
-        fields = ['subject_wise', 'scheme_name', 'active']
+        fields = ['subject', 'name', 'active']
 
 class TeacherRegForm(forms.ModelForm):
     name = forms.CharField(max_length=30, required=False, help_text='Optional.')  

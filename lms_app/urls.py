@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import syllabus_list, standard_list, subject_list, chapter_list, TeacherList, StudentList, registepage, Notification_list, Upload_material , Question_Paper , StudentView, toggle
+from .views import syllabus_list, standard_list, subject_list, chapter_list, TeacherList, StudentList, registepage, Notification_list, Upload_material , Question_Paper , StudentView, toggle, scheme_list
 
 
 # app_name = "lms-app"
@@ -14,6 +14,7 @@ urlpatterns = [
     
     path('subjects/',subject_list, name='subject_list'),
     path('chapters/',chapter_list, name='chapter_list'),
+    path('scheme/',scheme_list, name='scheme_list'),
     
     path('register_teacher/',views.registepage, name='teacher'),
     path('register_student/',views.studentpage, name='student'),
