@@ -12,9 +12,10 @@ __pycache__/
 *.log
 
 # venv
+.env
 env
 venv
-sbr
+
 
 # other
 .DS_Store
@@ -25,7 +26,22 @@ package-lock.json
 staticfiles/*
 !staticfiles/.gitkeep 
 
-#migrations
-**/migrations/**
-!**/migrations
-!**/migrations/__init__.py
+
+
+
+
+
+# Django #
+*.log
+*.pot
+*.pyc
+_pycache_
+db.sqlite3
+media
+
+# Backup files # 
+*.bak 
+
+
+
+
