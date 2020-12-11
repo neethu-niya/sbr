@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',  # Enable the inner app 
+    'api',
     'lms_app',
     'user',
     'phonenumber_field',
@@ -87,7 +88,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'dblms.sqlite3'),
+#         'NAME': os.path.join(BASE_DIR, 'dblms.sqlite8'),
 #     }
 # }
 
@@ -102,16 +103,29 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'sbr',
+#         'USER': 'admin',
+#         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
+#         'HOST': 'database-1.cz7kaqdmaqwx.us-east-2.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sbr',
+        'NAME': 'database-1',
         'USER': 'admin',
-        'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
-        'HOST': 'database-1.cz7kaqdmaqwx.us-east-2.rds.amazonaws.com',
+        'PASSWORD': 'FpBesS8FRTJGA7qeuev4WLmP3',
+        'HOST': 'database-1.c87jt2nj0lma.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
+
 
 
 #nothing

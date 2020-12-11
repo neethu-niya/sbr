@@ -46,7 +46,7 @@ class SubjectView(APIView):
         user = get_user_model().objects.get(id=user.id)
         user = user.student
         try:
-            subjects = user.subject.all()
+            subjects = user.scheme.subject.all()
             subjects = SubjectSerializer(subjects, many=True).data
         except:
             subjects = []
