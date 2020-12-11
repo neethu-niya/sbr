@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'dblms.sqlite8'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'dblms.sqlite8'),
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -118,7 +118,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'database-1',
+        'NAME': 'sbr',
         'USER': 'admin',
         'PASSWORD': 'FpBesS8FRTJGA7qeuev4WLmP3',
         'HOST': 'database-1.c87jt2nj0lma.us-east-2.rds.amazonaws.com',
