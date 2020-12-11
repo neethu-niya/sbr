@@ -241,6 +241,8 @@ class Chat(models.Model):
 
 class Scheme(models.Model):
     name = models.CharField(max_length=255)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     subject = models.ManyToManyField(Subject)
     slug = AutoSlugField(populate_from='name', null=True)
     active = models.BooleanField(default=False)
