@@ -157,11 +157,11 @@ def load_syllabus(request):
     
     return render(request, 'lms_app/city_dropdown_list_options.html', {'stand': stand})
 
-def load_subject(request):
+def load_scheme(request):
     standard_id = request.GET.get('standard_id')
-    sub = Subject.objects.filter(standard_id=standard_id).order_by('name')
+    sch = Scheme.objects.filter(standard_id=standard_id).order_by('name')
     
-    return render(request, 'lms_app/subject_dropdown.html', {'sub': sub})
+    return render(request, 'lms_app/subject_dropdown.html', {'sch': sch})
 
 def load_country(request):
     country_id = request.GET.get('country_id')
@@ -268,6 +268,16 @@ def toggle(request):
     Model = apps.get_model("lms_app",request.POST['model'])
     w = Model.objects.get(id=request.POST['id'])
     w.active = not w.active
+    w.save()
+    
+
+    return HttpResponse('success')
+
+def toggle_ispaid(request):
+    from django.apps import apps
+    Model = apps.get_model("lms_app",request.POST['model'])
+    w = Model.objects.get(id=request.POST['id'])
+    w.is_paid = not w.is_paid
     w.save()
     
 

@@ -124,7 +124,7 @@
 
                         <div class="col-sm-6">
                                     <div class="form-group form-group-default">
-                                    <label for="addPosition">Select country :</label>                                                       
+                                    <label for="addPosition">Select state :</label>                                                       
                                         {{form.state}}
                                     </div>
                                 </div>
@@ -287,8 +287,8 @@
 
                                 <div class="col-sm-4">
                                     <div class="form-group form-group-default" >
-                                    <label for="addPosition">SUBJECT :</label>
-                                                    {{form.subject}}
+                                    <label for="addPosition">SCHEME :</label>
+                                                    {{form.scheme}}
                                                 </div>
                                 </div> 
 
@@ -313,6 +313,13 @@
                                     </label>
                                 </div>
                             
+                            <div class="form-check"> 
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="is_paid" value="is_paid">
+                                        <span class="form-check-sign">Is_paid</span>
+                                    </label>
+                                </div>
+
                                 {% comment %} <div class="form-check"> 
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox" name="paid" value="paid">
@@ -415,7 +422,7 @@
         },
         success: function (data) {   // `data` is the return of the `load_cities` view function
           console.log(data);
-          $("#id_subject").html(data);  // replace the contents of the city input with the data that came from the server
+          $("#id_scheme").html(data);  // replace the contents of the city input with the data that came from the server
 
             /*let html_data = '<option value="">---------</option>';
                 data.forEach(function (standard) {

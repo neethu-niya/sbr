@@ -97,6 +97,8 @@
                                         <th>Name</th>
                                         <th>Standard</th>
                                         <th>course_type</th>
+                                        <th style="width: 10%">Is_paid</th>
+                                        
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -109,6 +111,23 @@
                                         {% comment %} <td>{{student.name}}</td> {% endcomment %}
                                         <td>{{student.standard}}</td>
                                         <td>{{student.course_type}}</td>
+                                        {% comment %} <td>{{student.is_paid}}</td> {% endcomment %}
+
+                                        <td>
+                                            <div class="form-button-action">
+                                                <label class="switch">
+                                                <input type="checkbox" id="togBtn">
+                                                <div class="slider round">
+                                                <label class="switch">
+                                                <input type="checkbox" id="checkbox" {% if student.is_paid %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75"  onclick="makeIspaid({{student.id}},'Student')">
+                                                <span class="slider round"></span>
+                                                </label>
+                                               
+                                                </div>
+                                            </div>
+                                            
+                                        </td>
+
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
@@ -124,9 +143,9 @@
                                                 {% comment %} <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
                                                     <div class="handle"></div>
                                                 </button> {% endcomment %}
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                {% comment %} <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                                     <i class="fa fa-times"></i>
-                                                </button>
+                                                </button> {% endcomment %}
                                             </div>
                                             {% comment %} <div class="form-button-action">
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
@@ -137,6 +156,9 @@
                                                 </button>
                                             </div> {% endcomment %}
                                         </td>
+
+                                        
+
                                     </tr>
                                 {% endfor %}
                                 </tbody>

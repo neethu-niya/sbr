@@ -88,7 +88,8 @@ class Standard(models.Model):
 
     def __str__(self):
         # return str(self.syllabus)
-        return f"{self.syllabus} - {self.name}"
+        # return f"{self.syllabus} - {self.name}"
+        return self.name
     
     def get_absolute_url(self):
         return reverse("standard_list", kwargs={"pk": self.pk})
@@ -314,7 +315,7 @@ class Student(models.Model):
         default=None, null=True, blank=True, unique=True)
     syllabus = models.ForeignKey(Syllabus,null=True,blank=True, on_delete=models.CASCADE)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
-
+    scheme = models.ForeignKey(Scheme, on_delete=models.CASCADE)
     course_type = models.CharField(null=True,blank=True,max_length=255)
     user = models.OneToOneField(get_user_model(),  null=True, blank=True, on_delete=models.CASCADE)
     is_paid = models.BooleanField(default=False)

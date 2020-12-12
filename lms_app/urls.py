@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import syllabus_list, standard_list, subject_list, chapter_list, TeacherList, StudentList, registepage, Notification_list, Upload_material , Question_Paper , StudentView, toggle, scheme_list
+from .views import syllabus_list, standard_list, subject_list, chapter_list, TeacherList, StudentList, registepage, Notification_list, Upload_material , Question_Paper , StudentView, toggle, scheme_list, toggle_ispaid
 
 
 # app_name = "lms-app"
@@ -36,9 +36,10 @@ urlpatterns = [
 
 
     path('toggle/', toggle, name="toggle"),
+    path('toggle_ispaid/', toggle_ispaid, name="toggle_ispaid"),
     
     path('ajax/load-syllabus/', views.load_syllabus, name='ajax_load_cities'),
-    path('ajax/load-subject/', views.load_subject, name='ajax_load_sub'),
+    path('ajax/load-subject/', views.load_scheme, name='ajax_load_sub'),
     path('ajax/load-country/', views.load_country, name='ajax_load_con'),
 
 

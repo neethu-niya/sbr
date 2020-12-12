@@ -65,12 +65,14 @@ class ChapterForm(forms.ModelForm):
 
 class SchemeForm(forms.ModelForm):
     subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter Scheme name"}))
     active = forms.BooleanField(required=False)
 
     class Meta:
         model = Scheme
-        fields = ['subject', 'name', 'active']
+        fields = ['subject', 'syllabus' , 'standard', 'name', 'active']
 
 class TeacherRegForm(forms.ModelForm):
     name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
@@ -127,7 +129,7 @@ class StudentRegister(forms.ModelForm):
         model = Student
         fields = ('name', 'address','country','state','city','district','present_country','email',
                   'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
-                  'syllabus','standard','course_type','active')
+                  'syllabus','standard', 'scheme',  'is_paid', 'course_type','active')
     # class Meta:
     #     model = Student
     #     fields = '__all__'
