@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from .models import *
 from .forms import *
 from django.http import HttpResponse
+from django.http import JsonResponse
 # from lms_app.functions.functions import handle_uploaded_file
 
 @staff_member_required
@@ -271,7 +272,8 @@ def toggle(request):
     w.save()
     
 
-    return HttpResponse('success')
+    return JsonResponse({"success": ""}, status=400)
+
 
 def toggle_ispaid(request):
     from django.apps import apps
@@ -281,7 +283,7 @@ def toggle_ispaid(request):
     w.save()
     
 
-    return HttpResponse('success')
+    return JsonResponse({"success": ""}, status=400)
 
 def commenting(request, pk):
     comment = request.POST.get('text', None)
