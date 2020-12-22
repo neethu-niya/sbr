@@ -13,7 +13,6 @@ from .forms import *
 from django.http import HttpResponse
 from django.http import JsonResponse
 from fcm_django.models import FCMDevice
-from core.settings import FCM_SERVER_KEY
 devices = FCMDevice.objects.all()
 
 # from lms_app.functions.functions import handle_uploaded_file
