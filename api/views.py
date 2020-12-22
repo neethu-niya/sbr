@@ -18,6 +18,9 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.contrib.auth import get_user_model
 from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents, Student
+from fcm_django.models import FCMDevice
+devices = FCMDevice.objects.all()
+
 
 
 # class SyllabusView(ListAPIView):
@@ -48,6 +51,7 @@ class SubjectView(APIView):
         try:
             subjects = user.scheme.subject.all()
             subjects = SubjectSerializer(subjects, many=True).data
+            devices.send_message("subjects Fetched", "The subjects api fetched")
         except:
             subjects = []
         
