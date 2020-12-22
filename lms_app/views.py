@@ -12,6 +12,10 @@ from .models import *
 from .forms import *
 from django.http import HttpResponse
 from django.http import JsonResponse
+from fcm_django.models import FCMDevice
+from settings import FCM_SERVER_KEY
+devices = FCMDevice.objects.all()
+
 # from lms_app.functions.functions import handle_uploaded_file
 
 @staff_member_required
@@ -182,6 +186,7 @@ def file_upload(request):
         form.cleaned_data
         print(form.cleaned_data)
         form.save()
+        devices.send_message("Video", "New Video Uploaded")
         return redirect('video')
     context = {'form': form}
     return render(request, 'lms_app/video_up.html', context)

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'cities_light',
     'storages',
+    'fcm_django',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -159,6 +161,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
+
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": "AAAAMmDy9Aw:APA91bHClA1aMAxJNRChRZtFxmPaK1okQRjguMofrUPMNviLp76_hTwfBK6O6JbuA1b-aaY5DWmbqgPeOzGPqwJUSL5niSJhG2TlgiUoz2yVPOdewbvJiIGGazan6wUdOxJsV-3mI5_h"
+     }
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
