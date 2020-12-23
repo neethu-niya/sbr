@@ -183,7 +183,7 @@ class VideoUpload(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True)
     subtitle = forms.CharField(max_length=255, required=False)
     description =forms.Textarea()
-    subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     
     # chapter =forms.ModelChoiceField(Chapter, on_delete=models.CASCADE)
