@@ -18,7 +18,7 @@ urlpatterns = [
     
     path('register_teacher/',views.registepage, name='teacher'),
     path('register_student/',views.studentpage, name='student'),
-    path('videos_list/',views.upload_video.as_view(), name='video'),
+    path('videos_list/',views.video_list, name='video'),
     path('video_up/',views.file_upload, name='up'),
     path('document_list/',views.upload_document.as_view(), name='document'),
     path('document_up/',views.docs_upload, name='upload'),

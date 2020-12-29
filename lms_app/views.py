@@ -72,7 +72,7 @@ def subject_list(request):
 
 @staff_member_required
 def chapter_list(request):
-    subject = request.GET.get('subject')
+    subject = request.GET.get('subject', None)
     chapters = Chapter.objects.all()
     if subject is not None:
         chapters = chapters.filter(subject__id__exact=subject)
@@ -174,10 +174,20 @@ def load_country(request):
     return render(request, 'lms_app/city_dropdown.html', {'city': city})
 
 
-class upload_video(ListView):
-    queryset = Video.objects.all()
-    context_object_name = 'videos'
-    template_name = 'lms_app/videos_list.html'
+@staff_member_required
+def video_list(request):
+    chapter = request.GET.get('chapter')
+    videos = Video.objects.all()
+    if chapter is not None:
+        videos = videos.filter(chapter__id__exact=chapter)
+    context = {'videos': videos}
+    return render(request, 'lms_app/videos_list.html', context)
+
+
+
+
+
+    
 
 def file_upload(request):
     form = VideoUpload(request.POST or None, request.FILES or None)
@@ -189,6 +199,7 @@ def file_upload(request):
         return redirect('video')
     context = {'form': form}
     return render(request, 'lms_app/video_up.html', context)
+
 
 class upload_document(ListView):
     queryset = Documents.objects.all()
