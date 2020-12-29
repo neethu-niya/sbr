@@ -194,8 +194,12 @@ def file_upload(request):
     if form.is_valid():
         form.cleaned_data
         print(form.cleaned_data)
-        form.save()
-        devices.send_message("Video", "New Video Uploaded")
+        upload_video = form.save(commit=False)
+        student = Student.objects.filter(standard=upload_video.standard)
+        print(student)
+        devices = FCMDevice.objects.filter(user=student.user)
+        devices.send_message("Video", upload_video.chapter)
+        upload_video.save()
         return redirect('video')
     context = {'form': form}
     return render(request, 'lms_app/video_up.html', context)
