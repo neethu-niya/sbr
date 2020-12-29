@@ -183,6 +183,8 @@ class VideoUpload(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True)
     subtitle = forms.CharField(max_length=255, required=False)
     description =forms.Textarea()
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     
@@ -197,7 +199,7 @@ class VideoUpload(forms.ModelForm):
     active =forms.BooleanField(required=False)
     class Meta:
        model = Video
-       fields = ('name', 'subtitle', 'description', 'subject', 'chapter',  'videofile', 'image', 
+       fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',  'videofile', 'image', 
                  'thumbnail_image','url_field', 'active')
 
 # class VideoUpload(forms.ModelForm):
@@ -209,6 +211,9 @@ class DocumentUpload(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
     description = forms.Textarea()
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     # material_type = forms.ChoiceField(choices = material_choices)
@@ -222,13 +227,16 @@ class DocumentUpload(forms.ModelForm):
     active = forms.BooleanField(required=False)
     class Meta:
         model = Documents
-        fields = ('name','subtitle', 'description', 'chapter',  'image', 
+        fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',  'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
 
 class StudyUpload(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
     description = forms.Textarea()
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     # material_type = forms.ChoiceField(choices = material_choices)
@@ -242,7 +250,7 @@ class StudyUpload(forms.ModelForm):
     active = forms.BooleanField(required=False)
     class Meta:
         model = Study_Material
-        fields = ('name','subtitle', 'description', 'chapter', 'image', 
+        fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter', 'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
 
 
