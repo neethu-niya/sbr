@@ -4,14 +4,14 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
 from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
-router.register(r'devices', FCMDeviceAuthorizedViewSet)
+
 
 
 
 
 urlpatterns = [
     path('auth/', obtain_auth_token, name='api_token_auth'),
-    re_path(r'^', include(router.urls)),
+    re_path(r'^devices?$', FCMDeviceAuthorizedViewSet.as_view({'post': 'create'}), name='create_fcm_device'),
     path('subjects/', SubjectView.as_view(), name="subjects"),
     path('chapters/<slug:slug>', ChapterView.as_view(), name="chapters"),
     path('documents/<slug:slug>', DocumentView.as_view(), name="documents"),
