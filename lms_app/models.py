@@ -206,6 +206,8 @@ class Video(models.Model):
     subtitle = models.CharField(max_length=255, null=True, blank=True)
     # description = models.TextField()
     description = models.TextField()
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
 
@@ -373,6 +375,9 @@ class Documents(models.Model):
     name = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255 )
     description = models.TextField(null=True, blank=True)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
     url_field = models.URLField(max_length=200, null=True, blank=True)
