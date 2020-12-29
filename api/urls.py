@@ -5,7 +5,7 @@ from .views import *
 
 from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
 from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
-
+router.register(r'devices', FCMDeviceAuthorizedViewSet)
 
 
 
