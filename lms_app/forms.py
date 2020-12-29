@@ -263,6 +263,9 @@ class Question_form(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
     description = forms.Textarea()
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     # material_type = forms.ChoiceField(choices = material_choices)
@@ -276,7 +279,7 @@ class Question_form(forms.ModelForm):
     active = forms.BooleanField(required=False)
     class Meta:
         model = Question_paper
-        fields = ('name','subtitle', 'description', 'chapter', 'image', 
+        fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter', 'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
 
 
