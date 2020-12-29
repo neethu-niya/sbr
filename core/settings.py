@@ -148,6 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'user.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -164,7 +165,8 @@ REST_FRAMEWORK = {
 
 
 FCM_DJANGO_SETTINGS = {
-        "FCM_SERVER_KEY": "AAAAMmDy9Aw:APA91bHClA1aMAxJNRChRZtFxmPaK1okQRjguMofrUPMNviLp76_hTwfBK6O6JbuA1b-aaY5DWmbqgPeOzGPqwJUSL5niSJhG2TlgiUoz2yVPOdewbvJiIGGazan6wUdOxJsV-3mI5_h"
+        "FCM_SERVER_KEY": "AAAAMmDy9Aw:APA91bHClA1aMAxJNRChRZtFxmPaK1okQRjguMofrUPMNviLp76_hTwfBK6O6JbuA1b-aaY5DWmbqgPeOzGPqwJUSL5niSJhG2TlgiUoz2yVPOdewbvJiIGGazan6wUdOxJsV-3mI5_h",
+        "USER_MODEL": AUTH_USER_MODEL
 }
 
 
@@ -207,7 +209,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'media_root')
 #############################################################
 
 
-AUTH_USER_MODEL = 'user.User'
 
 
 AWS_ACCESS_KEY_ID = 'AKIAUGL6LDKVBY2AK6E2'

@@ -105,7 +105,7 @@
                                 {% for syllabus in syllabus %}
                                     <tr>
                                     {% comment %} ?syllabus={{syllabus.pk}} {% endcomment %}
-                                        <td><a href="{% url 'standard_list' %}">{{syllabus.name}}</a> </td>
+                                        <td><a href="{% url 'standard_list' %}?syllabus={{ syllabus.pk }}">{{syllabus.name}}</a> </td>
                                         <td>{{syllabus.active}}</td>
                                         <td>
                                             <div class="form-button-action">
@@ -113,9 +113,6 @@
                                                 <input type="checkbox" id="checkbox" {% if syllabus.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75"  onclick="makeActive({{syllabus.id}}, 'Syllabus')">
                                                 <span class="slider round"></span>
                                                 </label> 
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>

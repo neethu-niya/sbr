@@ -125,7 +125,7 @@
                                 <tbody>
                                 {% for chapter in chapters %}
                                     <tr>
-                                        <td><a href="{% url 'subject_list' %}?chapter={{chapter.pk}}">{{chapter.name}}</a></td>
+                                        <td><a href="{% url 'video' %}?chapter={{chapter.pk}}">{{chapter.name}}</a></td>
 
                                         {% comment %} <td>{{chapter.name}}</td> {% endcomment %}
                                         <td>{{chapter.active}}</td>
@@ -135,9 +135,6 @@
                                                 <input type="checkbox" {% if chapter.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{chapter.id}}, 'Chapter')">
                                                 <span class="slider round"></span>
                                                 </label> 
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>
