@@ -180,23 +180,23 @@ class StudentRegister(forms.ModelForm):
 
 
 class VideoUpload(forms.ModelForm):
-    # name = forms.CharField(max_length=100, required=True)
-    # subtitle = forms.CharField(max_length=255, required=False)
-    # description =forms.Textarea()
-    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    name = forms.CharField(max_length=100, required=True)
+    subtitle = forms.CharField(max_length=255, required=False)
+    description =forms.Textarea()
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     
-    # # chapter =forms.ModelChoiceField(Chapter, on_delete=models.CASCADE)
-    # # upload_to='staticfiles/media_root/videos/'
-    # # upload_to='staticfiles/image/'
-    # # upload_to='staticfiles/thumbnail/',
-    # videofile =forms.FileField()
-    # image =forms.ImageField()
-    # thumbnail_image =forms.ImageField()
-    # url_field =forms.URLField(max_length=200, required=False)
-    # active =forms.BooleanField(required=False)
+    # chapter =forms.ModelChoiceField(Chapter, on_delete=models.CASCADE)
+    # upload_to='staticfiles/media_root/videos/'
+    # upload_to='staticfiles/image/'
+    # upload_to='staticfiles/thumbnail/',
+    videofile =forms.FileField()
+    image =forms.ImageField()
+    thumbnail_image =forms.ImageField()
+    url_field =forms.URLField(max_length=200, required=False)
+    active =forms.BooleanField(required=False)
     class Meta:
        model = Video
        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',  'videofile', 'image', 
