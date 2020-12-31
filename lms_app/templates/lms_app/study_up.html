@@ -45,124 +45,15 @@
                     <div class="card-header">
                         <div class="card-title">Add Study Material</div>
                     </div>
-        <form method="post"class="post-form" enctype="multipart/form-data" id="studyForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-cit-url="{% url 'ajax_load_con' %}"  data-chap-url="{% url 'ajax_load_chap' %}">
-            {% csrf_token %}                 
-             <div class="container-fluid">
-                <div class="card-body">
-                    <div class="row"> 
-                        <div class="col-md-2 col-lg-4"> 
-                            <div class="form-group col-md-12">
-                                <label for="name">Name</label>
-                                <input type="textarea" class="form-control" name="name" id="" placeholder="Enter Your Name">       
-                               
-                            </div>
-                        </div>
-
-                        <div class="col-md-2 col-lg-4"> 
-                            <div class="form-group col-md-12">
-                                <label for="name">Subtitle</label>
-                                <input type="textarea" class="form-control"name="subtitle" id="" placeholder="Enter Your Name">       
-                               
-                            </div>
-                        </div>  
-                </div>
-                        <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Description</span>
-                                        </div>
-                                        <textarea class="form-control" name="description" id="" aria-label="With textarea"></textarea>
-                                    </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Syllabus</label>                                                       
-                                        {{form.syllabus}}
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Standard</label>                                                       
-                                        {{form.standard}}
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Subject</label>                                                       
-                                        {{form.subject}}
-                                    </div>
-                            </div>
-                        </div>
-                         
-                        <div class="form-group">
-                        <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Chapter</label>                                                       
-                                        {{form.chapter}}
-                                    </div>
-                        </div>
-                        </div>
-
-
-                        {% comment %} <div class="form-group">
-                        <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Material Type</label>                                                       
-                                        {{form.material_type}}
-                                    </div>
-                        </div>
-                        </div> {% endcomment %}
-                       
-                       
-                        <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload Image</label>
-                                <input type="file" class="form-control-file" name="image" id='' >
-                        </div>  
-                        <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload thumbnail</label>
-                                <input type="file" class="form-control-file" name="thumbnail_image" id='' >
-                        </div> 
-                       
-                        <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload Pdf</label>
-                                <input type="file" class="form-control-file" name="pdf" id='' >
-                        </div>
-                        </div> 
-                        <div style="width:800px; margin:0 auto;">     
-                                <b><h1>OR</h1></b>
-                            
-
-                        </div> 
-                        
-                        
-
-                        <div class="form-group">
-                                    <label for="basic-url">URL</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-                                        </div>
-                                        <input type="text" class="form-control" name="url_field" id="" aria-describedby="basic-addon3">
-                                    </div>
-                        </div>
-                        <div class="form-check"> 
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="active" value="active">
-                                        <span class="form-check-sign">Active</span>
-                                    </label>
-                        </div>
-                        <div class="form-group">
-                        {% comment %} {{form.as_p}}   {% endcomment %}
-                            <button class="btn btn-outline-info" type="submit">submit</button>
-                            <button class="btn btn-danger">Cancel</button>
-                       
-                        </div>
-        </form> 
+  <form method="post"class="post-form" enctype="multipart/form-data" id="studyForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
+    <div class="card-body">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">submit</button>
+        <button class="btn btn-danger">Cancel</button>
+    </div>
+  </form>
                 </div>
             </div>
         </div>
