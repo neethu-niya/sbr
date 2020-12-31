@@ -388,7 +388,7 @@ class Documents(models.Model):
     thumbnail_image = models.ImageField(
         upload_to='staticfiles/thumbnail/', null=True, blank=True)
     pdf = models.FileField(upload_to='staticfiles/pdf')
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

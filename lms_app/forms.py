@@ -256,27 +256,10 @@ class VideoUpload(forms.ModelForm):
 #         fields = '__all__'
 
 class DocumentUpload(forms.ModelForm):
-    name = forms.CharField(max_length=255, required=False)
-    subtitle = forms.CharField(max_length=255, required=False)
-    description = forms.Textarea() 
-    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-
-    # material_type = forms.ChoiceField(choices = material_choices)
-
-    image = forms.ImageField(required=False)
-    thumbnail_image = forms.ImageField(required=False)
-        
-    pdf = forms.FileField(required=False)
-    url_field =forms.URLField(max_length=200, required=False)
-
-    active = forms.BooleanField(required=False)
     class Meta:
         model = Documents
         fields = ('name','subtitle', 'description','syllabus', 'standard','subject', 'chapter',  'image', 
-                  'thumbnail_image', 'pdf','url_field', 'active')
+                  'thumbnail_image', 'pdf')
 
     
 
