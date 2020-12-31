@@ -235,6 +235,7 @@ class VideoUpload(forms.ModelForm):
 
 
 
+
 class DocumentUpload(forms.ModelForm):
     class Meta:
         model = Documents
