@@ -116,11 +116,9 @@
                                        {{ form.thumbnail_image|as_crispy_field }}
                                 
                         </div> 
-                        <div class="form-check"> 
-                                    <label class="form-check-label">
-                                       {{ form.active|as_crispy_field }}
-                                    </label>
-                                </div>
+
+                                       <div>{{ form.active|as_crispy_field }}</div>
+     
 
                         <div class="form-group">
                             <button class="btn btn-outline-info" type="submit">submit</button>
