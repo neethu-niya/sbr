@@ -57,8 +57,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
     {% comment %} $(document).ready(function(){ {% endcomment %}
+   {% comment %} $(document).ready(function(){ {% endcomment %}
     $("#id_syllabus").change(function () {
-      var url = $("#documentForm").attr("data-std-url");  // get the url of the `load_cities` view
+      var url = $("#videoForm").attr("data-std-url");  // get the url of the `load_cities` view
       var syllabusId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -84,7 +85,7 @@
 
     }); 
     $("#id_standard").change(function () {
-      var url = $("#documentForm").attr("data-sub-url");  // get the url of the `load_cities` view
+      var url = $("#videoForm").attr("data-sub-url");  // get the url of the `load_cities` view
       var standardId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -111,7 +112,7 @@
     });
 
     $("#id_subject").change(function () {
-      var url = $("#documentForm").attr("data-chap-url");  // get the url of the `load_cities` view
+      var url = $("#videoForm").attr("data-chap-url");  // get the url of the `load_cities` view
       var subjectId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -137,6 +138,28 @@
 
     }); 
 
+
+    $("#id_country").change(function () {
+      var url = $("#personForm").attr("data-cit-url");  // get the url of the `load_cities` view
+      var countryId = $(this).val();  // get the selected country ID from the HTML input
+        
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'country_id': countryId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          console.log(data);
+          $("#id_state").html(data);  // replace the contents of the city input with the data that came from the server
+
+           
+        
+
+        }
+
+      });
+
+    }); 
 
     
 
