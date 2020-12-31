@@ -115,12 +115,14 @@
                                 </form>
                             </div>
                         </div>
+
+
                         <div class="table-responsive">
                             <table id="add-row" class="display table table-striped table-hover" >
                                 <thead>
                                     <tr>
-                                        {% comment %} <th>Subject</th> {% endcomment %}
                                         <th>Chapter</th>
+                                        <th>Subject</th>
                                         <th>Active</th>
                                         <th>Free Tier</th>
                                     </tr>
@@ -130,6 +132,7 @@
                                 {% for chapter in chapters %}
                                     <tr>
                                         <td><a href="{% url 'video' %}?chapter={{chapter.pk}}">{{chapter.name}}</a></td>
+                                        <td>{{chapter.subject}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
