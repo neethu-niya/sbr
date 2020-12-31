@@ -189,21 +189,6 @@ class VideoUpload(forms.ModelForm):
        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
                  'thumbnail_image', 'videofile')
 
-
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['standard'].queryset = Standard.objects.none()
-
-
-    #     if 'syllabus' in self.data:
-    #         try:
-    #             syllabus_id = int(self.data.get('syllabus'))
-    #             self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
-    #         except (ValueError, TypeError):
-    #             pass  # invalid input from the client; ignore and fallback to empty City queryset
-    #     elif self.instance.pk and self.instance.standard is not None:
-    #         self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
  
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -249,11 +234,6 @@ class VideoUpload(forms.ModelForm):
             self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
 
 
-    
-# class VideoUpload(forms.ModelForm):
-#     class Meta:
-#         model = 'videos'
-#         fields = '__all__'
 
 class DocumentUpload(forms.ModelForm):
     class Meta:
