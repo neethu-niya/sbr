@@ -187,7 +187,7 @@ class VideoUpload(forms.ModelForm):
     class Meta:
        model = Video
        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',  'videofile', 'image', 
-                 'thumbnail_image')
+                 'thumbnail_image', 'active')
 
 
 
