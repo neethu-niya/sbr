@@ -272,10 +272,10 @@ class DocumentUpload(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
     description = forms.Textarea() 
-    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     # material_type = forms.ChoiceField(choices = material_choices)
 
@@ -291,14 +291,59 @@ class DocumentUpload(forms.ModelForm):
         fields = ('name','subtitle', 'description','syllabus', 'standard','subject', 'chapter',  'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
 
+    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['standard'].queryset = Standard.objects.none()
+
+
+        if 'syllabus' in self.data:
+            try:    
+                syllabus_id = int(self.data.get('syllabus'))
+                self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.none()
+
+
+        if 'standard' in self.data:
+            try:    
+                standard_id = int(self.data.get('standard'))
+                self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['chapter'].queryset = Chapter.objects.none()
+
+
+        if 'subject' in self.data:
+            try:    
+                subject_id = int(self.data.get('subject'))
+                self.fields['chapter'].queryset = Chapter.objects.filter(id=subject_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
+
 class StudyUpload(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
     description = forms.Textarea()
-    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     # material_type = forms.ChoiceField(choices = material_choices)
 
@@ -314,6 +359,49 @@ class StudyUpload(forms.ModelForm):
         fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter', 'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
 
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['standard'].queryset = Standard.objects.none()
+
+
+        if 'syllabus' in self.data:
+            try:    
+                syllabus_id = int(self.data.get('syllabus'))
+                self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.none()
+
+
+        if 'standard' in self.data:
+            try:    
+                standard_id = int(self.data.get('standard'))
+                self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['chapter'].queryset = Chapter.objects.none()
+
+
+        if 'subject' in self.data:
+            try:    
+                subject_id = int(self.data.get('subject'))
+                self.fields['chapter'].queryset = Chapter.objects.filter(id=subject_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
 
 # class Comment_form(forms.ModelForm):
 #     Video = forms.ModelChoiceField(queryset=Comment.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"})))
@@ -342,6 +430,50 @@ class Question_form(forms.ModelForm):
         model = Question_paper
         fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter', 'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
+    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['standard'].queryset = Standard.objects.none()
+
+
+        if 'syllabus' in self.data:
+            try:    
+                syllabus_id = int(self.data.get('syllabus'))
+                self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.none()
+
+
+        if 'standard' in self.data:
+            try:    
+                standard_id = int(self.data.get('standard'))
+                self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['chapter'].queryset = Chapter.objects.none()
+
+
+        if 'subject' in self.data:
+            try:    
+                subject_id = int(self.data.get('subject'))
+                self.fields['chapter'].queryset = Chapter.objects.filter(id=subject_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
 
 
 class NotificationAdd(forms.ModelForm):
