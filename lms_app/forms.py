@@ -200,7 +200,7 @@ class VideoUpload(forms.ModelForm):
     image =forms.ImageField()
     thumbnail_image =forms.ImageField()
     url_field =forms.URLField(max_length=200, required=False)
-    active =forms.BooleanField(required=False)
+    # active =forms.BooleanField(required=False)
     class Meta:
        model = Video
        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',  'videofile', 'image', 
