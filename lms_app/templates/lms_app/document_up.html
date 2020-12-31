@@ -4,9 +4,10 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
-{% block content %}
+
 {% block content %}
   {% load static %}
+    {% load crispy_forms_tags %}
 {% comment %} {{form}} {% endcomment %}
     <div class="page-inner">
         <div class="page-header">
