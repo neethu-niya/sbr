@@ -41,10 +41,12 @@
         
 
   <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
+    <div class="card-body">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-primary">Sign in</button>
   </form>
+  </div>
                 </div>
             </div>
         </div>
