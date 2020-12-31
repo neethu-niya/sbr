@@ -155,7 +155,7 @@ def studentpage(request):
     context = {'form': form}
     return render(request, 'lms_app/register_student.html', context)
 
-def load_syllabus(request):
+def load_standard(request):
     syllabus_id = request.GET.get('syllabus_id')
     stand = Standard.objects.filter(syllabus_id=syllabus_id).order_by('name')
     

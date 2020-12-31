@@ -58,7 +58,7 @@
     {% else %}
     {% endif %}
 
-    <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}" data-sub-url="{% url 'ajax_load_sub' %}" data-cit-url="{% url 'ajax_load_con' %}" class="post-form" enctype="multipart/form-data">
+    <form method="post" id="personForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_sub' %}" data-cit-url="{% url 'ajax_load_con' %}" class="post-form" enctype="multipart/form-data">
             {% csrf_token %}                 
              <div class="container-fluid">
                 <div class="card-body">
@@ -386,7 +386,7 @@
   <script>
     {% comment %} $(document).ready(function(){ {% endcomment %}
     $("#id_syllabus").change(function () {
-      var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+      var url = $("#personForm").attr("data-std-url");  // get the url of the `load_cities` view
       var syllabusId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
