@@ -146,17 +146,17 @@
                                 </thead>
 
                                 <tbody>
-                                {% for schemes in schemes %}
+                                {% for scheme in schemes %}
                                     <tr>
-                                        <td>{{schemes.name}}</td>
-                                        <td>{{shemes.syllabus}}</td>
-                                        <td>{{shemes.standard}}</td>
-                                        <td>{{shemes.subject_set}}</td>
-                                        <td>{{schemes.active}}</td>
+                                        <td>{{scheme.name}}</td>
+                                        <td>{{scheme.syllabus}}</td>
+                                        <td>{{scheme.standard}}</td>
+                                        <td>{{scheme.subject_set}}</td>
+                                        <td>{{scheme.active}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
-                                                <input type="checkbox" {% if schemes.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{schemes.id}}, 'Scheme')">
+                                                <input type="checkbox" {% if scheme.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{scheme.id}}, 'Scheme')">
                                                 <span class="slider round"></span>
                                                 </label> 
                                             </div>
