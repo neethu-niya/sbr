@@ -7,7 +7,8 @@
 
 {% block content %}
   {% load static %}
-  {% load crispy_forms_tags %}
+    {% load crispy_forms_tags %}
+{% comment %} {{form}} {% endcomment %}
     <div class="page-inner">
         <div class="page-header">
             <h4 class="page-title">SBR ACADEMY</h4>
@@ -21,26 +22,23 @@
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">VIDEO</a>
+                    <a href="#">Document</a>
                 </li>
                 <li class="separator">
                     <i class="flaticon-right-arrow"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Video Upload</a>
+                    <a href="#">Document Upload</a>
                 </li>
             </ul>
         </div>
-    </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">UPLOAD VIDEO:</div>
+                        <div class="card-title">Add Documents</div>
                     </div>
-        
-
-  <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
+    <form method="post"class="post-form" enctype="multipart/form-data" id="documentForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
     <div class="card-body">
     {% csrf_token %}
     {{ form|crispy }}
@@ -49,18 +47,19 @@
         <button class="btn btn-danger">Cancel</button>
     </div>
   </form>
-  </div>
                 </div>
             </div>
         </div>
-{% endblock content %}
+{% endblock %}
+
 
 {% block javascripts %}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
-    {% comment %} $(document).ready(function(){ {% endcomment %}
+   {% comment %} $(document).ready(function(){ {% endcomment %}
+   {% comment %} $(document).ready(function(){ {% endcomment %}
     $("#id_syllabus").change(function () {
-      var url = $("#videoForm").attr("data-std-url");  // get the url of the `load_cities` view
+      var url = $("#documentForm").attr("data-std-url");  // get the url of the `load_cities` view
       var syllabusId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -86,7 +85,7 @@
 
     }); 
     $("#id_standard").change(function () {
-      var url = $("#videoForm").attr("data-sub-url");  // get the url of the `load_cities` view
+      var url = $("#documentForm").attr("data-sub-url");  // get the url of the `load_cities` view
       var standardId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -113,7 +112,7 @@
     });
 
     $("#id_subject").change(function () {
-      var url = $("#videoForm").attr("data-chap-url");  // get the url of the `load_cities` view
+      var url = $("#documentForm").attr("data-chap-url");  // get the url of the `load_cities` view
       var subjectId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -162,15 +161,6 @@
 
     }); 
 
-
-
-
   </script>
 
 {% endblock javascripts %}
-
-
-
-
-
-
