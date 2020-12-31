@@ -47,6 +47,8 @@
                   {% csrf_token %}
 
                   {{ form | crispy }}
+                  {{ form.active|as_crispy_field }}
+
 
                   
                 </div>
