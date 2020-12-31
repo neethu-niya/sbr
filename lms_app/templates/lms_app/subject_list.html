@@ -64,6 +64,10 @@
                                         <form action="/dashboard/subjects/" method="POST">
                                             {% csrf_token %}
                                             <div class="row">
+                                                <div class="form-group form-group-default">
+                                                    <label for="addPosition">Select Syllabus</label>                                                       
+                                                        {{form.syllabus}}
+                                                </div>
                                                 <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
                                                     <label for="addPosition">Select Standard</label>                                                       

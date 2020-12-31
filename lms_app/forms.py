@@ -41,38 +41,41 @@ class StandardForm(forms.ModelForm):
 
 
 class SubjectForm(forms.ModelForm):
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
     active = forms.BooleanField(required=False)
 
     class Meta:
         model = Subject
-        fields = ['standard', 'name', 'active']
+        fields = ['syllabus', 'standard', 'name', 'active']
 
 
 class ChapterForm(forms.ModelForm):
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
     active = forms.BooleanField(required=False)
 
     class Meta:
         model = Chapter
-        fields = ['subject', 'name', 'active']
+        fields = ['syllabus', 'standard', 'subject', 'name', 'active']
 
 
 
 
 
 class SchemeForm(forms.ModelForm):
-    subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter Scheme name"}))
     active = forms.BooleanField(required=False)
 
     class Meta:
         model = Scheme
-        fields = ['subject', 'syllabus' , 'standard', 'name', 'active']
+        fields = ['syllabus', 'subject', 'standard', 'name', 'active']
 
 class TeacherRegForm(forms.ModelForm):
     name = forms.CharField(max_length=30, required=False, help_text='Optional.')  

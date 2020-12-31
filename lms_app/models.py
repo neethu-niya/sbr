@@ -98,6 +98,7 @@ class Standard(models.Model):
 
 
 class Subject(models.Model):
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
@@ -178,6 +179,7 @@ def update_teacher_user(sender, instance, created, **kwargs):
 # 
 
 class Chapter(models.Model):
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)

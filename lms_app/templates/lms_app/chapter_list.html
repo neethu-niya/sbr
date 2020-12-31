@@ -64,25 +64,18 @@
                                         <form action="/dashboard/chapters/" method="POST">
                                             {% csrf_token %}
                                             <div class="row">
-                                                {% comment %} <div class="col-sm-12">
+                                                <div class="col-sm-12">
                                                 <div class="form-group form-group-default">
-                                                    <label for="addPosition">Select Subject</label>                                                       
-                                                        {{form.subject}}
+                                                    <label for="addPosition">Select Syllabus</label>                                                       
+                                                        {{form.syllabus}}
                                                 </div>
-                                                </div> {% endcomment %}
-
-                                                {% comment %} <div class="form-group"> {% endcomment %}
-                                                    {% comment %} <label for="exampleFormControlSelect2">Example multiple select</label>
-                                                    <select multiple class="form-control" id="exampleFormControlSelect2">
-                                                    {% for sub in form.subject %}
-                                                        <option>{{sub}}</option>
-                                                    {% endfor %}
-                                                    </select> {% endcomment %}
-                                                    {% comment %} {{form.subject}}
-                                                </div> {% endcomment %}
-
-
-                                                
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div id="addName" class="form-group form-group-default">
+                                                        <label>Standard Name</label>
+                                                        {{form.standard}}
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group form-group-default">
@@ -133,7 +126,7 @@
                                             <div class="form-button-action">
                                                 <label class="switch">
                                                 <input type="checkbox" {% if chapter.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{chapter.id}}, 'Chapter')">
-                                                <span class="slider round"></span>
+                                                {% comment %} <span class="slider round"></span> {% endcomment %}
                                                 </label> 
                                             </div>
                                         </td>
@@ -151,8 +144,37 @@
 {% endblock content %}
 
 {% block javascripts %}
+{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here--> {% endcomment %}
+	  <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->
+            {% comment %} <script type="text/javascript"> {% endcomment %}
 
-	<script >
+            {% comment %} <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#checkbox').change(function() {
+                        $.post("/toggle/", {
+                        id: '{{syllabus.id}}', 
+                        active: this.checked, 
+                        csrfmiddlewaretoken: '{{ csrf_token }}' 
+                    });
+                });
+            });  {% endcomment %}
+        <script>
+        {% comment %} const  makeActive = (id, model) => {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'toggle' %}",
+                data: {
+                   id: id, 
+                   model: model,
+                   csrfmiddlewaretoken: '{{ csrf_token }}'  
+                },
+                success: (res) => {
+                   location.reload()
+                },
+            
+            });
+        } {% endcomment %}
+            
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
 			});
@@ -168,7 +190,7 @@
 							var val = $.fn.dataTable.util.escapeRegex(
 								$(this).val()
 								);
-
+                                //active
 							column
 							.search( val ? '^'+val+'$' : '', true, false )
 							.draw();
@@ -191,14 +213,15 @@
 			$('#addRowButton').click(function() {
 				$('#add-row').dataTable().fnAddData([
 					$("#addName").val(),
-					$("#addPosition").val(),
-					$("#addOffice").val(),
+                    
 					action
 					]);
 				$('#addRowModal').modal('hide');
 
 			});
 		});
+
+                  
 	</script>
 
 {% endblock javascripts %}
