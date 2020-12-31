@@ -57,10 +57,11 @@ class ChapterForm(forms.ModelForm):
     subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
     active = forms.BooleanField(required=False)
+    free_tier = forms.BooleanField(required=False)
 
     class Meta:
         model = Chapter
-        fields = ['syllabus', 'standard', 'subject', 'name', 'active']
+        fields = ['syllabus', 'standard', 'subject', 'name', 'free_tier', 'active']
 
 
 
