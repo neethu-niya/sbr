@@ -137,6 +137,9 @@
                                     <tr>
                                         {% comment %} <th>Subject</th> {% endcomment %}
                                         <th>Scheme</th>
+                                        <th>Syllabus</th>
+                                        <th>standard</th>
+                                        <th>Subjects</th>
                                         <th>Active</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
@@ -145,10 +148,10 @@
                                 <tbody>
                                 {% for schemes in schemes %}
                                     <tr>
-                                        {% comment %} <td><a href="{% url 'subject_list' %}?scheme={{scheme.pk}}">{{scheme.subject_wise}}</a></td> {% endcomment %}
-
                                         <td>{{schemes.name}}</td>
-                                        {% comment %} <td>{{schemes.subject}}</td> {% endcomment %}
+                                        <td>{{shemes.syllabus}}</td>
+                                        <td>{{shemes.standard}}</td>
+                                        <td>{{shemes.subject_set}}</td>
                                         <td>{{schemes.active}}</td>
                                         <td>
                                             <div class="form-button-action">
@@ -156,9 +159,6 @@
                                                 <input type="checkbox" {% if schemes.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{schemes.id}}, 'Scheme')">
                                                 <span class="slider round"></span>
                                                 </label> 
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>
