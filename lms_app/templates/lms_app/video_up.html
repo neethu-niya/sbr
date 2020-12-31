@@ -39,93 +39,12 @@
                         <div class="card-title">UPLOAD VIDEO:</div>
                     </div>
         
-        <form method="post" class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
-            {% csrf_token %}                 
-             <div class="container-fluid">
-                <div class="card-body">
-                    <div class="row"> 
-                        <div class="col-md-2 col-lg-4"> 
-                            <div class="form-group col-md-12">
-                                <label for="name">Name</label>
-                                    
-                                {% comment %} <input type= "text" class="form-control" value= "{{form.name.value}}"> {% endcomment %}
-                                <input type="textarea" class="form-control" name="name" id='' placeholder="Enter Your Name">       
-                               
-                            </div>
-                        </div>
 
-                        <div class="col-md-2 col-lg-4"> 
-                            <div class="form-group col-md-12">
-                                <label for="name">Subtitle</label>
-                                <input type="textarea" class="form-control" name="subtitle" id='' placeholder="Enter Your Name">       
-                               
-                            </div>
-                        </div>  
-                    </div>
-                        <div class="form-group">
-                            <div class="col-md-2 col-lg-6"> 
-                                <label for="Description">Description</label>
-                                <textarea class="form-control" name="description"  placeholder="Description "></textarea>
-                                
-                            </div> 
-                        </div> 
-
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Syllabus</label>                                                       
-                                       {{ form.syllabus|as_crispy_field }}
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Standard</label>                                                       
-                                       {{ form.standard|as_crispy_field }}
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Subject</label>                                                       
-                                       {{ form.subject|as_crispy_field }}
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-4">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select Chapter</label>                                                       
-                                       {{ form.chapter|as_crispy_field }}
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload Video</label>
-                                       {{ form.videofile|as_crispy_field }}
-                        </div> 
-                         <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload Image</label>
-                                       {{ form.image|as_crispy_field }}
-                        </div> 
-                         <div class="form-group">
-                                <label for="exampleFormControlFile1">Upload thumbnail</label>
-                                       {{ form.thumbnail_image|as_crispy_field }}
-                                
-                        </div> 
-
-                                       <div>{{ form.active|as_crispy_field }}</div>
-     
-
-                        <div class="form-group">
-                            <button class="btn btn-outline-info" type="submit">submit</button>
-                            <button class="btn btn-danger">Cancel</button>
-                       
-                        </div>
-        </form>
+  <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
                 </div>
             </div>
         </div>
