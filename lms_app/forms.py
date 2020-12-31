@@ -183,10 +183,10 @@ class VideoUpload(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True)
     subtitle = forms.CharField(max_length=255, required=False)
     description =forms.Textarea()
-    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    # chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     
     # chapter =forms.ModelChoiceField(Chapter, on_delete=models.CASCADE)
     # upload_to='staticfiles/media_root/videos/'
@@ -271,7 +271,7 @@ class VideoUpload(forms.ModelForm):
 class DocumentUpload(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
-    description = forms.Textarea()
+    description = forms.Textarea() 
     syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
@@ -288,7 +288,7 @@ class DocumentUpload(forms.ModelForm):
     active = forms.BooleanField(required=False)
     class Meta:
         model = Documents
-        fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',  'image', 
+        fields = ('name','subtitle', 'description','syllabus', 'standard','subject', 'chapter',  'image', 
                   'thumbnail_image', 'pdf','url_field', 'active')
 
 class StudyUpload(forms.ModelForm):
@@ -324,10 +324,10 @@ class Question_form(forms.ModelForm):
     name = forms.CharField(max_length=255, required=False)
     subtitle = forms.CharField(max_length=255, required=False)
     description = forms.Textarea()
-    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     # material_type = forms.ChoiceField(choices = material_choices)
 

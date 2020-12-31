@@ -208,10 +208,10 @@ class Video(models.Model):
     description = models.TextField()
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
 
 
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
     videofile = models.FileField(
         upload_to='staticfiles/media_root/videos/', null=True)
     image = models.ImageField(
@@ -378,7 +378,7 @@ class Documents(models.Model):
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
     # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
     url_field = models.URLField(max_length=200, null=True, blank=True)
     image = models.ImageField(
@@ -402,7 +402,11 @@ class Study_Material(models.Model):
     name = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255 )
     description = models.TextField(null=True, blank=True)
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
+    # chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
     url_field = models.URLField(max_length=200, null=True, blank=True)
     image = models.ImageField(
@@ -426,7 +430,11 @@ class Question_paper(models.Model):
     name = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255 )
     description = models.TextField(null=True, blank=True)
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
+    # chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     # material_type = models.CharField(max_length=50, choices=material_choices,  null=True,  blank=True)
     url_field = models.URLField(max_length=200, null=True, blank=True)
     image = models.ImageField(
@@ -448,7 +456,11 @@ class Question_paper(models.Model):
 
 
 class File(models.Model):
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
+    # chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(
         upload_to='staticfiles/image/', null=True, blank=True)
