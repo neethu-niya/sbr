@@ -80,7 +80,7 @@ class Syllabus(models.Model):
 
 
 class Standard(models.Model):
-    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255)
     active = models.BooleanField(default=False) 
     created = models.DateTimeField(auto_now_add=True)
@@ -98,8 +98,8 @@ class Standard(models.Model):
 
 
 class Subject(models.Model):
-    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
-    standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
@@ -179,9 +179,9 @@ def update_teacher_user(sender, instance, created, **kwargs):
 # 
 
 class Chapter(models.Model):
-    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE)
-    standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name', null=True)
     active = models.BooleanField(default=False)
