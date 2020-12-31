@@ -124,7 +124,7 @@
                                         {% comment %} <th>Subject</th> {% endcomment %}
                                         <th>Chapter</th>
                                         <th>Active</th>
-                                        <th style="width: 10%">Action</th>
+                                        <th>Free Tier</th>
                                     </tr>
                                 </thead>
 
@@ -132,13 +132,18 @@
                                 {% for chapter in chapters %}
                                     <tr>
                                         <td><a href="{% url 'video' %}?chapter={{chapter.pk}}">{{chapter.name}}</a></td>
-
-                                        {% comment %} <td>{{chapter.name}}</td> {% endcomment %}
-                                        <td>{{chapter.active}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
                                                 <input type="checkbox" {% if chapter.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeActive({{chapter.id}}, 'Chapter')">
+                                                <span class="slider round"></span>
+                                                </label> 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <label class="switch">
+                                                <input type="checkbox" {% if chapter.free_tier %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75" onclick="makeIsFreeTier({{chapter.id}}, 'Chapter')">
                                                 <span class="slider round"></span>
                                                 </label> 
                                             </div>

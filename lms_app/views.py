@@ -314,6 +314,16 @@ def toggle_ispaid(request):
 
     return JsonResponse({"success": ""}, status=400)
 
+def toggle_freetier(request):
+    from django.apps import apps
+    Model = apps.get_model("lms_app",request.POST['model'])
+    w = Model.objects.get(id=request.POST['id'])
+    w.free_tier = not w.free_tier
+    w.save()
+    
+
+    return JsonResponse({"success": ""}, status=400)
+
 def commenting(request, pk):
     comment = request.POST.get('text', None)
     # if comment is None:

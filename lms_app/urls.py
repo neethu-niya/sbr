@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import syllabus_list, standard_list, subject_list, chapter_list, TeacherList, StudentList, registepage, Notification_list, Upload_material , Question_Paper , StudentView, toggle, scheme_list, toggle_ispaid
+from .views import (
+    syllabus_list, standard_list, subject_list, chapter_list, TeacherList,
+    StudentList, registepage, Notification_list, Upload_material , Question_Paper ,
+    StudentView, toggle, scheme_list, toggle_ispaid, toggle_freetier
+)
 
 
 # app_name = "lms-app"
@@ -37,6 +41,8 @@ urlpatterns = [
 
     path('toggle/', toggle, name="toggle"),
     path('toggle_ispaid/', toggle_ispaid, name="toggle_ispaid"),
+    path('toggle_freetier/', toggle_freetier, name="toggle_freetier"),
+
     
     path('ajax/load-syllabus/', views.load_syllabus, name='ajax_load_cities'),
     path('ajax/load-subject/', views.load_scheme, name='ajax_load_sub'),
