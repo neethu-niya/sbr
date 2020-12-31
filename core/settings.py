@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'storages',
     'fcm_django',
     'corsheaders',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -185,6 +186,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #############################################################
 # SRC: https://devcenter.heroku.com/articles/django-assets
