@@ -175,8 +175,37 @@
 {% endblock content %}
 
 {% block javascripts %}
+{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here--> {% endcomment %}
+	  <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->
+            {% comment %} <script type="text/javascript"> {% endcomment %}
 
-	<script >
+            {% comment %} <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#checkbox').change(function() {
+                        $.post("/toggle/", {
+                        id: '{{syllabus.id}}', 
+                        active: this.checked, 
+                        csrfmiddlewaretoken: '{{ csrf_token }}' 
+                    });
+                });
+            });  {% endcomment %}
+        <script>
+        {% comment %} const  makeActive = (id, model) => {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'toggle' %}",
+                data: {
+                   id: id, 
+                   model: model,
+                   csrfmiddlewaretoken: '{{ csrf_token }}'  
+                },
+                success: (res) => {
+                   location.reload()
+                },
+            
+            });
+        } {% endcomment %}
+            
 		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
 			});
@@ -192,7 +221,7 @@
 							var val = $.fn.dataTable.util.escapeRegex(
 								$(this).val()
 								);
-
+                                //active
 							column
 							.search( val ? '^'+val+'$' : '', true, false )
 							.draw();
@@ -215,14 +244,15 @@
 			$('#addRowButton').click(function() {
 				$('#add-row').dataTable().fnAddData([
 					$("#addName").val(),
-					$("#addPosition").val(),
-					$("#addOffice").val(),
+                    
 					action
 					]);
 				$('#addRowModal').modal('hide');
 
 			});
 		});
+
+                  
 	</script>
 
 {% endblock javascripts %}
