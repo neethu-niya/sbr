@@ -151,7 +151,9 @@
                                         <td>{{scheme.name}}</td>
                                         <td>{{scheme.syllabus}}</td>
                                         <td>{{scheme.standard}}</td>
-                                        <td>{{scheme.subject_set.all}}</td>
+                                        {% for subject in scheme.subject %}
+                                        <td>{{subject}}</td>
+                                        {% endfor %}
                                         <td>{{scheme.active}}</td>
                                         <td>
                                             <div class="form-button-action">
