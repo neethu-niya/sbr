@@ -68,15 +68,46 @@ class ChapterForm(forms.ModelForm):
 
 
 class SchemeForm(forms.ModelForm):
-    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    # subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter Scheme name"}))
     active = forms.BooleanField(required=False)
 
     class Meta:
         model = Scheme
-        fields = ['syllabus', 'subject', 'standard', 'name', 'active']
+        fields = ['syllabus', 'standard', 'subject', 'name', 'active']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['standard'].queryset = Standard.objects.none()
+
+
+        if 'syllabus' in self.data:
+            try:    
+                syllabus_id = int(self.data.get('syllabus'))
+                self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.none()
+
+
+        if 'standard' in self.data:
+            try:    
+                standard_id = int(self.data.get('standard'))
+                self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
+
+    
 
 class TeacherRegForm(forms.ModelForm):
     name = forms.CharField(max_length=30, required=False, help_text='Optional.')  
