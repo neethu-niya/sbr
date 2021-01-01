@@ -70,7 +70,7 @@ class ChapterForm(forms.ModelForm):
 class SchemeForm(forms.ModelForm):
     class Meta:
         model = Scheme
-        fields = ['syllabus', 'standard', 'subject', 'name']
+        fields = ['name', 'syllabus', 'standard', 'subject']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
