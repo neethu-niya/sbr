@@ -31,8 +31,8 @@
                 </li>
             </ul>
         </div>
-    </div>
-        <div class="row">
+
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -62,15 +62,73 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                   <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
-                                        <div class="card-body">
-                                        {% csrf_token %}
-                                        {{ form|crispy }}
-                                        <div class="form-group">
-                                            <button class="btn btn-outline-info" type="submit">submit</button>
-                                            <button class="btn btn-danger">Cancel</button>
-                                        </div>
-                                    </form>
+                                        <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
+                                        {% comment %} <form action="/dashboard/scheme/" method="POST"> {% endcomment %}
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                {% comment %} <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label for="addPosition">Select Subject</label>                                                       
+                                                        {{form.subject}}
+                                                </div>
+                                                </div> {% endcomment %}
+
+                                                {% comment %} <div class="form-group"> {% endcomment %}
+                                                    {% comment %} <label for="exampleFormControlSelect2">Example multiple select</label>
+                                                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                                                    {% for sub in form.subject %}
+                                                        <option>{{sub}}</option>
+                                                    {% endfor %}
+                                                    </select> {% endcomment %}
+                                                    {% comment %} {{form.subject}}
+                                                </div> {% endcomment %}
+
+
+                                                
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Scheme Name</label>
+                                                        {{form.name}}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group form-group-default" >
+                                                    <label for="addPosition">Select Subject :</label>                                                       
+                                                        {{form.subject}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group form-group-default">
+                                                    <label for="addPosition">Select syllabus :</label>                                                       
+                                                        {{form.syllabus}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group form-group-default">
+                                                    <label for="addPosition">Select standard :</label>                                                       
+                                                        {{form.standard}}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group form-check">
+                                                    <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value={{form.active}}>
+                                        
+                                                    <span class="form-check-sign">Active</span>
+                                                    </label>
+                                                </div>
+                                                
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer no-bd">
+                                        <button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
+                                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </form>
                             </div>
                         </div>
 
