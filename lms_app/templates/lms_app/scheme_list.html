@@ -62,22 +62,15 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
-                                            <div class="card-body">
-                                            {% csrf_token %}
-                                            {{ form|crispy }}
-                                            <div class="form-group">
-                                                <button class="btn btn-outline-info" type="submit">submit</button>
-                                                <button class="btn btn-danger">Cancel</button>
-                                            </div>
-                                        </form> 
-                                    </div>
-                                    <div class="modal-footer no-bd">
-                                        <button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
-                                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                                </form>
+                                   <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
+                                        <div class="card-body">
+                                        {% csrf_token %}
+                                        {{ form|crispy }}
+                                        <div class="form-group">
+                                            <button class="btn btn-outline-info" type="submit">submit</button>
+                                            <button class="btn btn-danger">Cancel</button>
+                                        </div>
+                                    </form>
                             </div>
                         </div>
 

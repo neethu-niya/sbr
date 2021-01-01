@@ -68,15 +68,9 @@ class ChapterForm(forms.ModelForm):
 
 
 class SchemeForm(forms.ModelForm):
-    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter Scheme name"}))
-    active = forms.BooleanField(required=False)
-
     class Meta:
         model = Scheme
-        fields = ['syllabus', 'standard', 'subject', 'name', 'active']
+        fields = ['syllabus', 'standard', 'subject', 'name']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
