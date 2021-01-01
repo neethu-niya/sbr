@@ -250,7 +250,7 @@ class Scheme(models.Model):
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
     subject = models.ManyToManyField(Subject)
     slug = AutoSlugField(populate_from='name', null=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
