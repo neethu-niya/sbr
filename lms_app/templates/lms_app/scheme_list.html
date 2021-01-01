@@ -66,30 +66,7 @@
                                         {% comment %} <form action="/dashboard/scheme/" method="POST"> {% endcomment %}
                                             {% csrf_token %}
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Scheme Name</label>
-                                                        {{ form.name|as_crispy_field }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Scheme Syllabus</label>
-                                                        {{ form.syllabus|as_crispy_field }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Scheme Standard</label>
-                                                        {{ form.standard|as_crispy_field }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Scheme Subject</label>
-                                                        {{ form.subject|as_crispy_field }}
-                                                    </div>
-                                                </div>
+                                               {{ form|crispy }}
                                                 
                                             </div>
                                         
