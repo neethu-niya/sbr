@@ -6,6 +6,7 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+
     <div class="page-inner">
         <div class="page-header">
             <h4 class="page-title">SBR Academy</h4>
@@ -63,7 +64,27 @@
                                         <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
                                         {% comment %} <form action="/dashboard/scheme/" method="POST"> {% endcomment %}
                                             {% csrf_token %}
-                                            <div class="card">
+                                            <div class="row">
+                                                {% comment %} <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label for="addPosition">Select Subject</label>                                                       
+                                                        {{form.subject}}
+                                                </div>
+                                                </div> {% endcomment %}
+
+                                                {% comment %} <div class="form-group"> {% endcomment %}
+                                                    {% comment %} <label for="exampleFormControlSelect2">Example multiple select</label>
+                                                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                                                    {% for sub in form.subject %}
+                                                        <option>{{sub}}</option>
+                                                    {% endfor %}
+                                                    </select> {% endcomment %}
+                                                    {% comment %} {{form.subject}}
+                                                </div> {% endcomment %}
+
+
+                                                
+
                                                 <div class="col-md-6">
                                                     <div class="form-group form-group-default">
                                                         <label>Scheme Name</label>
@@ -88,7 +109,7 @@
                                                     <label for="addPosition">Select standard :</label>                                                       
                                                         {{form.standard}}
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                             </div>
                                         
                                     </div>
