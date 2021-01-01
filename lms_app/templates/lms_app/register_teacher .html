@@ -79,7 +79,7 @@
                         <div class="col-md-2 col-lg-4">
                             <div class="form-group col-md-12"> 
                              <label for="Phone">Phone Number</label>
-                             <input type="phone2numeric" class="form-control" name="contact_no_1" id= "" placeholder="Enter Phone Number">
+                             <input type="phone2numeric" class="form-control" name="contact_no_1" id= "phon" placeholder="Enter Phone Number">
                                    
                             </div>
                         </div>
@@ -87,8 +87,10 @@
                         <div class="form-group col-md-4">
                             <label for="Phone">Whatsapp Number</label>
                                     
-                            <input type="phone2numeric" class="form-control" name="whatsapp_no" id="" placeholder="Enter Whatsapp Number">
-                                   
+                            <input type="phone2numeric" class="form-control" name="whatsapp_no" id="what" placeholder="Enter Whatsapp Number">
+                            <input type="checkbox" name="check1" onchange="copyTextValue(this);">
+
+                                   <em>Same</em>
                         </div>
                         
                     </div>
@@ -208,7 +210,20 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+
+function copyTextValue(bf) {
+  var text1 = bf.checked ? document.getElementById("phon").value : '';
+  document.getElementById("what").value = text1;
+  
+}
+
+</script>
+
+{% endblock javascripts %}
 
 {% comment %} <form method="post" class="post-form" enctype="multipart/form-data">
     {% csrf_token %}
