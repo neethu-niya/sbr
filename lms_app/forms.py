@@ -68,9 +68,11 @@ class ChapterForm(forms.ModelForm):
 
 
 class SchemeForm(forms.ModelForm):
+    subject= forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
+    
     class Meta:
         model = Scheme
-        fields = ['name', 'syllabus', 'standard', 'subject']
+        fields = [ 'name', 'syllabus', 'standard', 'subject']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
