@@ -63,13 +63,19 @@
                                     </div>
                                     <div class="modal-body">
                                         <form method="post"class="post-form" enctype="multipart/form-data" id="videoForm" data-std-url="{% url 'ajax_load_std' %}" data-sub-url="{% url 'ajax_load_subj' %}" data-chap-url="{% url 'ajax_load_chap' %}">
-                                         <div class="card-body">
+                                        {% comment %} <form action="/dashboard/scheme/" method="POST"> {% endcomment %}
                                             {% csrf_token %}
-                                            {{ form|crispy }}
-                                            <div class="form-group">
-                                                <button class="btn btn-outline-info" type="submit">submit</button>
-                                                <button class="btn btn-danger">Cancel</button>
+                                            <div class="row">
+                                               {{ form|crispy }}
+                                                
                                             </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer no-bd">
+                                        <button type="submit" id="addRowButton" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
                                 </form>
                             </div>
                         </div>
