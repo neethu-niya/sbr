@@ -377,7 +377,7 @@ class Question_form(forms.ModelForm):
     class Meta:
         model = Question_paper
         fields = ('name','subtitle', 'description', 'syllabus', 'standard','subject', 'chapter', 'image', 
-                  'thumbnail_image', 'pdf', 'active')
+                  'thumbnail_image', 'pdf')
     
 
     def __init__(self, *args, **kwargs):
