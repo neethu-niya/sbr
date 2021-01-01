@@ -109,7 +109,16 @@
                                                     <label for="addPosition">Select standard :</label>                                                       
                                                         {{form.standard}}
                                                     </div>
-                                                </div>                                                
+                                                </div>
+
+                                                <div class="form-group form-check">
+                                                    <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value={{form.active}}>
+                                        
+                                                    <span class="form-check-sign">Active</span>
+                                                    </label>
+                                                </div>
+                                                
                                             </div>
                                         
                                     </div>
@@ -167,6 +176,7 @@
 {% endblock content %}
 
 {% block javascripts %}
+    
 {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here--> {% endcomment %}
 	  <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->
             {% comment %} <script type="text/javascript"> {% endcomment %}
@@ -243,22 +253,23 @@
 
 			});
 		});
-    $("#id_syllabus").change(function () {
-      var url = $("#videoForm").attr("data-std-url");  // get the url of the `load_cities` view
-      var syllabusId = $(this).val();  // get the selected country ID from the HTML input
-        
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'syllabus_id': syllabusId       // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          console.log(data);
-          $("#id_standard").html(data);  // replace the contents of the city input with the data that came from the server
 
-            /*let html_data = '<option value="">---------</option>';
-                data.forEach(function (standard) {
-                    html_data += `<option value="${standard.id}">${standard.name}</option>`
+        $("#id_syllabus").change(function () {
+            var url = $("#videoForm").attr("data-std-url");  // get the url of the `load_cities` view
+            var syllabusId = $(this).val();  // get the selected country ID from the HTML input
+
+            $.ajax({                       // initialize an AJAX request
+              url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+              data: {
+                'syllabus_id': syllabusId       // add the country id to the GET parameters
+              },
+              success: function (data) {   // `data` is the return of the `load_cities` view function
+                console.log(data);
+                $("#id_standard").html(data);  // replace the contents of the city input with the data that came from the server
+
+                  /*let html_data = '<option value="">---------</option>';
+                      data.forEach(function (standard) {
+                          html_data += `<option value="${standard.id}">${standard.name}</option>`
                 });
                 console.log(html_data);
                 $("#id_standard").html(html_data);*/
@@ -344,7 +355,7 @@
 
       });
 
-    }); 
+    });
                   
 	</script>
 
