@@ -95,8 +95,10 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Subtitle</th>
-                                        <th>description</th>
+                                        <th>Syllabus</th>
+                                        <th>Standard</th>
+                                        <th>Subject</th>
+                                        <th>Chapter</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -105,8 +107,10 @@
                                     {% for s in study %}
                                         <tr>
                                             <td>{{s.name}}</td>
-                                            <td>{{s.subtitle}}</td>
-                                            <td>{{s.description}}</td>
+                                            <td>{{s.syllabus}}</td>
+                                            <td>{{s.standard}}</td>
+                                            <td>{{s.subject}}</td>
+                                            <td>{{s.chapter}}</td>
                                             <td>
                                                 <div class="form-button-action">
                                                 <label class="switch">
@@ -115,12 +119,6 @@
                                                 <span class="slider round"></span>
                                                 
                                                 </label>  
-                                                {% comment %} <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                                    <div class="handle"></div>
-                                                </button> {% endcomment %}
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
                                             </div>
                                                 {% comment %} <div class="form-button-action">
                                                     <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
