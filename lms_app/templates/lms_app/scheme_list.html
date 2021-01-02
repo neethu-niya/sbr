@@ -177,82 +177,10 @@
 
 {% block javascripts %}
     
-{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here--> {% endcomment %}
 	  <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->
-            {% comment %} <script type="text/javascript"> {% endcomment %}
 
-            {% comment %} <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#checkbox').change(function() {
-                        $.post("/toggle/", {
-                        id: '{{syllabus.id}}', 
-                        active: this.checked, 
-                        csrfmiddlewaretoken: '{{ csrf_token }}' 
-                    });
-                });
-            });  {% endcomment %}
         <script>
-        {% comment %} const  makeActive = (id, model) => {
-            $.ajax({
-                type: "POST",
-                url: "{% url 'toggle' %}",
-                data: {
-                   id: id, 
-                   model: model,
-                   csrfmiddlewaretoken: '{{ csrf_token }}'  
-                },
-                success: (res) => {
-                   location.reload()
-                },
-            
-            });
-        } {% endcomment %}
-            
-		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
-			});
-
-			$('#multi-filter-select').DataTable( {
-				"pageLength": 5,
-				initComplete: function () {
-					this.api().columns().every( function () {
-						var column = this;
-						var select = $('<select class="form-control"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-								);
-                                //active
-							column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-						} );
-
-						column.data().unique().sort().each( function ( d, j ) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
-					} );
-				}
-			});
-
-			// Add Row
-			$('#add-row').DataTable({
-				"pageLength": 5,
-			});
-
-			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-
-			$('#addRowButton').click(function() {
-				$('#add-row').dataTable().fnAddData([
-					$("#addName").val(),
-                    
-					action
-					]);
-				$('#addRowModal').modal('hide');
-
-			});
-		});
+ 
 
         $("#id_syllabus").change(function () {
             var url = $("#videoForm").attr("data-std-url");  // get the url of the `load_cities` view
@@ -332,31 +260,7 @@
 
       });
 
-    }); 
-
-
-    $("#id_country").change(function () {
-      var url = $("#personForm").attr("data-cit-url");  // get the url of the `load_cities` view
-      var countryId = $(this).val();  // get the selected country ID from the HTML input
-        
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'country_id': countryId       // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          console.log(data);
-          $("#id_state").html(data);  // replace the contents of the city input with the data that came from the server
-
-           
-        
-
-        }
-
-      });
-
-    });
-                  
+    });         
 	</script>
 
 {% endblock javascripts %}

@@ -161,17 +161,17 @@ def load_standard(request):
     
     return render(request, 'lms_app/city_dropdown_list_options.html', {'stand': stand})
 
-def load_chapter(request):
-    subject_id = request.GET.get('subject_id')
-    cha = Chapter.objects.filter(subject_id=subject_id).order_by('name')
-    
-    return render(request, 'lms_app/chapter_dropdown.html', {'cha': cha})
-
 def load_subject(request):
     standard_id = request.GET.get('standard_id')
     subj = Subject.objects.filter(standard_id=standard_id).order_by('name')
     
     return render(request, 'lms_app/subject_dropdown.html', {'subj': subj})
+
+def load_chapter(request):
+    subject_id = request.GET.get('subject_id')
+    cha = Chapter.objects.filter(subject_id=subject_id).order_by('name')
+    
+    return render(request, 'lms_app/chapter_dropdown.html', {'cha': cha})
 
 
 
