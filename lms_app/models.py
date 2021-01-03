@@ -211,16 +211,13 @@ class Video(models.Model):
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
     standard = ChainedForeignKey(
         Standard, chained_field="syllabus", chained_model_field="syllabus", show_all=False,
-        auto_choose=True, sort=True,on_delete=models.CASCADE,
-        null=True, blank=True)
+        auto_choose=True, sort=True)
     subject = ChainedForeignKey(
         Subject, chained_field="standard",chained_model_field="standard", show_all=False,
-        auto_choose=True, sort=True, on_delete=models.CASCADE,
-        null=True, blank=True)
+        auto_choose=True, sort=True)
     chapter = ChainedForeignKey(
         Chapter, chained_field="subject",chained_model_field="subject", show_all=False,
-        auto_choose=True, sort=True, on_delete=models.CASCADE,
-        null=True, blank=True)
+        auto_choose=True, sort=True)
     videofile = models.FileField(
         upload_to='staticfiles/media_root/videos/', null=True)
     image = models.ImageField(
