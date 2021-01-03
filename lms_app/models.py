@@ -12,7 +12,7 @@ from rest_framework.authtoken.models import Token
 from cities_light.models import City, Country, Region
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
-
+from smart_selects.db_fields import ChainedForeignKey
 
 # from lms_app.forms import RegisterForm
 User = get_user_model()
@@ -209,11 +209,18 @@ class Video(models.Model):
     # description = models.TextField()
     description = models.TextField()
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
-    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
-
-
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ChainedForeignKey(
+        Standard, chained_field="syllabus", chained_model_field="syllabus", show_all=False,
+        auto_choose=True, sort=True,on_delete=models.CASCADE,
+        null=True, blank=True)
+    subject = models.ChainedForeignKey(
+        Subject, chained_field="standard",chained_model_field="standard", show_all=False,
+        auto_choose=True, sort=True, on_delete=models.CASCADE,
+        null=True, blank=True)
+    chapter = models.ForeignKey(
+        Chapter, chained_field="subject",chained_model_field="subject", show_all=False,
+        auto_choose=True, sort=True, on_delete=models.CASCADE,
+        null=True, blank=True)
     videofile = models.FileField(
         upload_to='staticfiles/media_root/videos/', null=True)
     image = models.ImageField(
