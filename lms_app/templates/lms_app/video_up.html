@@ -63,7 +63,7 @@
       var syllabusId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        url: '{% url 'ajax_load_std' %}',                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
         data: {
           'syllabus_id': syllabusId       // add the country id to the GET parameters
         },
@@ -89,7 +89,7 @@
       var standardId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        url: '{% url 'ajax_load_subj' %}',                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
         data: {
           'standard_id': standardId       // add the country id to the GET parameters
         },
@@ -116,7 +116,7 @@
       var subjectId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        url: '{% url 'ajax_load_chap' %}',                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
         data: {
           'subject_id': subjectId       // add the country id to the GET parameters
         },
