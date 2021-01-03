@@ -183,6 +183,14 @@ class StudentRegister(forms.ModelForm):
 
 
 class VideoUpload(forms.ModelForm):
+    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), empty_label='None',
+        required=False)
+    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), empty_label='None',
+        required=False)
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), empty_label='None',
+        required=False)
+    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), empty_label='None',
+        required=False)
 
     class Meta:
         model = Video
