@@ -19,6 +19,8 @@ urlpatterns = [
     path('subjects/',subject_list, name='subject_list'),
     path('chapters/',chapter_list, name='chapter_list'),
     path('scheme/',scheme_list, name='scheme_list'),
+    path('scheme_upload/',views.scheme_upload, name='scheme_upload'),
+
     
     path('register_teacher/',views.registepage, name='teacher'),
     path('register_student/',views.studentpage, name='student'),

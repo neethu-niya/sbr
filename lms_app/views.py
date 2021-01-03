@@ -101,6 +101,17 @@ def scheme_list(request):
     return render(request, 'lms_app/scheme_list.html', context)
 
 
+def scheme_upload(request):
+    form = SchemeForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.cleaned_data
+        print(form.cleaned_data)
+        form.save()
+        return redirect('scheme_list')
+    context = {'form': form}
+    return render(request, 'lms_app/scheme_upload.html', context)
+
+
 
 
 class TeacherList(ListView):
