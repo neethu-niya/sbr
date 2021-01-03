@@ -73,6 +73,7 @@ class SchemeForm(forms.ModelForm):
     class Meta:
         model = Scheme
         fields = ['syllabus', 'standard', 'subject', 'name', 'active']
+        
 
    
 
@@ -184,9 +185,17 @@ class StudentRegister(forms.ModelForm):
 class VideoUpload(forms.ModelForm):
 
     class Meta:
-       model = Video
-       fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
+        model = Video
+        
+        widgets = {
+            'syllabus': ModelSelect2Widget,
+            'standard': ModelSelect2Widget,
+            'subject': ModelSelect2Widget,
+
+        }
+        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
                  'thumbnail_image', 'videofile')
+    
 
  
     
