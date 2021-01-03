@@ -373,7 +373,7 @@ def chapter_video_upload(request, pk):
 			video.standard = chapter.standard
 			video.subject = chapter.subject
 			video.chapter = chapter
-			unit_pdt.save()
+			video.save()
 			return redirect('lms_app/videos_list.html')
 	else:
 		form = ChapterVideoUpload()
