@@ -191,7 +191,6 @@ class VideoUpload(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['standard'].queryset = Standard.objects.none()
 
 
         if 'syllabus' in self.data:
@@ -204,9 +203,6 @@ class VideoUpload(forms.ModelForm):
             self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
 
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['subject'].queryset = Subject.objects.none()
 
 
         if 'standard' in self.data:
@@ -217,10 +213,6 @@ class VideoUpload(forms.ModelForm):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
             self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['chapter'].queryset = Chapter.objects.none()
 
 
         if 'subject' in self.data:
