@@ -41,7 +41,7 @@
   <form method="post"class="post-form" enctype="multipart/form-data">
     <div class="card-body">
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <div class="form-group">
         <button class="btn btn-outline-info" type="submit">Submit</button>
         <button class="btn btn-danger">Cancel</button>
