@@ -226,9 +226,13 @@ class VideoUpload(forms.ModelForm):
         self.fields['standard'].queryset = Standard.objects.none()
 
         if 'syllabus' in self.data:
-            syllabus_id = self.data.get('syllabus')
-            self.fields['standard'].queryset = Standard.objects.all().filter(id=syllabus_id).order_by('name')
-
+            try:    
+                syllabus_id = int(self.data.get('syllabus'))
+                self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
 
 
     def __init__(self, *args, **kwargs):
@@ -237,9 +241,13 @@ class VideoUpload(forms.ModelForm):
 
 
         if 'standard' in self.data:
-            standard_id = self.data.get('standard')
-            self.fields['subject'].queryset = Subject.objects.all().filter(id=standard_id).order_by('name')
-
+            try:    
+                standard_id = int(self.data.get('standard'))
+                self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -247,9 +255,13 @@ class VideoUpload(forms.ModelForm):
 
 
         if 'subject' in self.data:
-            subject_id = self.data.get('subject'))
-            self.fields['chapter'].queryset = Chapter.objects.all().filter(id=subject_id).order_by('name')
-
+            try:    
+                subject_id = int(self.data.get('subject'))
+                self.fields['chapter'].queryset = Chapter.objects.filter(id=subject_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
 
 
 
