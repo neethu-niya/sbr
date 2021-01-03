@@ -189,8 +189,6 @@ USE_TZ = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-JQUERY_URL = True
-
 #############################################################
 # SRC: https://devcenter.heroku.com/articles/django-assets
 

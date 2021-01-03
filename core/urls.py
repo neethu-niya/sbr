@@ -17,7 +17,6 @@ urlpatterns = [
     path("", include("authentication.urls")),  # add this
     path("", include("app.urls")),  # add this
     path("dashboard/", include("lms_app.urls")),
-    path('chaining/', include('smart_selects.urls')),
     # path("search/", include("lms_app.urls")),
 
 
