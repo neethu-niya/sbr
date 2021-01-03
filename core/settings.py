@@ -190,17 +190,23 @@ USE_TZ = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
 CACHES = {
-    # … default cache config and others
-    "select2": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "/var/run/redis/redis.sock",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "default": {
+                "BACKEND": "django_redis.cache.RedisCache",
+                "LOCATION": "/var/run/redis/redis.sock",
+                "OPTIONS": {
+                    "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                }
+            },
+            'select2': {
+                "BACKEND": "django_redis.cache.RedisCache",
+                "LOCATION": "/var/run/redis/redis.sock",
+                "OPTIONS": {
+                    "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                }
+            }
         }
-    }
-}
+
 
 # Tell select2 which cache configuration to use:
 SELECT2_CACHE_BACKEND = "select2"
