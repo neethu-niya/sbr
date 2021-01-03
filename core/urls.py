@@ -17,6 +17,7 @@ urlpatterns = [
     path("", include("authentication.urls")),  # add this
     path("", include("app.urls")),  # add this
     path("dashboard/", include("lms_app.urls")),
+    path("select2/", include("django_select2.urls")),
     # path("search/", include("lms_app.urls")),
 
 

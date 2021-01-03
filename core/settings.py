@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'fcm_django',
     'corsheaders',
     'crispy_forms',
+    'django_select2',
 ]
 
 MIDDLEWARE = [
@@ -188,6 +189,21 @@ USE_L10N = True
 USE_TZ = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+CACHES = {
+    # … default cache config and others
+    "select2": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# Tell select2 which cache configuration to use:
+SELECT2_CACHE_BACKEND = "select2"
 
 #############################################################
 # SRC: https://devcenter.heroku.com/articles/django-assets
