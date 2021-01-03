@@ -3,6 +3,7 @@ from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student, Sche
 from django.contrib.auth import get_user_model
 from django_countries.fields import CountryField
 from cities_light.models import City, Country, Region
+from django_select2.forms import ModelSelect2Widget     
 
 material_choices = [
     ('0', 'Study Material'),
@@ -215,53 +216,45 @@ class StudentRegister(forms.ModelForm):
 
 
 class VideoUpload(forms.ModelForm):
+    syllabus = forms.ModelChoiceField(
+        queryset=Syllabus.objects.all(),
+        label=u"Syllabus",
+        widget=ModelSelect2Widget(
+            model=Syllabus,
+            
+        )
+    )
+    standard = forms.ModelChoiceField(
+        queryset=Standard.objects.all(),
+        label=u"Standard",
+        widget=ModelSelect2Widget(
+            model=Standard,
+        )
+    )
+    subject = forms.ModelChoiceField(
+        queryset=Subject.objects.all(),
+        label=u"Subject",
+        widget=ModelSelect2Widget(
+            model=Subject,
+        )
+    )
+    chapter = forms.ModelChoiceField(
+        queryset=Chapter.objects.all(),
+        label=u"Chapter",
+        widget=ModelSelect2Widget(
+            model=Chapter,
+        )
+    )
+
+
+
+
     class Meta:
        model = Video
        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
                  'thumbnail_image', 'videofile')
 
  
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['standard'].queryset = Standard.objects.none()
-
-        if 'syllabus' in self.data:
-            try:    
-                syllabus_id = int(self.data.get('syllabus'))
-                self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk:
-            self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
-
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['subject'].queryset = Subject.objects.none()
-
-
-        if 'standard' in self.data:
-            try:    
-                standard_id = int(self.data.get('standard'))
-                self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk:
-            self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['chapter'].queryset = Chapter.objects.none()
-
-
-        if 'subject' in self.data:
-            try:    
-                subject_id = int(self.data.get('subject'))
-                self.fields['chapter'].queryset = Chapter.objects.filter(id=subject_id).order_by('name')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk:
-            self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
     
 
 
