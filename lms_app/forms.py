@@ -262,7 +262,7 @@ class VideoUpload(forms.ModelForm):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
             self.fields['chapter'].queryset = self.instance.subject.chapter_set.order_by('name')
-
+    
 
 
 
