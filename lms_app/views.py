@@ -370,9 +370,9 @@ def chapter_video_upload(request, pk):
 		if form.is_valid():
 			video = form.save(commit=False)
 			video.syllabus = chapter.syllabus
-            video.standard = chapter.standard
-            video.subject = chapter.subject
-            video.chapter = chapter
+			video.standard = chapter.standard
+			video.subject = chapter.subject
+			video.chapter = chapter
 			unit_pdt.save()
 			return redirect('lms_app/videos_list.html')
 	else:
