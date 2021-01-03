@@ -180,7 +180,7 @@ def load_subject(request):
 
 def load_chapter(request):
     subject_id = request.GET.get('subject_id')
-    cha = Chapter.objects.filter(subject_id=subject_id).order_by('name')
+    cha = Chapter.objects.filter(subject_id=subject_id).order_by('id')
     
     return render(request, 'lms_app/chapter_dropdown.html', {'cha': cha})
 
