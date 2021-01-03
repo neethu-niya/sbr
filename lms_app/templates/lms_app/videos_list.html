@@ -107,7 +107,7 @@
                                         <td><a href="{% url 'commentup' v.pk %}">{{v.name}}</a></td>
 
                                           
-                                            <td>{{v.chapter}}</td>
+                                            <td><a href="{% url 'chapter_video_upload' v.chapter.id %}">{{v.chapter}}</td></a>
                                             <td>{{v.description}}</td>
                                             <td>
                                                 <div class="form-button-action">

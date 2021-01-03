@@ -409,3 +409,11 @@ class Comments_Form(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('video','text')
+
+
+class ChapterVideoUpload(forms.ModelForm):
+
+    class Meta:
+        model = Video
+        fields = ('name', 'subtitle', 'description', 'image', 
+                 'thumbnail_image', 'videofile')

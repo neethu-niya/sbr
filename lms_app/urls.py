@@ -51,6 +51,9 @@ urlpatterns = [
     path('ajax/load-subject/', views.load_subject, name='ajax_load_subj'),
     path('ajax/load-chapter/', views.load_chapter, name='ajax_load_chap'),
     path('ajax/load-country/', views.load_country, name='ajax_load_con'),
+    path('video_up/<int:pk>/', views.chapter_video_upload, name='chapter_video_upload'),
+
+
 
 
 # 'register_teacher/',register

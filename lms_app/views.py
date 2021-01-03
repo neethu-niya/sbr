@@ -4,7 +4,10 @@ from django.views.generic import ListView
 from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
-from lms_app.forms import SyllabusForm, StandardForm, SubjectForm, ChapterForm, TeacherRegForm, StudentRegister, Comments_Form
+from lms_app.forms import (
+    SyllabusForm, StandardForm, SubjectForm, ChapterForm,
+    TeacherRegForm, StudentRegister, Comments_Form, ChapterVideoUpload
+    )
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -358,3 +361,23 @@ def commenting(request, pk):
     # }
 
     return render(request,'lms_app/comment.html')
+
+
+def chapter_video_upload(request, pk):
+	chapter = Chapter.objects.get(id=pk)
+	if request.method == 'POST':
+		form = ChapterVideoUpload(request.POST, request.FILES)
+		if form.is_valid():
+			video = form.save(commit=False)
+			video.syllabus = chapter.syllabus
+            video.standard = chapter.standard
+            video.subject = chapter.subject
+            video.chapter = chapter
+			unit_pdt.save()
+			return redirect('lms_app/videos_list.html')
+	else:
+		form = ChapterVideoUpload()
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/video_up.html', context)
