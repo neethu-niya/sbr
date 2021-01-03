@@ -180,7 +180,7 @@ def load_subject(request):
 
 def load_chapter(request):
     subject_id = request.GET.get('subject_id')
-    cha = Chapter.objects.filter(subject_id=subject_id).order_by('id')
+    cha = Chapter.objects.filter(subject_id=subject_id).order_by('name')
     
     return render(request, 'lms_app/chapter_dropdown.html', {'cha': cha})
 
@@ -218,8 +218,6 @@ def video_list(request):
 def file_upload(request):
     form = VideoUpload(request.POST or None, request.FILES or None)
     if form.is_valid():
-        form.cleaned_data
-        print(form.cleaned_data)
         form.save()
         return redirect('video')
     context = {'form': form}
