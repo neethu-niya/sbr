@@ -122,12 +122,7 @@
           console.log(data);
           $("#id_chapter").html(data);  // replace the contents of the city input with the data that came from the server
 
-            /*let html_data = '<option value="">---------</option>';
-                data.forEach(function (standard) {
-                    html_data += `<option value="${standard.id}">${standard.name}</option>`
-                });
-                console.log(html_data);
-                $("#id_standard").html(html_data);*/
+            
         
 
         }
@@ -135,32 +130,6 @@
       });
 
     }); 
-
-
-    $("#id_country").change(function () {
-      var url = $("#personForm").attr("data-cit-url");  // get the url of the `load_cities` view
-      var countryId = $(this).val();  // get the selected country ID from the HTML input
-        
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'country_id': countryId       // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          console.log(data);
-          $("#id_state").html(data);  // replace the contents of the city input with the data that came from the server
-
-           
-        
-
-        }
-
-      });
-
-    }); 
-
-
-
 
   </script>
 
