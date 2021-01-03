@@ -226,7 +226,7 @@ class VideoUpload(forms.ModelForm):
         self.fields['standard'].queryset = Standard.objects.none()
 
         if 'syllabus' in self.data:
-            syllabus_id = int(self.data.get('syllabus'))
+            syllabus_id = self.data.get('syllabus')
             self.fields['standard'].queryset = Standard.objects.filter(id=syllabus_id).order_by('name')
 
 
@@ -237,7 +237,7 @@ class VideoUpload(forms.ModelForm):
 
 
         if 'standard' in self.data:
-            standard_id = int(self.data.get('standard'))
+            standard_id = self.data.get('standard')
             self.fields['subject'].queryset = Subject.objects.filter(id=standard_id).order_by('name')
 
 
@@ -247,7 +247,7 @@ class VideoUpload(forms.ModelForm):
 
 
         if 'subject' in self.data:
-            subject_id = int(self.data.get('subject'))
+            subject_id = self.data.get('subject')
             self.fields['chapter'].queryset = Chapter.objects.filter(id=subject_id).order_by('name')
 
 
