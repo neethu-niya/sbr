@@ -209,15 +209,15 @@ class Video(models.Model):
     # description = models.TextField()
     description = models.TextField()
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
-    standard = models.ChainedForeignKey(
+    standard = ChainedForeignKey(
         Standard, chained_field="syllabus", chained_model_field="syllabus", show_all=False,
         auto_choose=True, sort=True,on_delete=models.CASCADE,
         null=True, blank=True)
-    subject = models.ChainedForeignKey(
+    subject = ChainedForeignKey(
         Subject, chained_field="standard",chained_model_field="standard", show_all=False,
         auto_choose=True, sort=True, on_delete=models.CASCADE,
         null=True, blank=True)
-    chapter = models.ForeignKey(
+    chapter = ChainedForeignKey(
         Chapter, chained_field="subject",chained_model_field="subject", show_all=False,
         auto_choose=True, sort=True, on_delete=models.CASCADE,
         null=True, blank=True)
