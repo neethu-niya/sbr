@@ -183,14 +183,6 @@ class StudentRegister(forms.ModelForm):
 
 
 class VideoUpload(forms.ModelForm):
-    syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), empty_label='None',
-        required=False)
-    standard = forms.ModelChoiceField(queryset=Standard.objects.all(), empty_label='None',
-        required=False)
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), empty_label='None',
-        required=False)
-    chapter = forms.ModelChoiceField(queryset=Chapter.objects.all(), empty_label='None',
-        required=False)
 
     class Meta:
         model = Video
@@ -199,7 +191,6 @@ class VideoUpload(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['standard'].queryset = Standard.objects.none()
 
 
         if 'syllabus' in self.data:
@@ -212,9 +203,6 @@ class VideoUpload(forms.ModelForm):
             self.fields['standard'].queryset = self.instance.syllabus.standard_set.order_by('name')
 
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['subject'].queryset = Subject.objects.none()
 
 
         if 'standard' in self.data:
@@ -225,10 +213,6 @@ class VideoUpload(forms.ModelForm):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
             self.fields['subject'].queryset = self.instance.standard.subject_set.order_by('name')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['chapter'].queryset = Chapter.objects.none()
 
 
         if 'subject' in self.data:
