@@ -217,7 +217,7 @@ def video_list(request):
     
 
 def file_upload(request):
-    form = VideoUpload(request.POST or None, request.FILES or None)
+    form = VideoUpload(request.POST, request.FILES)
     if form.is_valid():
         form.save()
         return redirect('video')
