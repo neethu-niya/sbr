@@ -59,7 +59,7 @@
   <script>
     {% comment %} $(document).ready(function(){ {% endcomment %}
     $("#id_syllabus").change(function () {
-      var url = $("#videostdForm").attr("data-std-url");  // get the url of the `load_cities` view
+      var url = $("#videoForm").attr("data-std-url");  // get the url of the `load_cities` view
       var syllabusId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -85,7 +85,7 @@
 
     }); 
     $("#id_standard").change(function () {
-      var url = $("#videosubForm").attr("data-sub-url");  // get the url of the `load_cities` view
+      var url = $("#videoForm").attr("data-sub-url");  // get the url of the `load_cities` view
       var standardId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
@@ -112,7 +112,7 @@
     });
 
     $("#id_subject").change(function () {
-      var url = $("#videochapForm").attr("data-chap-url");  // get the url of the `load_cities` view
+      var url = $("#videoForm").attr("data-chap-url");  // get the url of the `load_cities` view
       var subjectId = $(this).val();  // get the selected country ID from the HTML input
         
       $.ajax({                       // initialize an AJAX request
