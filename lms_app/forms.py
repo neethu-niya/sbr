@@ -188,6 +188,14 @@ class VideoUpload(forms.ModelForm):
         model = Video
         fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
                  'thumbnail_image', 'videofile')
+        syllabus = forms.ModelChoiceField(
+        queryset=Syllabus.objects.all(),
+        label=u"Syllabus",
+        widget=ModelSelect2Widget(
+            search_fields=['name__icontains'],
+            dependent_fields={'standard': 'standard_set'},
+        )
+    )
         standard = forms.ModelChoiceField(
         queryset=Standard.objects.all(),
         label=u"Standard",
