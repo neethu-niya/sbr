@@ -222,7 +222,7 @@ def file_upload(request):
         form.save()
         return redirect('video')
     else:
-		form = VideoUpload()
+        form = VideoUpload()
     context = {'form': form}
     return render(request, 'lms_app/video_up.html', context)
     
