@@ -217,10 +217,11 @@ def video_list(request):
     
 
 def file_upload(request):
-    form = VideoUpload(request.POST, request.FILES)
-    if form.is_valid():
-        form.save()
-        return redirect('video')
+    if request.method == 'POST':
+        form = VideoUpload(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('video')
     else:
         form = VideoUpload()
     context = {'form': form}
