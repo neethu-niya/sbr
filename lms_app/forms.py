@@ -183,6 +183,13 @@ class StudentRegister(forms.ModelForm):
 
 
 class VideoUpload(forms.ModelForm):
+    syllabus = forms.ModelChoiceField(
+        queryset=Syllabus.objects.all(),
+        label=u"Syllabus",
+        widget=ModelSelect2Widget(
+            dependent_fields={'standard': 'standard_set'},
+        )
+    )
     standard = forms.ModelChoiceField(
         queryset=Standard.objects.all(),
         label=u"Standard",
