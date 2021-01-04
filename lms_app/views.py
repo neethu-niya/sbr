@@ -217,7 +217,7 @@ def video_list(request):
     
 
 def file_upload(request):
-    form = VideoUpload
+    form = VideoUpload()
     if request.method == 'POST':
         form = VideoUpload(request.POST, request.FILES)
         if form.is_valid():
