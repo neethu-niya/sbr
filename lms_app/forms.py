@@ -186,8 +186,7 @@ class VideoUpload(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
-                 'thumbnail_image', 'videofile')
+        
         syllabus = forms.ModelChoiceField(
         queryset=Syllabus.objects.all(),
         label=u"Syllabus",
@@ -205,6 +204,8 @@ class VideoUpload(forms.ModelForm):
             max_results=500,
         )
     )
+    fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
+                 'thumbnail_image', 'videofile')
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
