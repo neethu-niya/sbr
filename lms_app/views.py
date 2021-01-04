@@ -217,9 +217,11 @@ def video_list(request):
     
 
 def file_upload(request):
-    form = VideoUpload(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
+    form = VideoUpload
+    if request.method == 'POST':
+        form = VideoUpload(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
         return redirect('video')
     context = {'form': form}
     return render(request, 'lms_app/video_up.html', context)
