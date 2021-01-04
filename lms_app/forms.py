@@ -188,7 +188,7 @@ class VideoUpload(forms.ModelForm):
         model = Video
         fields = ('name', 'subtitle', 'description', 'syllabus', 'standard','subject', 'chapter',   'image', 
                  'thumbnail_image', 'videofile')
-         standard = forms.ModelChoiceField(
+        standard = forms.ModelChoiceField(
         queryset=Standard.objects.all(),
         label=u"Standard",
         widget=ModelSelect2Widget(
