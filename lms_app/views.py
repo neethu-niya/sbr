@@ -225,7 +225,6 @@ def file_upload(request):
         upload_video = form.save(commit=False)
         student = Student.objects.filter(standard=upload_video.standard)
         print(student)
-        devices = FCMDevice.objects.filter(user=student.user)
         u = User.objects.filter(student__standard=student)
         devices = FCMDevice.objects.filter(user=u)
         devices.send_message("Uploaded New Video", upload_video.chapter)
