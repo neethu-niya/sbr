@@ -348,6 +348,21 @@ def question_upload(request):
     context = {'form': form}
     return render(request, 'lms_app/question_up.html', context)
 
+def question_update(request, pk): 
+	question = Question_paper.objects.get(id=pk)
+	if request.method == 'POST':
+		form = Question_form(request.POST, request.FILES or None, instance=question)
+		if form.is_valid():
+			form.save()
+			return redirect('questions')
+	else:
+		form = Question_form(instance=question)
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/question_up.html', context)
+
+
 
 def toggle(request):
     from django.apps import apps

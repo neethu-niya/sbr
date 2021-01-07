@@ -38,6 +38,7 @@ urlpatterns = [
     path('study/update/<int:pk>/', views.study_update, name='study_update'),
     path('Question/',views.Question_Paper.as_view(), name='questions'),
     path('question_up/',views.question_upload, name='question_up'),
+    path('question/update/<int:pk>/', views.question_update, name='question_update'),
     path('student_view/<int:pk>',views.StudentView, name='studentview'),
     path('teacher_view/<int:pk>',views.TeacherView, name='teacherview'),
     # path('comment/<int:pk>',views.comments, name='commentadd'),

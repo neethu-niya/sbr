@@ -78,6 +78,7 @@
                                         <th>Subject</th>
                                         <th>Chapter</th>
                                         <th style="width: 10%">Action</th>
+                                        <th style="width: 10%">Edit</th>
                                     </tr>
                                 </thead>
 
@@ -99,6 +100,11 @@
                                                 </label>  
                                             </div>
                                                 </div>
+                                            </td>
+                                            <td>
+                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                        <a href="{% url 'question_update' stud.id %}"><i class="fa fa-edit"></i></a>
+                                                    </button>
                                             </td>
                                         </tr>
                                     {% endfor %}
