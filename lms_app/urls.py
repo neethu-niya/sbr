@@ -35,6 +35,7 @@ urlpatterns = [
     #path('profile_t/',views.Profilep.as_view(), name='pro'),
     path('study_list/',views.Upload_material.as_view(), name='studyfile'),
     path('study_up/',views.study_upload, name='Supload'),
+    path('study/update/<int:pk>/', views.study_update, name='study_update'),
     path('Question/',views.Question_Paper.as_view(), name='questions'),
     path('question_up/',views.question_upload, name='question_up'),
     path('student_view/<int:pk>',views.StudentView, name='studentview'),

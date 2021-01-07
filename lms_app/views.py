@@ -318,6 +318,20 @@ def study_upload(request):
     context = {'form': form}
     return render(request, 'lms_app/study_up.html', context)
 
+def study_update(request, pk): 
+	study = Study_Material.objects.get(id=pk)
+	if request.method == 'POST':
+		form = StudyUpload(request.POST, request.FILES or None, instance=study)
+		if form.is_valid():
+			form.save()
+			return redirect('studyfile')
+	else:
+		form = StudyUpload(instance=study)
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/study_up.html', context)
+
 
 class Question_Paper(ListView):
     queryset = Question_paper.objects.all()
