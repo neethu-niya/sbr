@@ -59,16 +59,324 @@
     {% else %}
     {% endif %}
 
-    <form method="post" id="personForm" data-std-url="{% url 'ajax_load_std' %}" data-scheme-url="{% url 'ajax_load_scheme' %}" data-cit-url="{% url 'ajax_load_con' %}" class="post-form" enctype="multipart/form-data">             
+    <form method="post" id="personForm" data-std-url="{% url 'ajax_load_std' %}" data-scheme-url="{% url 'ajax_load_scheme' %}" data-cit-url="{% url 'ajax_load_con' %}" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}                 
              <div class="container-fluid">
                 <div class="card-body">
-                    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">Submit</button>
-        <button class="btn btn-danger">Cancel</button>
-    </div>
-  </form>  
+                    <div class="row"> 
+                        <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                                <label for="name">Name :</label>
+                                <input type="textarea" class="form-control" name="name" id="" placeholder="Enter Your Name">       
+                               
+                            </div>
+                        </div> 
+                        <div class="form-group col-md-4">
+                            <label for="email2">Email Address :</label>
+                                    
+                            <input type="email" class="form-control" name="email" id="" placeholder="Enter Your Email">
+                            <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      
+                        </div>
+                    </div>
+
+                  
+
+                        			
+                     <div class="row"> 
+                        <div class="col-md-2 col-lg-4">
+                            <div class="form-group col-md-12"> 
+                                <label for="Phone">Phone Number :</label>
+                                <input type="phone2numeric" class="form-control" name="contact_no" id="phon"   placeholder="Enter Phone Number">
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="Phone">Whatsapp Number :</label>
+                               
+                            <input type="phone2numeric" class="form-control" name="whatsapp_no" id="what" placeholder="Enter Whatsapp Number" >
+                            <input type="checkbox" name="check1" onchange="copyTextValue(this);">
+
+                                   <em>Same</em>
+                        </div>
+                        
+                    </div>
+                    
+                    {% comment %} <div class="row">
+                        <div class="form-group">
+                                    <label for="smallSelect">COUNTRY</label>
+                                    <select class="form-control form-control-sm" id="smallSelect" name="country"> {% endcomment %}
+                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
+                                    {% comment %} <option value={{form.country}} > </option>                                                     {% endcomment %}
+                                      
+                                    {% comment %} </div> {% endcomment %}
+                            
+                                    {% comment %} </select>    
+                            </div>     {% endcomment %}
+
+                        <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select country :</label>                                                       
+                                        {{form.country | crispy}}
+                                    </div>
+                                </div>
+
+
+                        <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select state :</label>                                                       
+                                        {{form.state}}
+                                    </div>
+                                </div>
+
+
+                            {% comment %} <div class="form-group">
+                                    <label for="smallSelect">STATE  </label>
+                                    <select id="State" class="form-control form-control-sm" id="smallSelect" name="state"   > {% endcomment %}
+                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
+                                    {% comment %} <option value={{form.state}} ></option>                                                     {% endcomment %}
+                                      
+                                    {% comment %} </div> {% endcomment %}
+                            
+                                    {% comment %} </select>    
+                            </div>    
+                        </div> {% endcomment %}
+                      {% comment %} <div class="row"> 
+                        <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                                <label for="name">Country :</label>
+                                <input type="textarea" class="form-control" name="country" id="" placeholder="Enter Your Country">       
+                               
+                            </div>
+                        </div> 
+                    </div> {% endcomment %}
+                    <div class="row"> 
+                        <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                                <label for="name">City :</label>
+                                <input type="textarea" class="form-control" name="city" id="" placeholder="Enter Your City">       
+                               
+                            </div>
+                        </div> 
+                    </div>  
+
+                    <div class="row"> 
+                        <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                                <label for="name">District :</label>
+                                <input type="textarea" class="form-control" name="district" id="" placeholder="Enter Your District">       
+                               
+                            </div>
+                        </div> 
+                    </div>
+
+
+                    <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select present country :</label>                                                       
+                                        {{form.present_country}}
+                                    </div>
+                                </div>
+
+                     {% comment %} <div class="form-group">
+                                    <label for="smallSelect">PRESENT COUNTRY</label>
+                                    <select class="form-control form-control-sm" id="smallSelect" name="present_country"> {% endcomment %}
+                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
+                                    {% comment %} <option >SELECT COUNTRY: </option>                                                    
+                                    <option value={{form.present_country}} > </option>                                                     {% endcomment %}
+                                     
+                                    {% comment %} </div> {% endcomment %}
+                            
+                                    {% comment %} </select>    
+                            </div>     {% endcomment %}
+                    {% comment %} <div class="row"> 
+                        <div class="col-md-2 col-lg-4"> 
+                            <div class="form-group col-md-12">
+                                <label for="name">Present country :</label>
+                                <input type="textarea" class="form-control" name="present_country" id="" placeholder="Enter Your Present Country">       
+                               
+                            </div>
+                        </div> 
+                    </div> {% endcomment %}
+                    
+                    <div class="row"> 
+                        <div class="col-md-2 col-lg-4">
+                            <div class="form-group col-md-12"> 
+                             <label for="textarea">Address :</label>
+                             <input type="textarea" class="form-control" name="address" id="" placeholder="Enter Your Address">       
+
+                             {% comment %} <textarea class="form-control" rows="5" id={{form.address}} > </textarea> {% endcomment %}
+                                   
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+
+                        <div class="form-group">
+                                <label for="exampleFormControlFile1">Upload Image :</label>
+                                <input type="file" class="form-control-file" name="image" id="" placeholder="Insert Image">
+                        </div> 
+                                 {% comment %} <div class="form-group has-error has-feedback">
+                                    <label for="errorInput">Error Input</label>
+                                    <input type="text" id="errorInput" value="Error" class="form-control">
+                                    <small id="emailHelp" class="form-text text-muted">Please provide a valid informations.</small>
+                                </div>  {% endcomment %}
+                                {% comment %} <div class="form-group">
+                                    <label for="disableinput">Disable Input</label>
+                                    <input type="text" class="form-control" id="disableinput" placeholder="Enter Input" disabled>
+                                {% comment %} </div> {% endcomment %}
+                                
+                                
+                                {% comment %} <div class="form-check">
+                                    <label>Gender</label><br/>
+                                    <label class="form-radio-label">
+                                        <input class="form-radio-input" type="radio" name="optionsRadios" value=""  checked="">
+                                        <span class="form-radio-sign">Male</span>
+                                    </label>
+                                    <label class="form-radio-label ml-3">
+                                        <input class="form-radio-input" type="radio" name="optionsRadios" value="">
+                                        <span class="form-radio-sign">Female</span>
+                                    </label>
+                                </div> {% endcomment %}
+                        <div class="row"> 
+                        <div class="col-md-2 col-lg-4">
+                            <div class="form-group col-md-12"> 
+                                <label for="text">Guardian Name :</label>
+                                <input type="text" class="form-control" name="guardian_name" id="" placeholder="Enter Name">
+                                   
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="text">Guardian Relation :</label>
+                                    
+                            <input type="text" class="form-control" name="guardian_relation" id="" placeholder="Enter Relation" >
+                                   
+                        </div>
+                        
+                    </div>
+
+                                
+                                
+                                {% comment %} <div class="form-group">
+                                    <div class="form-group col-md-2">
+                                    <label for="Phone">SCHEME:</label>
+                                                    {{form.scheme}}
+                                                </div>
+                                </div>  {% endcomment %}
+
+
+                                
+
+
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select syllabus :</label>                                                       
+                                        {{form.syllabus}}
+                                    </div>
+                                </div>
+                     
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-default" >
+                                    <label for="addPosition">Select STANDARD :</label>                                                       
+                                        {{form.standard}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group form-group-default" >
+                                    <label for="addPosition">SCHEME :</label>
+                                                    {{form.scheme}}
+                                                </div>
+                                </div> 
+
+                                <div class="row"> 
+                                     <div class="col-md-2 col-lg-4">
+                                        <div class="form-group col-md-12"> 
+                                            <label for="textarea">Course Type :</label>
+                                            <input type="textarea" class="form-control" name="course_type" id="" placeholder="Enter Your Course">       
+
+                             
+                                   
+                                         </div>
+                                    </div>
+                                </div>
+                               
+                                
+                            
+                                <div class="form-check"> 
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="active" value="active">
+                                        <span class="form-check-sign">Active</span>
+                                    </label>
+                                </div>
+                            
+                            <div class="form-check"> 
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="is_paid" value="is_paid">
+                                        <span class="form-check-sign">Is_paid</span>
+                                    </label>
+                                </div>
+
+                                {% comment %} <div class="form-check"> 
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="paid" value="paid">
+                                        <span class="form-check-sign">Paid</span>
+                                    </label>
+                                </div>                                 {% endcomment %}
+                            
+                            
+                        
+                    
+                    <div class="form-group">
+                        {% comment %} {{form.as_p}}   {% endcomment %}
+                         <button class="btn btn-outline-info" type="submit">Submit</button>
+                          <button class="btn btn-danger">Cancel</button>
+                       
+                    </div>
+    </form> 
+                            {% comment %} <tbody>
+                                {% for teacher in teachers %}
+                                    <tr>
+                                        <td>{{teacher.name}}</td>
+                                        <td>{{teacher.email}}</td>
+                                        <td>{{teacher.password}}</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %} 
+                           </tbody>  {% endcomment %}
+                           
+                            {% comment %} <tbody>
+                                {% for student in students %}
+                                    <tr>
+                                        <td>{{student.name}}</td>
+                                        <td>{{student.standard}}</td>
+                                        <td>{{student.course_type}}</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody> {% endcomment %}
                 </div>
             </div>
         </div>
