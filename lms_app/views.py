@@ -218,8 +218,21 @@ def video_list(request):
 
 def file_upload(request):
     form = VideoUpload(request.POST or None, request.FILES or None)
+    syllabus = request.POST.get('syllabus', False)
+    print(syllabus)
+    standard = request.POST.get('standard', False)
+    print(standard)
+    subject = request.POST.get('subject', False)
+    print(subject)
+    chapter = request.POST.get('chapter', False)
+    print(chapter)
     if form.is_valid():
-        form.save()
+        videoform = form.save(commit=False)
+        videoform.syllabus = syllabus
+        videoform.standard = standard
+        videoform.subject = subject
+        videoform.chapter = chapter
+        videoform.save()
         return redirect('video')
     context = {'form': form}
     return render(request, 'lms_app/video_up.html', context)
