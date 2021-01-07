@@ -96,37 +96,6 @@ class TeacherRegForm(forms.ModelForm):
 
 
 class StudentRegister(forms.ModelForm):
-    # name = forms.CharField(max_length=30, required=False, help_text='Optional')  
-    # address = forms.CharField(max_length=50, required=False)
-   
-    # country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # state = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # city = forms.CharField(max_length=255, required=False)
-    
-    
-    # # state = forms.CharField(max_length=255)
-    # district = forms.CharField(max_length=255,required=False)
-    # present_country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    
-    # email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    # subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # image = forms.ImageField()
-    # guardian_name = forms.CharField(max_length=255)
-    # guardian_relation = forms.CharField(max_length=50)
-    # contact_no = forms.CharField(max_length=30, required=False)
-    # whatsapp_no = forms.CharField(max_length=30, required=False)
-    # # gender = forms.CharField(max_length=6, required=False)
-    # standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    
-    # syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # # Syllabus = forms.ModelMultipleChoiceField(queryset=Syllabus.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
-    # # scheme = forms.ModelChoiceField(queryset=Scheme.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
-    # course_type = forms.CharField(max_length=255)
-    # active = forms.BooleanField(required=False)
-
-    #want to work on user unique
-    #user = User.objects.get(username=self.name)
 
     class Meta:
         model = Student
