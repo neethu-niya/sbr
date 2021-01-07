@@ -261,12 +261,12 @@ def docs_upload(request):
 def docs_update(request, pk): 
 	documents = Documents.objects.get(id=pk)
 	if request.method == 'POST':
-		form = VideoUpload(request.POST, request.FILES or None, instance=documents)
+		form = DocumentUpload(request.POST, request.FILES or None, instance=documents)
 		if form.is_valid():
 			form.save()
-			return redirect('video')
+			return redirect('document')
 	else:
-		form = VideoUpload(instance=documents)
+		form = DocumentUpload(instance=documents)
 	context = {
 	'form' : form,
 	}
