@@ -96,7 +96,7 @@ class TeacherRegForm(forms.ModelForm):
 
 
 class StudentRegister(forms.ModelForm):
-
+    active = forms.RadioSelect()
     class Meta:
         model = Student
         fields = ('name', 'address','country','state','city','district','present_country','email',
