@@ -59,28 +59,6 @@
                                     </div>
                                     <div class="modal-body">
                                         <p class="small">Create a new row using this form, make sure you fill them all</p>
-                                        {% comment %} <form>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Name</label>
-                                                        <input id="addName" type="text" class="form-control" placeholder="fill name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 pr-0">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Position</label>
-                                                        <input id="addPosition" type="text" class="form-control" placeholder="fill position">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Office</label>
-                                                        <input id="addOffice" type="text" class="form-control" placeholder="fill office">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form> {% endcomment %}
                                     </div>
                                     <div class="modal-footer no-bd">
                                         <button type="button" id="addRowButton" class="btn btn-primary">Add</button>
@@ -104,7 +82,7 @@
                                 <tbody>
                                     {% for v in videos %}
                                         <tr>
-                                        <td><a href="{% url 'commentup' v.pk %}">{{v.name}}</a></td>
+                                        <td><a href="{% url 'video_update' v.id %}">{{v.name}}</a></td>
 
                                           
                                             <td><a href="{% url 'chapter_video_upload' v.chapter.id %}">{{v.chapter}}</td></a>

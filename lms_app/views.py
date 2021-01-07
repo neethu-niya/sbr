@@ -225,6 +225,21 @@ def file_upload(request):
     return render(request, 'lms_app/video_up.html', context)
 
 
+def video_update(request, pk): 
+	video = Video.objects.get(id=pk)
+	if request.method == 'POST':
+		form = VideoUpload(request.POST, request.FILES or None, instance=video)
+		if form.is_valid():
+			form.save()
+			return redirect('video')
+	else:
+		form = VideoUpload(instance=video)
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/video_up.html', context)
+
+
 class upload_document(ListView):
     queryset = Documents.objects.all()
     context_object_name = 'documents'

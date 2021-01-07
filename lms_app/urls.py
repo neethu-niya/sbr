@@ -26,6 +26,7 @@ urlpatterns = [
     path('register_student/',views.studentpage, name='student'),
     path('videos_list/',views.video_list, name='video'),
     path('video_up/',views.file_upload, name='up'),
+    path('video/update/<int:pk>/', views.video_update, name='video_update'),
     path('document_list/',views.upload_document.as_view(), name='document'),
     path('document_up/',views.docs_upload, name='upload'),
     path('notification_list/',views.Notification_list.as_view(), name='notify'),
