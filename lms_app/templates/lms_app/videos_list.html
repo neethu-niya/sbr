@@ -76,6 +76,7 @@
                                         <th>chapter</th>
                                         <th>description</th>
                                         <th style="width: 10%">Action</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
 
@@ -107,6 +108,11 @@
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </div> {% endcomment %}
+                                            </td>
+                                            <td>
+                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                        <a href="{% url 'video_update' v.id %}"><i class="fa fa-edit"></i></a>
+                                                    </button>
                                             </td>
                                         </tr>
                                     {% endfor %}
