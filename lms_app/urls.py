@@ -29,6 +29,7 @@ urlpatterns = [
     path('video/update/<int:pk>/', views.video_update, name='video_update'),
     path('document_list/',views.upload_document.as_view(), name='document'),
     path('document_up/',views.docs_upload, name='upload'),
+    path('document/update/<int:pk>/', views.docs_update, name='docs_update'),
     path('notification_list/',views.Notification_list.as_view(), name='notify'),
     path('add_notification/',views.notifi_up, name='addnotify'),
     #path('profile_t/',views.Profilep.as_view(), name='pro'),

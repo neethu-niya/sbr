@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
-from .models import Syllabus, Standard, Subject, Chapter, Teacher, Student
+from .models import (
+    Syllabus, Standard, Subject, Chapter, Teacher,
+    Student, Documents, Study_Material, Question_paper
+    )
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 from lms_app.forms import (
@@ -254,6 +257,20 @@ def docs_upload(request):
         return redirect('document')
     context = {'form': form}
     return render(request, 'lms_app/document_up.html', context)
+
+def docs_update(request, pk): 
+	documents = Documents.objects.get(id=pk)
+	if request.method == 'POST':
+		form = VideoUpload(request.POST, request.FILES or None, instance=documents)
+		if form.is_valid():
+			form.save()
+			return redirect('video')
+	else:
+		form = VideoUpload(instance=documents)
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/document_up.html', context)
 
 
 
