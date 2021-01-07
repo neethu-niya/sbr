@@ -138,27 +138,15 @@
                                         <td>
                                             <div class="form-button-action">
                                                 <label class="switch">
-                                                <input type="checkbox" id="togBtn" name="name">
+                                                <input type="checkbox" id="togBtn">
                                                 <div class="slider round">
-                                                {% comment %} <span class="on">ACTIVE</span>
-                                                <span class="off">INACTIVE</span> {% endcomment %}
-                                                </div>
-                                                </label>
-                                            </div>
-                                                {% comment %} <div class="form-button-action">
                                                 <label class="switch">
-                                                
-                                                <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75">
+                                                <input type="checkbox" id="checkbox" {% if teacher.active %} checked {% endif %} data-toggle="toggle" data-width="100" data-height="75"  onclick="makeActive({{teacher.id}},'Teacher')">
                                                 <span class="slider round"></span>
-                                                
-                                                </label>  
-                                                {% comment %} <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                                    <div class="handle"></div>
-                                                </button> {% endcomment %}
-                                                {% comment %} <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>  {% endcomment %}
+                                                </label>
+                                                </div>
+                                            </div>
+                                               
                                         </td>
                                     </tr>
                                 {% endfor %} 
