@@ -100,6 +100,7 @@ class StudentRegister(forms.ModelForm):
     standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     present_country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    state = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     scheme = forms.ModelChoiceField(queryset=Scheme.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
 
     class Meta:
