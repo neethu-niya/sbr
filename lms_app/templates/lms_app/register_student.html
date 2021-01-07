@@ -113,9 +113,22 @@
                             
                                     {% comment %} </select>    
                             </div>     {% endcomment %}
+                      <div class="row">
+                        <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select country :</label>                                                       
+                                        {{form.country}}
+                                    </div>
+                                </div>
 
-                        
 
+                        <div class="col-sm-6">
+                                    <div class="form-group form-group-default">
+                                    <label for="addPosition">Select state :</label>                                                       
+                                        {{form.state}}
+                                    </div>
+                                </div>
+                      </div>
 
                             {% comment %} <div class="form-group">
                                     <label for="smallSelect">STATE  </label>
@@ -138,20 +151,6 @@
                         </div> 
                     </div> {% endcomment %}
                     <div class="row"> 
-                    <div class="col-sm-6">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select country :</label>                                                       
-                                        {{form.country}}
-                                    </div>
-                                </div>
-
-
-                        <div class="col-sm-6">
-                                    <div class="form-group form-group-default">
-                                    <label for="addPosition">Select state :</label>                                                       
-                                        {{form.state}}
-                                    </div>
-                                </div>
                         <div class="col-md-2 col-lg-4"> 
                             <div class="form-group col-md-12">
                                 <label for="name">City :</label>
