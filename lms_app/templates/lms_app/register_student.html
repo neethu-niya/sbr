@@ -63,33 +63,25 @@
              <div class="container-fluid">
                 <div class="card-body">
                     <div class="row"> 
-                        <div class="col-md-2 col-lg-4"> 
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-4">
                                 <label for="name">Name :</label>
                                 <input type="textarea" class="form-control" name="name" id="" placeholder="Enter Your Name">       
                                
                             </div>
-                        </div> 
-                        <div class="form-group col-md-4">
-                            <label for="email2">Email Address :</label>
-                                    
-                            <input type="email" class="form-control" name="email" id="" placeholder="Enter Your Email">
-                            <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      
-                        </div>
-                    </div>
-
-                  
-
-                        			
+                            <div class="form-group col-md-4">
+                                <label for="email2">Email Address :</label>   
+                                <input type="email" class="form-control" name="email" id="" placeholder="Enter Your Email">
+                                <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                        </div>                       			
                      <div class="row"> 
-                        <div class="form-group col-md-4">
-                            
+                        <div class="col-md-2 col-lg-4">
+                            <div class="form-group col-md-12"> 
                                 <label for="Phone">Phone Number :</label>
                                 <input type="phone2numeric" class="form-control" name="contact_no" id="phon"   placeholder="Enter Phone Number">
                                 
                             </div>
-                     
+                        </div>
 
                         <div class="form-group col-md-4">
                             <label for="Phone">Whatsapp Number :</label>
@@ -98,21 +90,9 @@
                             <input type="checkbox" name="check1" onchange="copyTextValue(this);">
 
                                    <em>Same</em>
-                      
+                        </div>
                         
                     </div>
-                    
-                    {% comment %} <div class="row">
-                        <div class="form-group">
-                                    <label for="smallSelect">COUNTRY</label>
-                                    <select class="form-control form-control-sm" id="smallSelect" name="country"> {% endcomment %}
-                                    {% comment %} <div class="form-group form-group-default"> {% endcomment %}
-                                    {% comment %} <option value={{form.country}} > </option>                                                     {% endcomment %}
-                                      
-                                    {% comment %} </div> {% endcomment %}
-                            
-                                    {% comment %} </select>    
-                            </div>     {% endcomment %}
                       <div class="row">
                         <div class="col-sm-6">
                                     <div class="form-group form-group-default">
