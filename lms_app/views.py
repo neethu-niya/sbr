@@ -224,9 +224,9 @@ def file_upload(request):
     if form.is_valid():
         upload_video = form.save(commit=False)
         standard = upload_video.standard
-        u = User.objects.filter(student__standard=standard)
-        devices = FCMDevice.objects.filter(user=u)
-        devices.send_message(title="Uploaded New Video", body="Message")
+        users = User.objects.filter(student__standard=standard)
+        for user in users:
+            FCMDevice.objects.filter(user=user).send_message(title="Uploaded New Video", body="Message")
         upload_video.save()
         return redirect('video')
     context = {'form': form}
