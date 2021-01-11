@@ -97,7 +97,11 @@
                                                 <td class="text-right">   
                                                 </td>
                                                 <td class="text-right">
+                                                  {% if syllabus_c %}
                                                     {{syllabus_c}}
+                                                  {% else %}
+                                                    {{No Syllabus}}
+                                                  {% endif %}
                                                 </td>
                                                 </td>
                                                  <td class="text-right">
@@ -116,7 +120,12 @@
                                                     
                                                 </td>
                                                 <td class="text-right">
+                                                  {% if standard_c %}
                                                     {{standard_c}}
+                                                  {% else %}
+                                                    {{No Standard}}
+                                                  {% endif %}
+                                                  
                                                 </td>
                                             </tr>
                                             
