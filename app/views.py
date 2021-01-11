@@ -18,8 +18,8 @@ def index(request):
     Total_user = User.objects.exclude(is_superuser=1).count()
     syllabus_count = Syllabus.objects.all().count()
     standard_count = Standard.objects.filter(syllabus_id=1).count()
-    syllabus_all  = Syllabus.objects.get(id=1)
-    syllabus_name = syllabus_all.name
+    # syllabus_all  = Syllabus.objects.get(id=1)
+    # syllabus_name = syllabus_all.name
     context = {
         'students_count': count,
         'teacher_count' : count_teacher,
