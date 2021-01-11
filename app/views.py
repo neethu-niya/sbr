@@ -26,8 +26,8 @@ def index(request):
         'user_count'    : Total_user,
         'syllabus_c': syllabus_count,
         'standard_c': standard_count,
-        'syllabus_txt': syllabus_all,
-        'syllabus_n'  : syllabus_name
+        # 'syllabus_txt': syllabus_all,
+        # 'syllabus_n'  : syllabus_name
     }
 
     return render(request, "index.html", context)
