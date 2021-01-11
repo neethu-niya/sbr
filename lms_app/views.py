@@ -226,7 +226,7 @@ def file_upload(request):
         standard = upload_video.standard
         users = User.objects.filter(student__standard=standard)
         for user in users:
-            FCMDevice.objects.filter(user=user).send_message(title="Uploaded New Video", body=f"{upload_video.name} of {upload_video.chapter}.")
+            FCMDevice.objects.filter(user=user).send_message(title="Uploaded New Video", body=f"{upload_video.name} in chapter {upload_video.chapter}.")
         upload_video.save()
         return redirect('video')
     context = {'form': form}
@@ -256,12 +256,16 @@ class upload_document(ListView):
 def docs_upload(request):
     form = DocumentUpload(request.POST or None , request.FILES or None)
     if form.is_valid():
-        form.cleaned_data
-        print(form.cleaned_data)
-        form.save()
+        upload_doc = form.save(commit=False)
+        standard = upload_doc.standard
+        users = User.objects.filter(student__standard=standard)
+        for user in users:
+            FCMDevice.objects.filter(user=user).send_message(title="Uploaded New Document", body=f"{upload_doc.name} in chapter {upload_doc.chapter}.")
+        upload_doc.save()
         return redirect('document')
     context = {'form': form}
     return render(request, 'lms_app/document_up.html', context)
+
 
 def docs_update(request, pk): 
 	documents = Documents.objects.get(id=pk)
@@ -316,9 +320,12 @@ class Upload_material(ListView):
 def study_upload(request):
     form = StudyUpload(request.POST or None , request.FILES or None)
     if form.is_valid():
-        form.cleaned_data
-        print(form.cleaned_data)
-        form.save()
+        upload_study = form.save(commit=False)
+        standard = upload_study.standard
+        users = User.objects.filter(student__standard=standard)
+        for user in users:
+            FCMDevice.objects.filter(user=user).send_message(title="Uploaded New Study Material", body=f"{upload_study.name} in chapter {upload_study.chapter}.")
+        upload_study.save()
         return redirect('studyfile')
     context = {'form': form}
     return render(request, 'lms_app/study_up.html', context)
@@ -346,9 +353,12 @@ class Question_Paper(ListView):
 def question_upload(request):
     form = Question_form(request.POST or None , request.FILES or None)
     if form.is_valid():
-        form.cleaned_data
-        print(form.cleaned_data)
-        form.save()
+        upload_quest = form.save(commit=False)
+        standard = upload_quest.standard
+        users = User.objects.filter(student__standard=standard)
+        for user in users:
+            FCMDevice.objects.filter(user=user).send_message(title="Uploaded New Question Paper", body=f"{upload_quest.name} in chapter {upload_quest.chapter}.")
+        upload_quest.save()
         return redirect('questions')
     context = {'form': form}
     return render(request, 'lms_app/question_up.html', context)
