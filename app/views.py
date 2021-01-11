@@ -22,7 +22,10 @@ def index(request):
         syllabus_all  = Syllabus.objects.get(id=1)
     except Syllabus.DoesNotExist:
         syllabus_all = None
-    syllabus_name = syllabus_all.name
+    try:
+        syllabus_name = syllabus_all.name
+    except Syllabus.DoesNotExist:
+        syllabus_name = None
     context = {
         'students_count': count,
         'teacher_count' : count_teacher,
