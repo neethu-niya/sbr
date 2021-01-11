@@ -18,7 +18,10 @@ def index(request):
     Total_user = User.objects.exclude(is_superuser=1).count()
     syllabus_count = Syllabus.objects.all().count()
     standard_count = Standard.objects.filter(syllabus_id=1).count()
-    syllabus_all  = Syllabus.objects.get(id=1)
+    try:
+        syllabus_all  = Syllabus.objects.get(id=1)
+    except Syllabus.DoesNotExist:
+        syllabus_all = None
     syllabus_name = syllabus_all.name
     context = {
         'students_count': count,
