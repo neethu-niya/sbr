@@ -72,7 +72,7 @@ class SchemeForm(forms.ModelForm):
 
     class Meta:
         model = Scheme
-        fields = ['syllabus', 'standard', 'subject', 'name', 'active']
+        fields = ['syllabus', 'standard', 'subject', 'name']
    
 
 class TeacherRegForm(forms.ModelForm):
