@@ -95,15 +95,15 @@ def chapter_list(request):
 def scheme_list(request):
     subject = request.GET.get('subject')
     schemes = Scheme.objects.all()
-    if subject is not None:
-        schemes = schemes.filter(subject__id__exact=subject)
-    form = SchemeForm(request.POST or None)
-    if form.is_valid():
-        print(form.cleaned_data)
-        form.cleaned_data
-        form.save()
-        return redirect('scheme_list')
-    context = {'schemes': schemes, 'form': form}
+    # if subject is not None:
+    #     schemes = schemes.filter(subject__id__exact=subject)
+    # form = SchemeForm(request.POST or None)
+    # if form.is_valid():
+    #     print(form.cleaned_data)
+    #     form.cleaned_data
+    #     form.save()
+    #     return redirect('scheme_list')
+    context = {'schemes': schemes}
     return render(request, 'lms_app/scheme_list.html', context)
 
 

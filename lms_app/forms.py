@@ -73,6 +73,10 @@ class SchemeForm(forms.ModelForm):
     class Meta:
         model = Scheme
         fields = ['syllabus', 'standard', 'subject', 'name', 'active']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].queryset = Subject.objects.none()
         
 
    
