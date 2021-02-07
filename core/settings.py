@@ -114,7 +114,7 @@ DATABASES = {
         'USER': 'shabeer',
         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     }
 }
 
