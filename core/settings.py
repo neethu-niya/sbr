@@ -96,13 +96,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'sbr-database',
+#         'USER': 'shabeer',
+#         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
+#         'HOST': 'sbr-database.c87jt2nj0lma.us-east-2.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sbr-database',
         'USER': 'shabeer',
         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
-        'HOST': 'sbr-database.c87jt2nj0lma.us-east-2.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
