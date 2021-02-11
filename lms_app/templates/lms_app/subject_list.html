@@ -107,6 +107,7 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Syllabus</th>
                                         <th>Standard</th>
                                         <th>Active</th>
                                         <th style="width: 10%">Action</th>
@@ -117,6 +118,7 @@
                                 {% for subject in subjects %}
                                     <tr>
                                         <td><a href="{% url 'chapter_list' %}?subject={{subject.pk}}">{{subject.name}}</a></td>
+                                        <td>{{subject.syllabus}}</td>
                                         <td>{{subject.standard}}</td>
                                         <td>{{subject.active}}</td>
                                         <td>
