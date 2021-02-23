@@ -40,6 +40,10 @@ devices = FCMDevice.objects.all()
 #         return Response({'subjects': subjects})
 
 
+def get_video_url(vimeo_id):
+	API_ENDPOINT = 'https://player.vimeo.com/video/'+vimeo_id+'/config'
+	response = requests.get(url = API_ENDPOINT)
+	return response.json().get('request').get('files').get('hls').get('cdns').get('akfire_interconnect_quic').get('url')
 
 
 class SubjectView(APIView):
