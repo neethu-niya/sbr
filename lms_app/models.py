@@ -222,7 +222,7 @@ class Video(models.Model):
     thumbnail_image = models.ImageField(
         upload_to='staticfiles/thumbnail/', null=True, blank=True)
     url_field = models.URLField(max_length=200, null=True, blank=True)
-    vimeo_id = models.CharField(max_length=200, null=True, blank=True)
+    # vimeo_id = models.CharField(max_length=200, null=True, blank=True)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

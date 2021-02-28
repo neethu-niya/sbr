@@ -19,7 +19,9 @@ from django.views.decorators.cache import cache_page
 from django.contrib.auth import get_user_model
 from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents, Student
 from fcm_django.models import FCMDevice
+import requests
 devices = FCMDevice.objects.all()
+
 
 
 
@@ -107,6 +109,28 @@ class DocumentView(APIView):
         
         return Response({'documents': documents})
 
+
+
+
+
+def get_video_url(vimeo_id):
+	API_ENDPOINT = 'https://player.vimeo.com/video/'+vimeo_id+'/config'
+	response = requests.get(url = API_ENDPOINT)
+	return response.json().get('request').get('files').get('progressive')[1].get("url")
+
+
+class GetVimeo(APIView):
+
+	def get(self, request):
+
+
+		urls = get_video_url('35527420')
+
+		context = {
+			'feedbacks': urls
+		}
+
+		return Response(urls)
 
 class VideoView(APIView):
     permission_classes = (IsAuthenticated, )
