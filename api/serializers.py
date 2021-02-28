@@ -47,15 +47,15 @@ def get_video_url(vimeo_id):
 
 class VideoSerializer(serializers.ModelSerializer):
 
-    # vimeo_url = serializers.SerializerMethodField()
+    vimeo_url = serializers.SerializerMethodField()
 
-    # def get_vimeo_url(self, obj):
-    #     return get_video_url(obj.vimeo_id)
+    def get_vimeo_url(self, obj):
+        return get_video_url(obj.vimeo_video_no)
 
 
     class Meta:
         model = Video
-        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard', 'subject', 'chapter', 'image', 'thumbnail_image')
+        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard', 'subject', 'chapter', 'image', 'thumbnail_image', 'vimeo_url')
 
         
 
