@@ -39,8 +39,26 @@ class DocumentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+def get_video_url(vimeo_id):
+	API_ENDPOINT = 'https://player.vimeo.com/video/'+vimeo_id+'/config'
+	response = requests.get(url = API_ENDPOINT)
+	return response.json().get('request').get('files').get('progressive')[1].get("url")
+
+
 class VideoSerializer(serializers.ModelSerializer):
+
+    vimeo_url = serializers.SerializerMethodField()
+
+    def get_vimeo_url(self, obj):
+        return get_video_url(obj.vimeo_id)
+
+
     class Meta:
         model = Video
-        fields = '__all__'
+        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard', 'subject', 'chapter', 'image', 'thumbnail_image', 'vimeo_url')
+
+        
+
+
+
 
