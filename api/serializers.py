@@ -50,7 +50,7 @@ class VideoSerializer(serializers.ModelSerializer):
     vimeo_url = serializers.SerializerMethodField()
 
     def get_vimeo_url(self, obj):
-        return get_video_url(obj.vimeo_video_no)
+        return get_video_url(obj.subtitle)
 
 
     class Meta:
