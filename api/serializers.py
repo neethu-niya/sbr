@@ -3,6 +3,8 @@ from lms_app.models import Syllabus, Standard, Subject, Chapter, Documents, Vide
 from user.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
+import requests
+import json
 
 
 class StandardSerializer(serializers.ModelSerializer):
@@ -47,15 +49,15 @@ def get_video_url(vimeo_id):
 
 class VideoSerializer(serializers.ModelSerializer):
 
-    # vimeo_url = serializers.SerializerMethodField()
+    vimeo_video = serializers.SerializerMethodField()
 
-    # def get_vimeo_url(self, obj):
-    #     return get_video_url(obj.subtitle)
+    def get_vimeo_video(self, obj):
+        return get_video_url(obj.vimeo_video)
 
 
     class Meta:
         model = Video
-        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard', 'subject', 'chapter', 'image', 'thumbnail_image')
+        fields = ('name', 'subtitle', 'description', 'syllabus', 'standard', 'subject', 'chapter', 'image', 'thumbnail_image', 'vimeo_video')
 
         
 
