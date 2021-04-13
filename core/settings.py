@@ -89,6 +89,20 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sbr',
+        'USER': 'admin',
+        'PASSWORD': 'e961c4cc50b74025879392eeb68f8681261202b025ea584c',
+        'HOST': '127.0.0.1',
+        'PORT': '',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES',character_set_connection=utf8,collation_connection=utf8_unicode_ci"
+        }
+    }
+}
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -107,16 +121,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sbrdb',
-        'USER': 'shabeer',
-        'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'sbrdb',
+#         'USER': 'shabeer',
+#         'PASSWORD': '7K*52Ck7E-apT?pq6EZ7CCS&B7vAt',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
