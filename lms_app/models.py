@@ -66,6 +66,11 @@ gender_choices = [
     ('1', 'Female'),
 ]
 
+DOUBT_STATUS = [
+    ('0', 'New'),
+    ('1', 'Solved'),
+]
+
 class Syllabus(models.Model):
     name = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
@@ -102,6 +107,8 @@ class Subject(models.Model):
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
     slug = AutoSlugField(populate_from='name')
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -184,6 +191,8 @@ class Chapter(models.Model):
     standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255)
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
     slug = AutoSlugField(populate_from='name', null=True)
     active = models.BooleanField(default=False)
     free_tier = models.BooleanField(default=False)
@@ -501,3 +510,19 @@ class Profile(models.Model):
     #     # self.user.password = "helloworld555"
     #     self.user=s
     #     super(Student, self).save(self, *args, **kwargs)
+
+
+class Doubt(models.Model):
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, null=True, blank=True)
+    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    image = models.ImageField(
+        upload_to='staticfiles/image/', null=True, blank=True)
+    audiofile = models.FileField(
+        upload_to='staticfiles/media_root/audios/', null=True)
+    status = models.CharField(max_length=255, choices=DOUBT_STATUS)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)

@@ -49,7 +49,7 @@ class SubjectForm(forms.ModelForm):
 
     class Meta:
         model = Subject
-        fields = ['syllabus', 'standard', 'name', 'active']
+        fields = ['syllabus', 'standard', 'name', 'image', 'active']
 
 
 class ChapterForm(forms.ModelForm):
@@ -62,7 +62,7 @@ class ChapterForm(forms.ModelForm):
 
     class Meta:
         model = Chapter
-        fields = ['syllabus', 'standard', 'subject', 'name', 'free_tier', 'active']
+        fields = ['syllabus', 'standard', 'subject', 'name', 'image', 'free_tier', 'active']
 
 
 
