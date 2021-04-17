@@ -45,6 +45,7 @@ class SubjectForm(forms.ModelForm):
     syllabus = forms.ModelChoiceField(queryset=Syllabus.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
+    image   = forms.ImageField()
     active = forms.BooleanField(required=False)
 
     class Meta:
@@ -57,6 +58,7 @@ class ChapterForm(forms.ModelForm):
     standard = forms.ModelChoiceField(queryset=Standard.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={"class":"form-control", type: "select", id:"addPosition"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", id: "addName", 'placeholder' :"enter subject name"}))
+    image   = forms.ImageField()
     active = forms.BooleanField(required=False)
     free_tier = forms.BooleanField(required=False)
 

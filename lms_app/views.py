@@ -68,7 +68,7 @@ def subject_list(request):
     subjects = Subject.objects.all()
     if standard is not None:
         subjects = subjects.filter(standard__id__exact=standard)
-    form = SubjectForm(request.POST or None)
+    form = SubjectForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.cleaned_data
         form.save()
@@ -82,7 +82,7 @@ def chapter_list(request):
     chapters = Chapter.objects.all()
     if subject is not None:
         chapters = chapters.filter(subject__id__exact=subject)
-    form = ChapterForm(request.POST or None)
+    form = ChapterForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.cleaned_data
         form.save()
