@@ -137,6 +137,8 @@ class Teacher(models.Model):
     
     name = models.CharField(max_length=255)
     email = models.EmailField(null=True, blank=True)
+    username = models.CharField(max_length=255, null=True, blank=True)
+    password = models.CharField(max_length=255, null=True, blank=True)
     contact_no_1 = PhoneNumberField(
         default=None, null=True, blank=True, unique=True)
     whatsapp_no = PhoneNumberField(
@@ -164,7 +166,7 @@ class Teacher(models.Model):
 @receiver(post_save, sender=Teacher)
 def create_teacher_user(sender, instance, created, **kwargs):
     if created:
-        user = User.objects.create_user(username=instance.name, password="potafo123")
+        user = User.objects.create_user(username=instance.username, password=instance.password)
         instance.user = user
         instance.save()
 
@@ -311,6 +313,8 @@ class Scheme(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=255)
+    username = models.CharField(max_length=255, null=True, blank=True)
+    password = models.CharField(max_length=255, null=True, blank=True)
     # gender = models.CharField(max_length=6, choices=gender_choices)
     # date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255,null=True,blank=True)
@@ -353,7 +357,7 @@ class Student(models.Model):
 @receiver(post_save, sender=Student)
 def create_student_user(sender, instance, created, **kwargs):
     if created:
-        user = User.objects.create_user(username=instance.name, password="potafo123")
+        user = User.objects.create_user(username=instance.username, password=instance.password)
         instance.user = user
         instance.save()
 

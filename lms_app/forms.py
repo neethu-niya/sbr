@@ -85,12 +85,13 @@ class TeacherRegForm(forms.ModelForm):
     address = forms.CharField(max_length=50, required=False)
     subject = forms.ModelMultipleChoiceField(queryset=Subject.objects.all(), widget=forms.SelectMultiple(attrs={"class":"form-control", id:"exampleFormControlSelect2"}))
     image   = forms.ImageField()
+    password = forms.CharField(min_length=6, widget=forms.TextInput(attrs={'class' : 'form-control'}))
     # gender = forms.CharField(max_length=30, required=False, help_text='Optional.')  
     
     active = forms.BooleanField(required=False)
     class Meta:
         model = Teacher
-        fields = ('name', 'email',  'contact_no_1', 'whatsapp_no', 'address', 'subject', 'image',
+        fields = ('name', 'email', 'username', 'password', 'contact_no_1', 'whatsapp_no', 'address', 'subject', 'image',
                   'active')
 
 
@@ -102,10 +103,12 @@ class StudentRegister(forms.ModelForm):
     present_country = forms.ModelChoiceField(queryset=Country.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     state = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
     scheme = forms.ModelChoiceField(queryset=Scheme.objects.all(), widget=forms.Select(attrs={"class":"form-control",type: "select", id:"addPosition"}))
+    password = forms.CharField(min_length=6, widget=forms.TextInput(attrs={'class' : 'form-control'}))
+
 
     class Meta:
         model = Student
-        fields = ('name', 'address','country','state','city','district','present_country','email',
+        fields = ('name', 'username', 'password', 'address','country','state','city','district','present_country','email',
                   'course_type','image','guardian_name', 'guardian_relation', 'contact_no', 'whatsapp_no',
                   'syllabus','standard', 'scheme',  'is_paid', 'course_type','active')
     # class Meta:
