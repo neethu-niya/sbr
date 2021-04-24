@@ -147,3 +147,20 @@ class VideoView(APIView):
             videos = []
         
         return Response({'videos': videos})
+
+
+class DoubtView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request, slug):
+       
+        
+        try:
+            chapter = Chapter.objects.get(slug=slug)
+            videos = chapter.video_set.all()
+        
+            videos = VideoSerializer(videos, many=True).data
+        except:
+            videos = []
+        
+        return Response({'videos': videos})

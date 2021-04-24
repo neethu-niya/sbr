@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from .views import (
-    syllabus_list, standard_list, subject_list, chapter_list, TeacherList,
+    syllabus_list, standard_list, subject_list, subject_update, chapter_list, chapter_update, TeacherList,
     StudentList, registepage, Notification_list, Upload_material , Question_Paper ,
     StudentView, toggle, scheme_list, toggle_ispaid, toggle_freetier
 )
@@ -17,7 +17,9 @@ urlpatterns = [
     path('standard/',standard_list, name='standard_list'),
     
     path('subjects/',subject_list, name='subject_list'),
+    path('subjects/update/<int:pk>/',subject_update, name='subject_update'),
     path('chapters/',chapter_list, name='chapter_list'),
+    path('chapters/update/<int:pk>/',chapter_update, name='chapter_update'),
     path('scheme/',scheme_list, name='scheme_list'),
     path('scheme_upload/',views.scheme_upload, name='scheme_upload'),
 

@@ -76,6 +76,22 @@ def subject_list(request):
     context = {'subjects': subjects, 'form': form}
     return render(request, 'lms_app/subject_list.html', context)
 
+
+@staff_member_required
+def subject_update(request, pk):
+	subject = Subject.objects.get(id=pk)
+	if request.method == 'POST':
+		form = SubjectForm(request.POST, request.FILES, instance=subject)
+		if form.is_valid():
+			form.save()
+			return redirect('subject_list')
+	else:
+		form = SubjectForm(instance=subject)
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/subject_update.html', context)
+
 @staff_member_required
 def chapter_list(request):
     subject = request.GET.get('subject', None)
@@ -89,6 +105,23 @@ def chapter_list(request):
         return redirect('chapter_list')
     context = {'chapters': chapters, 'form': form}
     return render(request, 'lms_app/chapter_list.html', context)
+
+
+@staff_member_required
+def chapter_update(request, pk):
+	chapter = Chapter.objects.get(id=pk)
+	if request.method == 'POST':
+		form = ChapterForm(request.POST, request.FILES, instance=chapter)
+		if form.is_valid():
+			form.save()
+			return redirect('chapter_list')
+	else:
+		form = ChapterForm(instance=chapter)
+	context = {
+	'form' : form,
+	}
+	return render(request, 'lms_app/chapter_update.html', context)
+
 
 
 @staff_member_required
