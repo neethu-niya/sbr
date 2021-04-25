@@ -100,6 +100,7 @@
                                         <th style="width: 10%">Is_paid</th>
                                         
                                         <th style="width: 10%">Action</th>
+                                        <th style="width: 10%">Edit</th>
                                     </tr>
                                 </thead>
 
@@ -156,6 +157,8 @@
                                                 </button>
                                             </div> {% endcomment %}
                                         </td>
+                                        <td>
+                                        <a href="{% url 'student_update' student.id %}"><button class="btn btn-outline-primary">Edit</button></a></td>
 
                                         
 

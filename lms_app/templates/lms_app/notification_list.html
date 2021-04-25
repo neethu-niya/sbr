@@ -112,6 +112,7 @@
                                         <th>Description</th>
                                         <th>Active</th>
                                         <th style="width: 10%">Action</th>
+                                        <th style="width: 10%">Edit</th>
                                     </tr>
                                 </thead>
 
@@ -138,10 +139,12 @@
                                                 </div>
                                                 </label>
                                                 <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
+                                               
                                                 </button>
                                             </div>
                                         </td>
+                                        <td>
+                                        <a href="{% url 'notification_update' noti.id %}"><button class="btn btn-outline-primary">Edit</button></a></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

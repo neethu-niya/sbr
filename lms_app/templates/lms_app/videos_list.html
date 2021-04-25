@@ -110,10 +110,7 @@
                                                 </div> {% endcomment %}
                                             </td>
                                             <td>
-                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                        <a href="{% url 'video_update' v.id %}"><i class="fa fa-edit"></i></a>
-                                                    </button>
-                                            </td>
+                                        <a href="{% url 'video_update' v.id %}"><button class="btn btn-outline-primary">Edit</button></a></td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>

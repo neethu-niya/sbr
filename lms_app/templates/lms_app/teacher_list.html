@@ -107,6 +107,7 @@
                                         <th>Subjects</th>
                                         <th>Phone Number</th>
                                         <th style="width: 10%">Action</th>
+                                        <th style="width: 10%">Edit</th>
                                     </tr>
                                 </thead>
 
@@ -148,6 +149,8 @@
                                             </div>
                                                
                                         </td>
+                                         <td>
+                                        <a href="{% url 'teacher_update' teacher.id %}"><button class="btn btn-outline-primary">Edit</button></a></td>
                                     </tr>
                                 {% endfor %} 
                                 </tbody>

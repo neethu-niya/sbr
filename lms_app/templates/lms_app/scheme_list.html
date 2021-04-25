@@ -141,6 +141,7 @@
                                         <th>Subjects</th>
                                         <th>Active</th>
                                         <th style="width: 10%">Action</th>
+                                        <th style="width: 10%">Edit</th>
                                     </tr>
                                 </thead>
 
@@ -160,6 +161,8 @@
                                                 </label> 
                                             </div>
                                         </td>
+                                        <td>
+                                        <a href="{% url 'scheme_update' scheme.id %}"><button class="btn btn-outline-primary">Edit</button></a></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

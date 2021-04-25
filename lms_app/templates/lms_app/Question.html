@@ -102,10 +102,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                            <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                        <a href="{% url 'question_update' stud.id %}"><i class="fa fa-edit"></i></a>
-                                                    </button>
-                                            </td>
+                                        <a href="{% url 'question_update' stud.id %}"><button class="btn btn-outline-primary">Edit</button></a></td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>

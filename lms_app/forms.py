@@ -120,6 +120,7 @@ class StudentRegister(forms.ModelForm):
 
 
 class VideoUpload(forms.ModelForm):
+    videofile = forms.FileField(required=False)
 
     class Meta:
         model = Video
