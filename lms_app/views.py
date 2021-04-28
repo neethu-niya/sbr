@@ -229,9 +229,10 @@ def StudentView(request, pk):
 def registepage(request):
 	form = TeacherRegForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
-		teacher = form.save(commit=False)
-		teacher.password = make_password(form.cleaned_data["password"])
-		teacher.save()
+		# teacher = form.save(commit=False)
+		# teacher.password = make_password(form.cleaned_data["password"])
+		# teacher.save()
+		form.save()
 		return redirect('teacher_list')
 	context = { 'form': form}
 	return render(request, 'lms_app/register_teacher.html', context)
@@ -242,9 +243,10 @@ def teacher_update(request, pk):
 	if request.method == 'POST':
 		form = TeacherRegForm(request.POST, request.FILES, instance=teacher)
 		if form.is_valid():
-			teacher = form.save(commit=False)
-			teacher.password = make_password(form.cleaned_data["password"])
-			teacher.save()
+			# teacher = form.save(commit=False)
+			# teacher.password = make_password(form.cleaned_data["password"])
+			# teacher.save()
+			form.save()
 			return redirect('teacher_list')
 	else:
 		form = TeacherRegForm(instance=teacher)
@@ -258,9 +260,10 @@ def studentpage(request):
 	form = StudentRegister(request.POST , request.FILES )
 	# register = Student.objects.all()
 	if form.is_valid():
-		student = form.save(commit=False)
-		student.password = make_password(form.cleaned_data["password"])
-		student.save()
+		# student = form.save(commit=False)
+		# student.password = make_password(form.cleaned_data["password"])
+		# student.save()
+		form.save()
 		return redirect('student_list') 
 	context = {'form': form}
 	return render(request, 'lms_app/register_student.html', context)
@@ -271,9 +274,10 @@ def student_update(request, pk):
 	if request.method == 'POST':
 		form = StudentRegister(request.POST, request.FILES, instance=student)
 		if form.is_valid():
-			student = form.save(commit=False)
-			student.password = make_password(form.cleaned_data["password"])
-			student.save()
+			# student = form.save(commit=False)
+			# student.password = make_password(form.cleaned_data["password"])
+			# student.save()
+			form.save()
 			return redirect('student_list')
 	else:
 		form = StudentRegister(instance=student)
