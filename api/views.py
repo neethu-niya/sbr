@@ -64,24 +64,53 @@ class SubjectView(APIView):
         return Response({'subjects': subjects})
 
 
+# class ChapterView(APIView):
+#     permission_classes = (IsAuthenticated, )
+
+#     def get(self, request, slug):
+#         user = request.user
+#         user = get_user_model().objects.get(id=user.id)
+#         user = user.student
+#         if user.is_paid == True:
+#             try:
+#                 subject = Subject.objects.get(slug=slug)
+#                 chapters = subject.chapter_set.all()
+            
+#                 chapters = ChapterSerializer(chapters, many=True).data
+#             except:
+#                 chapters = []
+#         elif user.is_paid == False:
+#             try:
+#                 subject = Subject.objects.get(slug=slug)
+#                 chapters = subject.chapter_set.filter(free_tier=True)
+            
+#                 chapters = ChapterSerializer(chapters, many=True).data
+#             except:
+#                 chapters = []
+#         else:
+#             chapters = []
+        
+#         return Response({'chapters': chapters})
+
+
 class ChapterView(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, request, slug):
         user = request.user
         user = get_user_model().objects.get(id=user.id)
-        user = user.student
-        if user.is_paid == True:
+        student = user.student
+        if student.is_paid == True:
             try:
-                subject = Subject.objects.get(slug=slug)
+                subject = Subject.objects.get(slug=slug,standard=student.standard)
                 chapters = subject.chapter_set.all()
             
                 chapters = ChapterSerializer(chapters, many=True).data
             except:
                 chapters = []
-        elif user.is_paid == False:
+        elif student.is_paid == False:
             try:
-                subject = Subject.objects.get(slug=slug)
+                subject = Subject.objects.get(slug=slug,standard=student.standard)
                 chapters = subject.chapter_set.filter(free_tier=True)
             
                 chapters = ChapterSerializer(chapters, many=True).data
